@@ -62,6 +62,10 @@
   top: var(--space-2);
 }
 
+/*
+ * The bar itself has no background: only the logo turns into a liquid-glass pill after
+ * scrolling, and the language button + pink hamburger float on the right.
+ */
 .bar {
   position: relative;
   display: flex;
@@ -71,38 +75,12 @@
   width: calc(100% - 1.5rem);
   height: var(--header-bar-height);
   margin-inline: auto;
-  padding: 0 var(--space-2) 0 var(--space-3);
-  border: 1px solid transparent;
-  border-radius: var(--radius-header);
+  pointer-events: none;
+}
+
+.brand,
+.actions {
   pointer-events: auto;
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    box-shadow var(--transition-base);
-}
-
-.solid {
-  background-color: var(--glass-bg);
-  border-color: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
-  backdrop-filter: blur(18px) saturate(160%);
-}
-
-.transparent {
-  background-color: transparent;
-  box-shadow: none;
-}
-
-/*
- * Menu open (mobile): the bar itself gets no background – the full-screen glass menu behind it
- * provides it. It must not have a backdrop-filter either, otherwise the fixed menu inside it would
- * be positioned relative to the bar instead of the viewport.
- */
-.open {
-  background-color: transparent;
-  border-color: transparent;
-  box-shadow: none;
 }
 
 .brand {
@@ -112,43 +90,58 @@
   align-items: center;
   min-width: 0;
   height: 100%;
+  padding: 0 var(--space-4) 0 var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-header);
   color: var(--color-text);
   text-decoration: none;
   transition:
-    opacity var(--transition-base),
-    transform var(--transition-base);
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    opacity var(--transition-base);
 }
 
 .brand:hover {
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
-/* Right side: language switch + menu toggle */
+/* Liquid glass on the logo after scrolling */
+.solid .brand {
+  background-color: var(--glass-bg);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
+  backdrop-filter: blur(18px) saturate(160%);
+}
+
+/* Right side: language button + menu toggle */
 .actions {
   display: flex;
   align-items: center;
   gap: var(--space-2);
 }
 
+/* Shown from tablet up; on phones the language choice lives in the menu */
 .languages {
   display: none;
   gap: var(--space-2);
 }
 
-.languageLink,
-.menuToggle {
+.languageLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
+  width: 2.75rem;
+  height: 2.75rem;
   border: 1px solid rgb(255 255 255 / 0.35);
   border-radius: 50%;
   background: rgb(255 255 255 / 0.1);
   color: var(--color-text);
-  font: inherit;
-  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
   transition:
     background-color var(--transition-base),
     border-color var(--transition-base),
@@ -156,39 +149,36 @@
     transform var(--transition-base);
 }
 
-.languageLink {
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-decoration: none;
+/* After scrolling it gets the same glass as the logo, so it stays readable over content */
+.solid .languageLink {
+  background-color: var(--glass-bg);
+  border-color: var(--glass-border);
+  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
+  backdrop-filter: blur(18px) saturate(160%);
 }
 
-.languageLink:hover {
+.languageLink:hover,
+.solid .languageLink:hover {
   background: var(--color-pink);
   border-color: var(--color-pink);
   color: var(--color-on-accent);
   transform: translateY(-1px);
 }
 
-/* On the solid (scrolled) bar the language button is see-through; only hover lights it up – as in the template */
-.solid .languageLink {
-  background: transparent;
-  border-color: transparent;
-}
-
-.solid .languageLink:hover {
-  background: var(--color-pink);
-  border-color: var(--color-pink);
-}
-
-/* Mobile menu button: just three pink lines – no circle, no background */
+/* Menu button: just three pink lines – no circle, no background */
 .menuToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
+  padding: 0;
   border: 0;
   border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-pink);
+  cursor: pointer;
+  transition: color var(--transition-base);
 }
 
 .menuToggle:hover {
@@ -199,6 +189,8 @@
   display: grid;
   gap: 5px;
   width: 1.6rem;
+  /* keeps the pink lines readable over photos */
+  filter: drop-shadow(0 1px 3px rgb(5 5 7 / 0.7));
 }
 
 .burger span {
@@ -223,7 +215,7 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Mobile first: the open menu covers the whole viewport as dark liquid glass, under the bar */
+/* The open menu covers the whole viewport as dark liquid glass, under the bar – on every screen size */
 .nav {
   position: fixed;
   inset: 0;
@@ -236,6 +228,7 @@
   background-color: rgb(5 5 7 / 0.72);
   /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
   backdrop-filter: blur(24px) saturate(160%);
+  pointer-events: auto;
   visibility: hidden;
   opacity: 0;
   transition:
@@ -338,50 +331,25 @@
 @media (min-width: 48rem) {
   .bar {
     width: 97%;
-    padding: 0 var(--space-3) 0 var(--space-4);
   }
 
   .brand {
     --logo-height: 2.15rem;
     --logo-scale: 0.98;
   }
-}
-
-@media (min-width: 64rem) {
-  .menuToggle,
-  .menuLanguages {
-    display: none;
-  }
 
   .languages {
     display: flex;
   }
 
-  /* Desktop: links sit centred inside the bar */
-  .nav,
-  .nav[data-open="true"] {
-    position: static;
-    z-index: auto;
-    flex: 1;
-    flex-direction: row;
+  .menuLanguages {
+    display: none;
+  }
+
+  /* Bigger, poster-like menu on larger screens */
+  .nav {
     justify-content: center;
-    overflow: visible;
-    padding: 0;
-    background: none;
-    backdrop-filter: none;
-    visibility: visible;
-    opacity: 1;
-    transition: none;
-  }
-
-  .navList li {
-    transform: none;
-    transition: none;
-  }
-
-  .navList {
-    flex-direction: row;
-    gap: var(--space-1);
+    padding-inline: max(var(--gutter), calc((100% - var(--container-width)) / 2 + var(--gutter)));
   }
 
   .navList li + li {
@@ -389,26 +357,22 @@
   }
 
   .navLink {
-    padding: var(--space-2) var(--space-2);
-    font-size: var(--text-md);
+    padding: var(--space-1) 0;
+    font-size: clamp(2.5rem, 1rem + 4.5vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+    text-shadow: var(--shadow-text);
   }
 
-  /* Hover from the template: fade and nudge right; the active page stays put */
   .navLink:hover:not([aria-current="page"]) {
-    opacity: 0.6;
-    transform: translateX(0.5rem);
-  }
-
-  .brand:hover {
-    transform: translateX(0.5rem);
+    color: var(--color-pink);
+    transform: translateX(0.75rem);
   }
 }
 
 @media (hover: none) {
   .navLink:hover:not([aria-current="page"]),
-  .brand:hover,
   .languageLink:hover {
-    opacity: 1;
     transform: none;
   }
 }

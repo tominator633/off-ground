@@ -150,26 +150,39 @@ html[data-menu-open] {
 }
 
 /*
- * The navbar stays put while the content changes. Named here, not in the CSS module,
- * because CSS Modules would hash the view-transition-name.
- * Only the bar is named (not the whole header): a named element becomes a backdrop root,
- * which would stop the blur strip above the bar from seeing the page. While the mobile menu
- * is open the name is dropped, so the full-screen glass menu inside the bar still blurs the page.
+ * The navbar pieces (logo, language button, menu button) stay put while the content changes.
+ * Named here, not in the CSS module, because CSS Modules would hash the view-transition-name.
+ * Each piece is named on its own (not the whole header): a named element becomes a backdrop
+ * root, which would stop glass inside it from blurring the page.
  */
-[data-site-bar][data-menu-open="false"] {
-  view-transition-name: site-header;
+[data-vt="site-logo"] {
+  view-transition-name: site-logo;
 }
 
-::view-transition-group(site-header) {
+[data-vt="site-lang"] {
+  view-transition-name: site-lang;
+}
+
+[data-vt="site-menu-toggle"] {
+  view-transition-name: site-menu-toggle;
+}
+
+::view-transition-group(site-logo),
+::view-transition-group(site-lang),
+::view-transition-group(site-menu-toggle) {
   animation: none;
   z-index: 100;
 }
 
-::view-transition-old(site-header) {
+::view-transition-old(site-logo),
+::view-transition-old(site-lang),
+::view-transition-old(site-menu-toggle) {
   display: none;
 }
 
-::view-transition-new(site-header) {
+::view-transition-new(site-logo),
+::view-transition-new(site-lang),
+::view-transition-new(site-menu-toggle) {
   animation: none;
 }
 

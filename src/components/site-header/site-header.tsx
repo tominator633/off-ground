@@ -51,7 +51,8 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
     return pathname === full || pathname.startsWith(`${full}/`);
   };
 
-  const transparent = !scrolled && !menuOpen;
+  // Glass on the logo (and language button) only after scrolling and while the menu is closed
+  const solid = scrolled && !menuOpen;
   const otherLocales = locales.filter((locale) => locale !== lang);
 
   return (
@@ -59,13 +60,9 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
       <a href="#main" className={styles.skipLink}>
         {labels.skipToContent}
       </a>
-      {/* Floating bar with a gap around it (same structure as the gay-aktivreisen header) */}
-      <div
-        className={`${styles.bar} ${menuOpen ? styles.open : transparent ? styles.transparent : styles.solid}`}
-        data-site-bar
-        data-menu-open={menuOpen}
-      >
-        <Link href={homePath} className={styles.brand} onClick={() => setMenuOpen(false)}>
+      {/* Floating bar: logo on the left, language + menu button on the right */}
+      <div className={`${styles.bar} ${solid ? styles.solid : ""}`}>
+        <Link href={homePath} className={styles.brand} data-vt="site-logo" onClick={() => setMenuOpen(false)}>
           <BrandLogo />
           <span className="visually-hidden">{labels.home}</span>
         </Link>
@@ -95,7 +92,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
             ))}
           </ul>
 
-          {/* Mobile only: language choice lives in the menu so the bar stays uncluttered */}
+          {/* Phones only: language choice lives in the menu so the bar stays uncluttered */}
           <div className={styles.menuLanguages} role="group" aria-label={labels.switchLanguage}>
             {locales.map((locale) => (
               <Link
@@ -114,7 +111,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
         </nav>
 
         <div className={styles.actions}>
-          {/* Desktop only: round language button in the bar */}
+          {/* Tablet and up: round language button next to the menu button */}
           <div className={styles.languages} aria-label={labels.switchLanguage} role="group">
             {otherLocales.map((locale) => (
               <Link
@@ -123,6 +120,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
                 hrefLang={locale}
                 lang={locale}
                 className={styles.languageLink}
+                data-vt="site-lang"
                 onClick={() => setMenuOpen(false)}
               >
                 <span aria-hidden="true">{localeLabels[locale].short}</span>
@@ -134,6 +132,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
           <button
             type="button"
             className={styles.menuToggle}
+            data-vt="site-menu-toggle"
             aria-expanded={menuOpen}
             aria-controls="site-menu"
             onClick={() => setMenuOpen((open) => !open)}
