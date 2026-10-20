@@ -16,6 +16,8 @@ interface PhotoGalleryProps {
 export function PhotoGallery({ photos, alt, labels }: PhotoGalleryProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [current, setCurrent] = useState<number | null>(null);
+  // Thumbnails that finished loading – they fade in over their blur placeholder
+  const [loaded, setLoaded] = useState<Set<number>>(() => new Set());
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -28,6 +30,11 @@ export function PhotoGallery({ photos, alt, labels }: PhotoGalleryProps) {
     setCurrent((index) => (index === null ? null : (index + delta + photos.length) % photos.length));
 
   const photo = current !== null ? photos[current] : null;
+  // Neighbours of the open photo load in the background, so prev/next is instant
+  const neighbours =
+    current !== null
+      ? [photos[(current + 1) % photos.length], photos[(current - 1 + photos.length) % photos.length]]
+      : [];
 
   return (
     <>
@@ -41,6 +48,8 @@ export function PhotoGallery({ photos, alt, labels }: PhotoGalleryProps) {
                 sizes="(min-width: 90rem) 22rem, (min-width: 64rem) 33vw, (min-width: 40rem) 50vw, 100vw"
                 placeholder="blur"
                 className={styles.image}
+                data-loaded={loaded.has(index)}
+                onLoad={() => setLoaded((prev) => new Set(prev).add(index))}
               />
               <span className="visually-hidden">{labels.open}</span>
             </button>
@@ -75,6 +84,11 @@ export function PhotoGallery({ photos, alt, labels }: PhotoGalleryProps) {
                 className={styles.full}
               />
             </div>
+            {neighbours.map((item) => (
+              <div key={`preload-${item.src.src}`} className={styles.preload} aria-hidden="true">
+                <Image src={item.src} alt="" fill sizes="100vw" loading="eager" />
+              </div>
+            ))}
             <p className={styles.counter} aria-live="polite">
               {current + 1} / {photos.length}
             </p>

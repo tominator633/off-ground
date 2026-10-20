@@ -38,6 +38,11 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Fewer widths = fewer variants to optimize on first request and a warmer shared cache.
+    // 2400 matches the largest source photo, so nothing bigger is ever generated.
+    deviceSizes: [640, 828, 1080, 1440, 1920, 2400],
+    imageSizes: [256, 384],
+    qualities: [75],
   },
   experimental: {
     serverActions: {

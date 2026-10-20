@@ -27,13 +27,22 @@
   display: block;
   width: 100%;
   height: auto;
+  opacity: 0.6;
+  filter: blur(6px);
   transition:
     transform var(--transition-base),
-    filter var(--transition-base);
+    filter 400ms ease,
+    opacity 400ms ease;
 }
 
-.thumb:hover .image,
-.thumb:focus-visible .image {
+/* Fade in from the blur placeholder once the photo has loaded */
+.image[data-loaded="true"] {
+  opacity: 1;
+  filter: none;
+}
+
+.thumb:hover .image[data-loaded="true"],
+.thumb:focus-visible .image[data-loaded="true"] {
   transform: scale(1.03);
   filter: saturate(1.15);
 }
@@ -63,6 +72,16 @@
 
 .full {
   object-fit: contain;
+}
+
+/* Off-screen copies of the neighbouring photos – only there to be downloaded early */
+.preload {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .counter {
