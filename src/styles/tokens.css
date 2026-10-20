@@ -13,7 +13,7 @@
   --color-pink: #f27bc0;
   --color-pink-strong: #e2559f;
   --color-blue: #74bdee;
-  --color-blue-strong: #4aa3e3;
+  --color-blue-strong: #2f9dff;
   --color-coral: #f0907a;
   --color-lilac: #b483cc;
   --color-on-accent: #050507;
@@ -42,10 +42,14 @@
   --font-body: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: var(--font-body);
   --font-logo: var(--font-body);
+  /* Navigation: the same bold, tight lettering as the "Off ground" logo */
+  --font-nav: var(--font-logo);
   /* Headings like the posters: bold, very tight tracking, offset shadow */
   --font-display-weight: 700;
   --font-display-tracking: -0.045em;
   --shadow-text: 0.05em 0.07em 0 rgb(94 58 102 / 0.85);
+  /* Small lettering on black (logo): bigger offset and pale pink, so it reads like the hero shadow */
+  --shadow-text-small: 0.07em 0.09em 0 rgb(214 150 214 / 0.7);
   --text-xs: 0.8125rem;
   --text-sm: 0.9375rem;
   --text-md: 1.0625rem;

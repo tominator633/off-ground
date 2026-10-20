@@ -10,3 +10,4 @@ export const interTight = Inter_Tight({
   display: "swap",
   variable: "--font-inter-tight",
 });
+
