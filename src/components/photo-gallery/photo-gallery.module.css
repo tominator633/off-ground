@@ -124,6 +124,15 @@
   .grid {
     columns: 3;
   }
+}
+
+@media (min-width: 90rem) {
+  .grid {
+    columns: 4;
+  }
+}
+
+@media (min-width: 64rem) {
 
   .stage {
     inset: var(--space-7) var(--space-9);

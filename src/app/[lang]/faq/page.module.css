@@ -1,7 +1,7 @@
 .list {
   display: grid;
   gap: var(--space-3);
-  max-width: var(--container-narrow);
+  max-width: var(--container-medium);
 }
 
 .item {

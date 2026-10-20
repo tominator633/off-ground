@@ -28,7 +28,7 @@ export function EventCard({ event, lang, labels, learnMore }: EventCardProps) {
           <PhotoBackdrop
             src={event.image}
             position={event.imagePosition}
-            sizes="(min-width: 64rem) 34rem, (min-width: 48rem) 50vw, 100vw"
+            sizes="(min-width: 90rem) 44rem, (min-width: 48rem) 50vw, 100vw"
             priority={false}
           />
           {event.kind === "one-off" ? <span className={styles.posterDate}>{formatPosterDate(event.date)}</span> : null}

@@ -38,7 +38,7 @@ export function PhotoGallery({ photos, alt, labels }: PhotoGalleryProps) {
               <Image
                 src={item.src}
                 alt={`${alt} (${index + 1}/${photos.length})`}
-                sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw"
+                sizes="(min-width: 90rem) 22rem, (min-width: 64rem) 33vw, (min-width: 40rem) 50vw, 100vw"
                 placeholder="blur"
                 className={styles.image}
               />
