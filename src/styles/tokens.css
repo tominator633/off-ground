@@ -49,7 +49,7 @@
   --font-display-tracking: -0.045em;
   --shadow-text: 0.05em 0.07em 0 rgb(94 58 102 / 0.85);
   /* Small lettering on black (logo): bigger offset and pale pink, so it reads like the hero shadow */
-  --shadow-text-small: 0.07em 0.09em 0 rgb(214 150 214 / 0.7);
+  --shadow-text-small: 0.07em 0.09em 0.14em rgb(214 150 214 / 0.65);
   --text-xs: 0.8125rem;
   --text-sm: 0.9375rem;
   --text-md: 1.0625rem;

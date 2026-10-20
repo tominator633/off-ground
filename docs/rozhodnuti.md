@@ -38,3 +38,5 @@ Formát: datum – co – proč.
 - **20. 10. 2026** – Nápis v logu má jemný bledě růžový stín (`--shadow-text-small`, k bílému písmu zase zvýrazněný), aby působil jako stín velkého nápisu v hero – stejný stín jako v hero by byl u malého písma na černé liště jen ~1 px a téměř neviditelný. – Přání Toma.
 - **20. 10. 2026** – Nápis „Off ground“ v logu lehce přesahuje přes hvězdu (posun doleva o 0,35 em, nápis nad hvězdou) – jako na logu z Instagramu. – Přání Toma.
 - **20. 10. 2026** – Nápis „Off ground“ v logu zvětšen o 10 % (`font-size: 1.1em` vůči velikosti loga; 20 % bylo moc). – Přání Toma.
+- **20. 10. 2026** – Odkazy v navigaci zůstávají bílé (modrá zkoušená, nefungovala), aktivní stránka růžová. – Přání Toma.
+- **20. 10. 2026** – Růžový stín nápisu v logu je rozmazaný (blur 0,14 em), aby nebyl ostrý, a nápis je tučnější (800), aby bílá víc vynikla. – Přání Toma.
