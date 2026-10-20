@@ -19,6 +19,7 @@ npm run dev
 | `npm test` | unit testy (Vitest) |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | vygeneruje typy rout a spustí TypeScript |
+| `npm run warm-images -- https://off-ground.vercel.app` | po nasazení zahřeje cache optimalizovaných fotek na Vercelu |
 
 ## Stack
 
