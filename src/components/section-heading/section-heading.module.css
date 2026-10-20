@@ -1,0 +1,38 @@
+.heading {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.center {
+  justify-items: center;
+  text-align: center;
+}
+
+.title {
+  position: relative;
+  font-size: var(--text-2xl);
+  padding-bottom: var(--space-3);
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4rem;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-brand);
+}
+
+.center .title::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.intro {
+  max-width: var(--container-narrow);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}

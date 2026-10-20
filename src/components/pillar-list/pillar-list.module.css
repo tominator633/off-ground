@@ -1,0 +1,77 @@
+.list {
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  --accent: var(--color-pink);
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.card:nth-child(even) {
+  --accent: var(--color-blue);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--accent);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.number {
+  font-family: var(--font-display);
+  font-weight: var(--font-display-weight);
+  font-size: var(--text-2xl);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.title {
+  font-size: var(--text-xl);
+}
+
+.text {
+  color: var(--color-text-muted);
+}
+
+.points {
+  display: grid;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.points li::before {
+  content: "✔";
+  margin-right: var(--space-2);
+  color: var(--accent);
+}
+
+@media (min-width: 48rem) {
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

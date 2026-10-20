@@ -1,0 +1,50 @@
+.lineup {
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.item {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+}
+
+.time {
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: var(--font-display-tracking);
+  text-shadow: var(--shadow-text);
+}
+
+.title {
+  color: var(--color-text);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  text-shadow: var(--shadow-text);
+}
+
+/* "misfits vs underdogs" – light blue vs coral with a glow, like on the poster */
+.versus {
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  text-shadow: var(--shadow-text);
+}
+
+.left {
+  color: #bfe6ff;
+  text-shadow: 0 0 0.35em rgb(116 189 238 / 0.9), var(--shadow-text);
+}
+
+.right {
+  color: #ffb3a6;
+  text-shadow: 0 0 0.35em rgb(255 92 92 / 0.85), var(--shadow-text);
+}

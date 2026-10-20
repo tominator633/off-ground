@@ -1,0 +1,90 @@
+/* Design tokens – every color, font and spacing value goes through these variables. */
+:root {
+  /* Base: black background, white text */
+  --color-bg: #050507;
+  --color-surface: #111116;
+  --color-surface-raised: #1a1a22;
+  --color-border: #2a2a35;
+  --color-text: #ffffff;
+  --color-text-muted: #b9b9c6;
+  --color-text-subtle: #8a8a99;
+
+  /* Brand accents – sampled from the tie-dye backgrounds of the Off Ground posters */
+  --color-pink: #f27bc0;
+  --color-pink-strong: #e2559f;
+  --color-blue: #74bdee;
+  --color-blue-strong: #4aa3e3;
+  --color-coral: #f0907a;
+  --color-lilac: #b483cc;
+  --color-on-accent: #050507;
+  --gradient-brand: linear-gradient(115deg, var(--color-pink) 0%, var(--color-blue) 100%);
+  --gradient-brand-soft: linear-gradient(115deg, rgb(242 123 192 / 0.16) 0%, rgb(116 189 238 / 0.16) 100%);
+
+  /* Glitter star of the logo */
+  --color-glitter-light: #d9a9dc;
+  --color-glitter-dark: #a874b4;
+  --color-glitter-edge: #5e3a66;
+
+  /* Tie-dye: soft colour clouds as on the posters (used in hero and as image placeholders) */
+  --tie-dye:
+    radial-gradient(38% 46% at 18% 24%, rgb(116 189 238 / 0.95), transparent 70%),
+    radial-gradient(42% 40% at 78% 18%, rgb(242 123 192 / 0.9), transparent 72%),
+    radial-gradient(45% 50% at 62% 70%, rgb(116 189 238 / 0.85), transparent 70%),
+    radial-gradient(40% 45% at 22% 82%, rgb(240 144 122 / 0.9), transparent 72%),
+    radial-gradient(35% 40% at 92% 88%, rgb(180 131 204 / 0.9), transparent 70%),
+    linear-gradient(135deg, #c886c4 0%, #e58aa9 45%, #8fb5e2 100%);
+
+  --color-success: #4ade80;
+  --color-error: #ff6b81;
+  --color-focus: var(--color-blue);
+
+  /* Typography – one font for everything (next/font, see src/lib/fonts.ts) */
+  --font-body: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-body);
+  --font-logo: var(--font-body);
+  /* Headings like the posters: bold, very tight tracking, offset shadow */
+  --font-display-weight: 700;
+  --font-display-tracking: -0.045em;
+  --shadow-text: 0.05em 0.07em 0 rgb(94 58 102 / 0.85);
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  --text-3xl: clamp(2.4rem, 1.4rem + 4.4vw, 4.75rem);
+  --leading-tight: 1.15;
+  --leading-body: 1.65;
+
+  /* Spacing & layout */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6rem;
+  --container-width: 72rem;
+  --container-narrow: 46rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  /* Floating header: gap above the bar + bar height = space the page content must clear */
+  --header-offset: 1.25rem;
+  --header-bar-height: 3.25rem;
+  --header-height: calc(var(--header-offset) + var(--header-bar-height));
+  --radius-header: 20px;
+  --glass-bg: rgb(12 12 16 / 0.62);
+  --glass-border: rgb(255 255 255 / 0.12);
+  --glass-highlight: inset 0 1px 0 rgb(255 255 255 / 0.12);
+  --glass-shadow: 0 10px 30px -8px rgb(0 0 0 / 0.6);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+
+  --shadow-glow: 0 0 0 1px rgb(255 255 255 / 0.04), 0 18px 48px -18px rgb(255 79 163 / 0.35);
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}

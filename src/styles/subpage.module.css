@@ -1,0 +1,120 @@
+/* Building blocks shared by the subpages (events, about, gallery, partners, faq, contact). */
+
+.section {
+  padding-block: var(--space-7);
+}
+
+.narrow {
+  max-width: var(--container-narrow);
+}
+
+.prose {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--container-narrow);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+.twoColumns {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.panel {
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.panelTitle {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-xl);
+}
+
+.panelText {
+  color: var(--color-text-muted);
+}
+
+.checkList {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+}
+
+.checkList li::before {
+  content: "✔";
+  margin-right: var(--space-2);
+  color: var(--color-pink);
+}
+
+.cardGrid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.valueCard {
+  padding: var(--space-5);
+  border-top: 4px solid var(--color-pink);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.valueCard:nth-child(3n + 2) {
+  border-top-color: var(--color-blue);
+}
+
+.valueTitle {
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+  font-size: var(--text-lg);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.caption {
+  margin-top: var(--space-4);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-style: italic;
+}
+
+@media (min-width: 48rem) {
+  .twoColumns,
+  .cardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cardGrid[data-columns="3"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.plainList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Decorative tie-dye block with the star (stands in for photos) */
+.visual {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+}
+
+.visualStar {
+  width: 40%;
+  height: auto;
+}

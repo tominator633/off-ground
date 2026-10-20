@@ -1,0 +1,84 @@
+.form {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  transition: border-color var(--transition-fast);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 9rem;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgb(54 163 255 / 0.3);
+}
+
+.field [aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.fieldError,
+.formError {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+.formError {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-sm);
+}
+
+.note {
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+}
+
+.success {
+  padding: var(--space-6) var(--space-5);
+  border: 1px solid var(--color-success);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-lg);
+}
+
+/* Kept off-screen instead of display:none, which some bots detect */
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form button {
+  justify-self: start;
+}

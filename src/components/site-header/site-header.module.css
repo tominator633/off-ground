@@ -1,0 +1,412 @@
+/*
+ * Floating header taken over from gay-aktivreisen: a rounded bar that doesn't touch
+ * the window edges and keeps a gap from the top. Here as dark "liquid glass".
+ */
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  padding-top: var(--header-offset);
+  pointer-events: none;
+}
+
+/*
+ * After scrolling, the gap above the floating bar is frosted like the status bar in iOS apps.
+ * Progressive blur: two layers – a stronger one right at the top edge and a lighter one that
+ * reaches further down – each fading out through a mask, so there's no visible edge.
+ */
+.header::before,
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  /* Below the bar (::after would otherwise paint over it and blur it) */
+  z-index: -1;
+  height: var(--header-height);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+/* Literal blur values on purpose: the CSS bundler drops backdrop-filter written via var() */
+.header::before {
+  background: linear-gradient(to bottom, rgb(5 5 7 / 0.22), transparent 70%);
+  backdrop-filter: blur(6px);
+  mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.6) 35%, transparent 65%);
+}
+
+.header::after {
+  backdrop-filter: blur(2px);
+  mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.5) 55%, transparent 100%);
+}
+
+.scrolled::before,
+.scrolled::after {
+  opacity: 1;
+}
+
+.skipLink {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 600;
+  z-index: 60;
+  pointer-events: auto;
+}
+
+.skipLink:focus {
+  top: var(--space-2);
+}
+
+.bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: calc(100% - 1.5rem);
+  height: var(--header-bar-height);
+  margin-inline: auto;
+  padding: 0 var(--space-2) 0 var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-header);
+  pointer-events: auto;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.solid {
+  background-color: var(--glass-bg);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
+  backdrop-filter: blur(18px) saturate(160%);
+}
+
+.transparent {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/*
+ * Menu open (mobile): the bar itself gets no background – the full-screen glass menu behind it
+ * provides it. It must not have a backdrop-filter either, otherwise the fixed menu inside it would
+ * be positioned relative to the bar instead of the viewport.
+ */
+.open {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.brand {
+  --logo-height: 1.9rem;
+  --logo-scale: 0.82;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.brand:hover {
+  opacity: 0.75;
+}
+
+/* Right side: language switch + menu toggle */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.languages {
+  display: none;
+  gap: var(--space-2);
+}
+
+.languageLink,
+.menuToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.1);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.languageLink {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.languageLink:hover {
+  background: var(--color-pink);
+  border-color: var(--color-pink);
+  color: var(--color-on-accent);
+  transform: translateY(-1px);
+}
+
+/* On the solid (scrolled) bar the language button is see-through; only hover lights it up – as in the template */
+.solid .languageLink {
+  background: transparent;
+  border-color: transparent;
+}
+
+.solid .languageLink:hover {
+  background: var(--color-pink);
+  border-color: var(--color-pink);
+}
+
+/* Mobile menu button: just three pink lines – no circle, no background */
+.menuToggle {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-pink);
+}
+
+.menuToggle:hover {
+  color: var(--color-pink-strong);
+}
+
+.burger {
+  display: grid;
+  gap: 5px;
+  width: 1.6rem;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  background: currentColor;
+  transition:
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.burger[data-open="true"] span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger[data-open="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger[data-open="true"] span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile first: the open menu covers the whole viewport as dark liquid glass, under the bar */
+.nav {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--header-height) + var(--space-6)) calc(var(--gutter) + var(--space-3)) var(--space-7);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: rgb(5 5 7 / 0.72);
+  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
+  backdrop-filter: blur(24px) saturate(160%);
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--transition-base),
+    visibility var(--transition-base);
+}
+
+.nav[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navList li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.navList li {
+  transform: translateY(0.75rem);
+  transition: transform 350ms ease;
+}
+
+.nav[data-open="true"] .navList li {
+  transform: none;
+}
+
+.navLink {
+  display: block;
+  padding: var(--space-4) 0;
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    color var(--transition-base),
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.navLink[aria-current="page"] {
+  color: var(--color-pink);
+}
+
+/* Language choice at the bottom of the mobile menu */
+.menuLanguages {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding-block: var(--space-4) var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.menuLanguageLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.menuLanguageLink[aria-current="true"] {
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+  pointer-events: none;
+}
+
+.menuLanguageLink:hover {
+  background: var(--color-pink);
+  border-color: var(--color-pink);
+  color: var(--color-on-accent);
+}
+
+@media (min-width: 26rem) {
+  .brand {
+    --logo-height: 2rem;
+    --logo-scale: 0.9;
+  }
+}
+
+@media (min-width: 48rem) {
+  .bar {
+    width: 97%;
+    padding: 0 var(--space-3) 0 var(--space-4);
+  }
+
+  .brand {
+    --logo-height: 2.15rem;
+    --logo-scale: 0.98;
+  }
+}
+
+@media (min-width: 64rem) {
+  .menuToggle,
+  .menuLanguages {
+    display: none;
+  }
+
+  .languages {
+    display: flex;
+  }
+
+  /* Desktop: links sit centred inside the bar */
+  .nav,
+  .nav[data-open="true"] {
+    position: static;
+    z-index: auto;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    overflow: visible;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    visibility: visible;
+    opacity: 1;
+    transition: none;
+  }
+
+  .navList li {
+    transform: none;
+    transition: none;
+  }
+
+  .navList {
+    flex-direction: row;
+    gap: var(--space-1);
+  }
+
+  .navList li + li {
+    border-top: 0;
+  }
+
+  .navLink {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  /* Hover from the template: fade and nudge right; the active page stays put */
+  .navLink:hover:not([aria-current="page"]) {
+    opacity: 0.6;
+    transform: translateX(0.5rem);
+  }
+
+  .brand:hover {
+    transform: translateX(0.5rem);
+  }
+}
+
+@media (hover: none) {
+  .navLink:hover:not([aria-current="page"]),
+  .brand:hover,
+  .languageLink:hover {
+    opacity: 1;
+    transform: none;
+  }
+}

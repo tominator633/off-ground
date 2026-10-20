@@ -1,0 +1,213 @@
+/* Hero – full-viewport event photo (layers in PhotoBackdrop) */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: calc(var(--header-height) + var(--space-6)) var(--space-9);
+  isolation: isolate;
+}
+
+.heroContent {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-5);
+  text-align: center;
+}
+
+.eyebrow {
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: rgb(5 5 7 / 0.55);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* The big logo: star behind the stacked "Off / ground", as on the Instagram profile picture */
+.heroLogo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding-bottom: var(--space-3);
+}
+
+.heroStar {
+  position: absolute;
+  width: 64%;
+  height: auto;
+  left: 26%;
+  top: 2%;
+}
+
+.heroTitle {
+  position: relative;
+  color: var(--color-text);
+  font-size: clamp(5rem, 2rem + 16vw, 12rem);
+  line-height: 0.82;
+  letter-spacing: -0.07em;
+  text-align: left;
+  text-shadow: var(--shadow-text);
+}
+
+.heroSubtitle {
+  max-width: 36rem;
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  text-shadow: 0 1px 12px rgb(5 5 7 / 0.45);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Shared section rhythm */
+.section {
+  padding-block: var(--space-8);
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-7);
+}
+
+.prose {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--container-narrow);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+/* Line-up poster */
+.lineupSection {
+  padding-block: var(--space-6);
+}
+
+.lineupPoster {
+  padding-block: var(--space-8);
+}
+
+.lineupTitle {
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+  font-size: clamp(3.5rem, 2rem + 8vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.07em;
+  text-align: center;
+  text-shadow: var(--shadow-text);
+}
+
+.lineupIntro {
+  margin-bottom: var(--space-7);
+  color: var(--color-text);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Moments – three event photos */
+.photoStrip {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photoItem {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.photo {
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.photoItem:hover .photo {
+  transform: scale(1.03);
+}
+
+/* Partner */
+.partner {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding: var(--space-7) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.partnerLabel {
+  color: var(--color-pink);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.partnerName {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.partnerText {
+  max-width: 30rem;
+  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+/* Call to action */
+.cta {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding: var(--space-7) var(--space-5);
+  border-radius: var(--radius-lg);
+  background:
+    var(--gradient-brand-soft),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: var(--text-2xl);
+}
+
+.ctaText {
+  max-width: 36rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+.instagram {
+  color: var(--color-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.instagram:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 48rem) {
+  .photoStrip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

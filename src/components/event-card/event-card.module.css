@@ -1,0 +1,132 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--color-pink);
+  box-shadow: var(--shadow-glow);
+}
+
+
+.media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+}
+
+.photo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  left: 8%;
+  top: 12%;
+  width: 34%;
+  height: auto;
+  opacity: 0.9;
+}
+
+/* Date set like on the posters: 10/10/2026 */
+.posterDate {
+  position: relative;
+  color: var(--color-text);
+  font-size: clamp(2rem, 1.2rem + 3vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  text-shadow: var(--shadow-text);
+}
+
+.badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.card[data-status="upcoming"] .badge {
+  background: var(--color-pink);
+  color: var(--color-on-accent);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+  padding: var(--space-5);
+}
+
+.title {
+  font-size: var(--text-xl);
+}
+
+.link {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* The whole card is clickable through the title link */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.meta {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.meta div {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.meta dt {
+  min-width: 3.5rem;
+  color: var(--color-text-subtle);
+}
+
+.meta dd {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.summary {
+  color: var(--color-text-muted);
+}
+
+.more {
+  margin-top: auto;
+  color: var(--color-pink);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+}
+

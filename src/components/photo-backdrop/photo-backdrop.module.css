@@ -1,0 +1,29 @@
+/* Layers (bottom → top): photo, tie-dye tint, darkening. */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* "color" blend keeps the photo's light and shadow but paints it in the tie-dye hues */
+.tint {
+  position: absolute;
+  inset: 0;
+  background: var(--tie-dye);
+  mix-blend-mode: color;
+  opacity: 0.85;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgb(5 5 7 / 0.3) 0%, rgb(5 5 7 / 0.12) 55%, transparent 80%),
+    /* stronger at the top so the logo and navbar stand out */
+    linear-gradient(to bottom, rgb(5 5 7 / 0.75) 0%, rgb(5 5 7 / 0.4) 14%, transparent 32%, transparent 60%, var(--color-bg) 100%);
+}

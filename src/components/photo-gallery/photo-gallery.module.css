@@ -1,0 +1,139 @@
+/* Masonry: CSS columns keep every photo in its own aspect ratio */
+.grid {
+  columns: 1;
+  column-gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  margin-bottom: var(--space-4);
+  break-inside: avoid;
+}
+
+.thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition:
+    transform var(--transition-base),
+    filter var(--transition-base);
+}
+
+.thumb:hover .image,
+.thumb:focus-visible .image {
+  transform: scale(1.03);
+  filter: saturate(1.15);
+}
+
+/* Full-screen viewer */
+.dialog {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(5 5 7 / 0.94);
+  color: var(--color-text);
+}
+
+.dialog::backdrop {
+  background: rgb(5 5 7 / 0.8);
+}
+
+.stage {
+  position: absolute;
+  inset: var(--space-8) var(--space-4);
+  pointer-events: none;
+}
+
+.full {
+  object-fit: contain;
+}
+
+.counter {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-4);
+  transform: translateX(-50%);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.control {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.12);
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.control:hover {
+  background: var(--color-pink);
+  color: var(--color-on-accent);
+}
+
+.close {
+  top: var(--space-4);
+  right: var(--space-4);
+}
+
+.prev,
+.next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.prev {
+  left: var(--space-3);
+}
+
+.next {
+  right: var(--space-3);
+}
+
+@media (min-width: 40rem) {
+  .grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 64rem) {
+  .grid {
+    columns: 3;
+  }
+
+  .stage {
+    inset: var(--space-7) var(--space-9);
+  }
+
+  .prev {
+    left: var(--space-5);
+  }
+
+  .next {
+    right: var(--space-5);
+  }
+}

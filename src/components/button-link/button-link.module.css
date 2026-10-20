@@ -1,0 +1,67 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 3rem;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.primary {
+  border: 0;
+  background: var(--gradient-brand);
+  color: var(--color-on-accent);
+  box-shadow: 0 10px 30px -12px var(--color-pink);
+}
+
+.primary:hover {
+  box-shadow: 0 14px 36px -10px var(--color-blue);
+}
+
+.outline {
+  border: 2px solid var(--color-text);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.outline:hover {
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+}
+
+/* Black button for use on tie-dye backgrounds */
+.dark {
+  border: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  box-shadow: 0 10px 30px -14px rgb(5 5 7 / 0.9);
+}
+
+.dark:hover {
+  background: var(--color-surface-raised);
+}

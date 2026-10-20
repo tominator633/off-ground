@@ -1,0 +1,30 @@
+/*
+ * Parent tunes the size with:
+ *   --logo-height  height of the star
+ *   --logo-scale   size of the lettering (1 = 1.5rem)
+ */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: calc(var(--logo-scale, 1) * 1.5rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.star {
+  flex-shrink: 0;
+  height: var(--logo-height, 2.4rem);
+  width: auto;
+  aspect-ratio: 212 / 187;
+}
+
+.wordmark {
+  color: var(--color-text);
+  font-family: var(--font-logo);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  /* the last letter's negative tracking would clip the shadow */
+  padding-right: 0.06em;
+  text-shadow: var(--shadow-text);
+}
