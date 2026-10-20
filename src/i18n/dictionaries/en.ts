@@ -26,7 +26,6 @@ export const en = {
     getInTouch: "Get in touch",
     allEvents: "All events",
     backToEvents: "Back to all events",
-    followInstagram: "Follow us on Instagram",
     photoAlt: "Photo from the first Off Ground",
   },
   home: {
@@ -175,6 +174,8 @@ export const en = {
     tagline: "Dance battle in Prague.",
     location: "Prague, Czech Republic",
     navigation: "Navigation",
+    rights: "All rights reserved.",
+    madeBy: "made by",
   },
   notFound: {
     title: "Page not found",

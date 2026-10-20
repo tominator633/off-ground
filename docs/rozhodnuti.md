@@ -41,3 +41,7 @@ Formát: datum – co – proč.
 - **20. 10. 2026** – Odkazy v navigaci zůstávají bílé (modrá zkoušená, nefungovala), aktivní stránka růžová. – Přání Toma.
 - **20. 10. 2026** – Růžový stín nápisu v logu je rozmazaný (blur 0,14 em), aby nebyl ostrý, a nápis je tučnější (800), aby bílá víc vynikla. – Přání Toma.
 - **20. 10. 2026** – Navbar má rámeček stejně tenký nahoře i dole: odstraněn vnitřní světlý proužek nahoře (`--glass-highlight`), který se sčítal s 1px rámečkem. – Přání Toma.
+- **20. 10. 2026** – Patička: „© 2026 Off Ground. Všechna práva vyhrazena.“ vlevo a „made by Tomáš Růžička“ vpravo (na mobilu pod sebou). Rok je pevný – patička je předgenerovaná a aktuální rok by vyžadoval vykreslování při každém požadavku. – Přání Toma.
+- **20. 10. 2026** – Ikony mají společnou složku `src/components/icons/` (inline SVG komponenty, barva přes `currentColor`, velikost podle textu ze sdíleného `icon.module.css`). První je ikona Instagramu z Iconify, použitá u všech odkazů na Instagram (úvod, patička, partneři). – Přání Toma.
+- **20. 10. 2026** – Patička je stejně černá jako stránka, bez barevného proužku nahoře; z dolních rohů svítí růžová (vlevo) a modrá (vpravo) záře jako v hlavičkách stránek. – Přání Toma.
+- **20. 10. 2026** – Odkazy na Instagram vypadají jako tlačítka (komponenta `InstagramButton`: obrysová pilulka s ikonou, při hoveru růžová výplň, bez podtržení): na úvodu vedle „Napiš nám“ s handlem @offground_fest, v patičce menší verze, u partnera „rest.art na Instagramu“. – Přání Toma.

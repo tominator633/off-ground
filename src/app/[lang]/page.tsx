@@ -3,6 +3,7 @@ import Image from "next/image";
 import heroPhoto from "@/assets/images/hero.jpg";
 import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ButtonLink } from "@/components/button-link/button-link";
+import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { LineUp } from "@/components/line-up/line-up";
 import { PhotoBackdrop } from "@/components/photo-backdrop/photo-backdrop";
 import { PillarList } from "@/components/pillar-list/pillar-list";
@@ -136,9 +137,7 @@ export default async function HomePage() {
           <p className={styles.ctaText}>{home.cta.text}</p>
           <div className={styles.heroActions}>
             <ButtonLink href={localizedPath(lang, "/contact")}>{home.cta.button}</ButtonLink>
-            <a href={social.instagram.url} className={styles.instagram} target="_blank" rel="noopener noreferrer">
-              {dict.common.followInstagram} {social.instagram.handle}
-            </a>
+            <InstagramButton href={social.instagram.url}>{social.instagram.handle}</InstagramButton>
           </div>
         </div>
       </section>

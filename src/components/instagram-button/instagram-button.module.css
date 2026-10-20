@@ -1,0 +1,46 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  justify-self: start;
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.button:hover {
+  border-color: var(--color-pink);
+  background: var(--color-pink);
+  color: var(--color-on-accent);
+  transform: translateY(-2px);
+}
+
+/* Same height as the other buttons (ButtonLink) */
+.md {
+  min-height: 3rem;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+}
+
+/* Compact version for the footer */
+.sm {
+  min-height: 2.5rem;
+  padding: var(--space-2) var(--space-4);
+  border-width: 1px;
+  font-size: var(--text-sm);
+}
+
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+}

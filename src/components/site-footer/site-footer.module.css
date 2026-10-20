@@ -1,15 +1,12 @@
+/* Same black as the page; pink and blue glows rise from the bottom corners, like the subpage heroes */
 .footer {
   position: relative;
   margin-top: var(--space-9);
-  background: var(--color-surface);
-}
-
-.footer::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: var(--gradient-brand);
+  overflow: hidden;
+  background:
+    radial-gradient(50rem 24rem at 0% 100%, rgb(242 123 192 / 0.32), transparent 70%),
+    radial-gradient(50rem 24rem at 100% 100%, rgb(116 189 238 / 0.3), transparent 70%),
+    var(--color-bg);
 }
 
 .inner {
@@ -38,16 +35,10 @@
   font-size: var(--text-sm);
 }
 
-.instagram {
-  display: inline-block;
-  margin-top: var(--space-3);
-  color: var(--color-blue);
-  font-weight: 600;
-  text-decoration: none;
-}
 
-.instagram:hover {
-  text-decoration: underline;
+
+.social {
+  margin-top: var(--space-4);
 }
 
 .heading {
@@ -86,6 +77,18 @@
   border-top: 1px solid var(--color-border);
   color: var(--color-text-subtle);
   font-size: var(--text-sm);
+}
+
+.bottomInner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+}
+
+.author {
+  color: var(--color-text-muted);
+  font-weight: 600;
 }
 
 @media (min-width: 48rem) {

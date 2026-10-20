@@ -13,6 +13,7 @@ Web tanečního battlu Off Ground v Praze (organizuje ho Tomův bratr). Přehled
 - Každý text v UI jde přes slovníky `src/i18n/dictionaries/{cs,en}.ts`. **Čeština je výchozí jazyk**, angličtina druhý. Česky se tyká.
 - Fakta (termíny, line-up, místa, partneři) jen z podkladů od organizátora / z Instagramu `@offground_fest`. Nic si nevymýšlet; co je zástupné, zapsat do `docs/k-diskusi-s-organizatorem.md`.
 - Akce se čtou jen přes `src/content/events.ts` (`getEvents`, `getEvent`), aby šel zdroj dat později vyměnit za CMS/databázi.
+- Ikony jako inline SVG komponenty ve společné složce `src/components/icons/` (`<nazev>-icon.tsx`, barva `currentColor`, sdílené `icon.module.css`). Žádné knihovny ikon.
 - Komponenta = složka v kebab-case s `<nazev>.tsx` + `<nazev>.module.css`. Unit testy vedle kódu (`*.test.ts`).
 - Kontaktní formulář: neoslabovat ochrany (Origin, honeypot, rate limit, Zod, Turnstile, fail-closed). Změny logiky pokrýt testy v `process-submission.test.ts`.
 - Nic tajného do repa (`.env*` je v `.gitignore`, kromě `.env.example`).

@@ -25,12 +25,4 @@
   font-size: var(--text-lg);
 }
 
-.link {
-  color: var(--color-blue);
-  font-weight: 600;
-  text-decoration: none;
-}
 
-.link:hover {
-  text-decoration: underline;
-}

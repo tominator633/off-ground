@@ -28,7 +28,6 @@ export const cs: Dictionary = {
     getInTouch: "Napiš nám",
     allEvents: "Všechny akce",
     backToEvents: "Zpět na všechny akce",
-    followInstagram: "Sleduj nás na Instagramu",
     photoAlt: "Fotka z prvního Off Ground",
   },
   home: {
@@ -177,6 +176,8 @@ export const cs: Dictionary = {
     tagline: "Taneční battle v Praze.",
     location: "Praha, Česká republika",
     navigation: "Navigace",
+    rights: "Všechna práva vyhrazena.",
+    madeBy: "made by",
   },
   notFound: {
     title: "Stránka nenalezena",

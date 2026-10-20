@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import partnersPhoto from "@/assets/images/sections/partners.jpg";
 import { ButtonLink } from "@/components/button-link/button-link";
+import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { PageHeader } from "@/components/page-header/page-header";
 import { partners } from "@/content/site";
 import { localizedPath } from "@/i18n/config";
@@ -26,9 +27,7 @@ export default async function PartnersPage() {
           <p className={styles.label}>{labels.official}</p>
           <h2 className={styles.name}>{labels.restArt.name}</h2>
           <p className={styles.text}>{labels.restArt.text}</p>
-          <a href={partners.restArt.instagram} className={styles.link} target="_blank" rel="noopener noreferrer">
-            {labels.restArt.link} →
-          </a>
+          <InstagramButton href={partners.restArt.instagram}>{labels.restArt.link}</InstagramButton>
         </article>
       </section>
       <section className={`container ${subpage.section}`}>

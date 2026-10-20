@@ -1,0 +1,8 @@
+/* Shared sizing for all icons: they follow the surrounding text size and colour */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.2em;
+}

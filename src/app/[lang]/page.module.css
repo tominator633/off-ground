@@ -196,15 +196,7 @@
   font-size: var(--text-lg);
 }
 
-.instagram {
-  color: var(--color-blue);
-  font-weight: 600;
-  text-decoration: none;
-}
 
-.instagram:hover {
-  text-decoration: underline;
-}
 
 @media (min-width: 48rem) {
   .photoStrip {
