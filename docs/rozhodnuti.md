@@ -40,3 +40,4 @@ Formát: datum – co – proč.
 - **20. 10. 2026** – Nápis „Off ground“ v logu zvětšen o 10 % (`font-size: 1.1em` vůči velikosti loga; 20 % bylo moc). – Přání Toma.
 - **20. 10. 2026** – Odkazy v navigaci zůstávají bílé (modrá zkoušená, nefungovala), aktivní stránka růžová. – Přání Toma.
 - **20. 10. 2026** – Růžový stín nápisu v logu je rozmazaný (blur 0,14 em), aby nebyl ostrý, a nápis je tučnější (800), aby bílá víc vynikla. – Přání Toma.
+- **20. 10. 2026** – Navbar má rámeček stejně tenký nahoře i dole: odstraněn vnitřní světlý proužek nahoře (`--glass-highlight`), který se sčítal s 1px rámečkem. – Přání Toma.

@@ -84,7 +84,7 @@
 .solid {
   background-color: var(--glass-bg);
   border-color: var(--glass-border);
-  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  box-shadow: var(--glass-shadow);
   /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
   backdrop-filter: blur(18px) saturate(160%);
 }
