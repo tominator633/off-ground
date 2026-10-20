@@ -1,0 +1,33 @@
+# Rozhodnutí
+
+Formát: datum – co – proč.
+
+## Změna projektu
+
+- **20. 10. 2026** – Projekt přejmenován z queer-men-connect na **Off Ground** (web tanečního battlu, organizuje ho Tomův bratr). Složka `MY-PROJECTS/OFF-GROUND` (podklady, Inkscape), repo `OFF-GROUND/off-ground`. Podklady původního projektu jsou v `OFF-GROUND/archiv-queer-men-connect`. – Přání Toma. Technický základ (Next.js, i18n, header, formulář) zůstal, design a obsah se změnily.
+
+## Technika
+
+- **19. 10. 2026** – Next.js 16 (App Router, TS), CSS Modules, žádný Tailwind. Ponechány výchozí volby `create-next-app`: Turbopack, Cache Components, Partial Prefetching, React Compiler. – Plné využití optimalizací Next.js; stránky jsou staticky předgenerované.
+- **19. 10. 2026** – i18n bez knihovny (slovníky v TS + `next/root-params`), ne `next-intl`. URL vždy s prefixem jazyka, `/` přesměruje podle jazyka prohlížeče. – Next 16.4 to umí nativně a funguje to se statickým generováním. Cena: adresy jsou v obou jazycích anglicky (`/cs/events`); přeložené adresy jdou doplnit přes `proxy.ts`.
+- **20. 10. 2026** – **Čeština je výchozí jazyk**, angličtina druhý (dřív naopak). – Publikum Off Ground je hlavně české.
+- **19. 10. 2026** – Akce v `src/content/events.ts` jako typovaná data za funkcemi `getEvents`/`getEvent`; jedna komponenta `EventCard`. – Připraveno na pozdější CMS nebo databázi.
+- **20. 10. 2026** – Akce má ručně nastavený stav `status: "upcoming" | "past"` a volitelný `lineup` (čas, název, volitelně `versus` pro dvojice jako „misfits vs underdogs“). – Automatické přepínání podle data by vyžadovalo vykreslování při každém požadavku.
+- **20. 10. 2026** – Detail akce čte `params` uvnitř `<Suspense>`. – Next 16 jinak hlásí, že navigace na stránku nebude okamžitá (`instant-shell-url-data`).
+- **19. 10. 2026** – Kontaktní formulář: Server Action + Zod + honeypot + rate limit v paměti + Cloudflare Turnstile + Resend, fail-closed v produkci. – Požadavek na maximální ochranu; Turnstile je zdarma a bez cookies. Rate limit v paměti je jen „best effort“.
+- **19. 10. 2026** – CSP bez nonce (`'unsafe-inline'` pro skripty). – Nonce by vynutil dynamické vykreslování všech stránek.
+- **19. 10. 2026** – Web zatím `noindex` (meta, `X-Robots-Tag`, `robots.txt`), zapne se proměnnou `SITE_INDEXING=true`. – Web je zatím jen pro nás.
+- **19. 10. 2026** – `backdrop-filter` se píše přímo hodnotou, ne přes `var()`. – Bundler CSS (Lightning CSS) deklaraci s `var()` zahodil.
+
+## Design
+
+- **20. 10. 2026** – Černé pozadí, akcenty v odstínech z plakátů Off Ground: růžová `#f27bc0`, modrá `#74bdee`, korálová `#f0907a`, lila `#b483cc`. Tie-dye pozadí z plakátů (barevné mraky + zrno) jen jako akcent: hero, line-up, zástupné obrázky. – Volba Toma.
+- **20. 10. 2026** – Jedno písmo na celý web: **Inter Tight** (Google Fonts). Plakáty používají Helvetica Neue (tučně, velmi těsně, se stínem); Inter Tight je jí z volných písem nejblíž (porovnáno s Arimo, Archivo, Instrument Sans, Hanken Grotesk, Albert Sans, Geist, Schibsted Grotesk). Nadpisy: řez 700, prostrkání −0,045 em, stín `--shadow-text`. – Volba Toma („jedno písmo“).
+- **20. 10. 2026** – Logo: zkosená třpytivá hvězda jako inline SVG (boční hrana pro tloušťku, třpyt ze SVG šumu) + nápis „Off ground“ jako živý text. Zdroj pro Inkscape: `../logo/off-ground-logo.svg` (mimo repo). Favicona je samotná hvězda. V hero je velké logo „Off / ground“ s hvězdou za textem jako na profilovce na Instagramu.
+- **19. 10. 2026** – Header je plovoucí kvádr (20 px od horního okraje, nedotýká se stran, zaoblení 20 px, lišta 52 px). Nahoře je průhledný, po scrollu tmavé liquid glass. Přepínač jazyka na desktopu kulatý (na plné liště průsvitný, rozsvítí se jen při hoveru), na mobilu v menu. Hamburger jsou jen tři růžové čáry. Mobilní menu přes celý viewport jako tmavé liquid glass se zamčeným scrollem. – Přání Toma.
+- **20. 10. 2026** – Česky se na webu tyká. – Neformální tón tanečního battlu.
+- **19. 10. 2026** – Analytika, cookies, přihlášky, platby a právní stránky zatím nejsou. – Přání Toma; zapsáno do `k-diskusi-s-organizatorem.md`.
+- **20. 10. 2026** – Hero na úvodu je fotka přes celý viewport, tónovaná do růžovo-modrých barev tie-dye (vrstva `var(--tie-dye)` s `mix-blend-mode: color`), ztmavená kvůli čitelnosti a dole přechází do černé. Fotka je z prvního Off Ground (`src/assets/images/hero.jpg`, 2000 × 1333 px, černobílá – tónování jí dodá barvy plakátů; originál v `../fotky/`). Ořez je vycentrovaný na dav (`object-position: center 60%`), hlavní tlačítko v hero je růžovo-modré kvůli kontrastu s tmavou fotkou. – Přání Toma.
+- **20. 10. 2026** – Lišta headeru snížena z 60 na 52 px (menší odsazení nad a pod logem). Po scrollu je mezera nad lištou mléčně rozmazaná jako stavový řádek v aplikacích na iPhonu (postupné rozmazání: dvě vrstvy `header::before` 6 px a `header::after` 2 px pod lištou, každá s maskou, která ji plynule ztrácí dolů, takže na krajích není vidět hranice). – Přání Toma.
+- **20. 10. 2026** – Každá podstránka má nahoře velkou fotku z prvního Off Ground (70 % výšky okna, nadpis dole) se stejným tónováním jako úvod – komponenta `PhotoBackdrop`, fotky v `src/assets/images/sections/` (zmenšené na 2400 px, bez GPS). Výběr z `../Nálož 01` a `../Nálož 02` (jen fotky na šířku, bez glitch úprav): Akce = tanečníci na nádvoří, detail akce = černobílý battle v kruhu, O nás = smějící se parta, Galerie = ruce v kruhu proti nebi, Partneři = stage se stanem, Časté dotazy = tanečnice v kruhu, Kontakt = lidi v rozhovoru. Fotka akce je v datech (`image`), proto ji ukazuje i karta akce. Horní část fotek je ztmavená víc, aby vynikl navbar s logem. – Přání Toma.
+- **20. 10. 2026** – Galerie: 20 fotek z náloží (mix noc/den, na šířku i na výšku, jedna glitch úprava) v mřížce typu masonry (CSS columns, každá fotka ve svém poměru stran) a prohlížení přes celou obrazovku v nativním `<dialog>` (šipky, Escape, klik vedle fotky zavře). Fotky v `src/assets/images/gallery/`, max. 2000 px, menší fotky se nezvětšují. Seznam v `src/content/gallery.ts`; „Momenty“ na úvodu ukazují 3 z nich s odkazem na celou galerii. – Přání Toma.
