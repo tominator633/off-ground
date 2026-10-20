@@ -22,7 +22,7 @@ export function EventCard({ event, lang, labels, learnMore }: EventCardProps) {
   const time = formatTimeRange(event.startTime, event.endTime) ?? labels.timeToBeAnnounced;
 
   return (
-    <article className={styles.card} data-status={event.status}>
+    <article className={`${styles.card} reveal`} data-status={event.status}>
       {event.image ? (
         <div className={`${styles.media} ${styles.photo}`}>
           <PhotoBackdrop

@@ -22,7 +22,7 @@ export default async function FaqPage() {
       <section className={`container ${subpage.section}`}>
         <div className={styles.list}>
           {dict.faq.items.map((item) => (
-            <details key={item.question} className={styles.item}>
+            <details key={item.question} className={`${styles.item} reveal`}>
               <summary className={styles.question}>{item.question}</summary>
               <p className={styles.answer}>{item.answer}</p>
             </details>

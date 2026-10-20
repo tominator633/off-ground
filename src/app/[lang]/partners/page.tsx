@@ -23,7 +23,7 @@ export default async function PartnersPage() {
     <>
       <PageHeader title={labels.title} lead={labels.lead} image={partnersPhoto} imagePosition="center 55%" />
       <section className={`container ${subpage.section}`}>
-        <article className={styles.partner}>
+        <article className={`${styles.partner} reveal`}>
           <p className={styles.label}>{labels.official}</p>
           <h2 className={styles.name}>{labels.restArt.name}</h2>
           <p className={styles.text}>{labels.restArt.text}</p>

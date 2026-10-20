@@ -97,7 +97,7 @@ export default async function HomePage() {
         <SectionHeading id="moments-title" title={home.gallery.title} />
         <ul className={styles.photoStrip}>
           {getHighlightPhotos().map((photo, index) => (
-            <li key={photo.src.src} className={styles.photoItem}>
+            <li key={photo.src.src} className={`${styles.photoItem} reveal`}>
               <Image
                 src={photo.src}
                 alt={`${dict.common.photoAlt} (${index + 1})`}
@@ -117,7 +117,7 @@ export default async function HomePage() {
       </section>
 
       <section className={`container ${styles.section}`} aria-labelledby="partner-title">
-        <div className={styles.partner}>
+        <div className={`${styles.partner} reveal`}>
           <p className={styles.partnerLabel} id="partner-title">
             {home.partner.title}
           </p>
@@ -130,7 +130,7 @@ export default async function HomePage() {
       </section>
 
       <section className="container" aria-labelledby="cta-title">
-        <div className={styles.cta}>
+        <div className={`${styles.cta} reveal`}>
           <h2 id="cta-title" className={styles.ctaTitle}>
             {home.cta.title}
           </h2>

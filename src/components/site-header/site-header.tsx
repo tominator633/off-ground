@@ -60,7 +60,11 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
         {labels.skipToContent}
       </a>
       {/* Floating bar with a gap around it (same structure as the gay-aktivreisen header) */}
-      <div className={`${styles.bar} ${menuOpen ? styles.open : transparent ? styles.transparent : styles.solid}`}>
+      <div
+        className={`${styles.bar} ${menuOpen ? styles.open : transparent ? styles.transparent : styles.solid}`}
+        data-site-bar
+        data-menu-open={menuOpen}
+      >
         <Link href={homePath} className={styles.brand} onClick={() => setMenuOpen(false)}>
           <BrandLogo />
           <span className="visually-hidden">{labels.home}</span>

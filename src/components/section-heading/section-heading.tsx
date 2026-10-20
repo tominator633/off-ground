@@ -9,7 +9,7 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ title, intro, id, align = "start" }: SectionHeadingProps) {
   return (
-    <div className={`${styles.heading} ${align === "center" ? styles.center : ""}`}>
+    <div className={`${styles.heading} ${align === "center" ? styles.center : ""} reveal`}>
       <h2 id={id} className={styles.title}>
         {title}
       </h2>

@@ -9,7 +9,7 @@ export function PillarList({ items }: PillarListProps) {
   return (
     <ul className={styles.list}>
       {items.map((item, index) => (
-        <li key={item.title} className={styles.card}>
+        <li key={item.title} className={`${styles.card} reveal`}>
           <span className={styles.number} aria-hidden="true">
             {String(index + 1).padStart(2, "0")}
           </span>

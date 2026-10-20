@@ -40,7 +40,7 @@ export function PhotoGallery({ photos, alt, labels }: PhotoGalleryProps) {
     <>
       <ul className={styles.grid}>
         {photos.map((item, index) => (
-          <li key={item.src.src} className={styles.item}>
+          <li key={item.src.src} className={`${styles.item} reveal`}>
             <button type="button" className={styles.thumb} onClick={() => setCurrent(index)}>
               <Image
                 src={item.src}

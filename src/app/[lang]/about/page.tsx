@@ -40,7 +40,7 @@ export default async function AboutPage() {
         <SectionHeading id="values-title" title={about.valuesTitle} />
         <ul className={`${styles.cardGrid} ${styles.plainList}`} data-columns="3">
           {about.values.map((value) => (
-            <li key={value.title} className={styles.valueCard}>
+            <li key={value.title} className={`${styles.valueCard} reveal`}>
               <h3 className={styles.valueTitle}>{value.title}</h3>
               <p>{value.text}</p>
             </li>

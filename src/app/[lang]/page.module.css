@@ -40,6 +40,20 @@
   height: auto;
   left: 26%;
   top: 2%;
+  /* Slow float – rotate/translate only, runs on the compositor */
+  animation: star-float 7s ease-in-out infinite alternate;
+}
+
+@keyframes star-float {
+  from {
+    rotate: -4deg;
+    translate: 0 0;
+  }
+
+  to {
+    rotate: 5deg;
+    translate: 0 -10px;
+  }
 }
 
 .heroTitle {

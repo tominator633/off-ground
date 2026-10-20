@@ -10,7 +10,7 @@ export function LineUp({ items }: LineUpProps) {
   return (
     <ol className={styles.lineup}>
       {items.map((item) => (
-        <li key={`${item.time}-${item.title}`} className={styles.item}>
+        <li key={`${item.time}-${item.title}`} className={`${styles.item} reveal`}>
           <time className={styles.time}>{item.time}</time>
           <span className={styles.title}>{item.title}</span>
           {item.versus ? (
