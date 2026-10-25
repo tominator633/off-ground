@@ -195,7 +195,8 @@
   z-index: -1;
   display: flex;
   flex-direction: column;
-  padding: calc(var(--header-height) + var(--space-6)) calc(var(--gutter) + var(--space-3)) var(--space-7);
+  /* the first link almost touches the top edge (no logo while the menu is open) */
+  padding: var(--space-1) calc(var(--gutter) + var(--space-3)) var(--space-7);
   overflow-y: auto;
   overscroll-behavior: contain;
   background-color: rgb(5 5 7 / 0.72);
@@ -233,7 +234,8 @@
 
 /* Big, poster-like links – the same style on phones and desktops, only the size scales */
 .navLink {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: var(--space-1) 0;
   color: var(--color-text);
   font-family: var(--font-nav);
@@ -249,6 +251,36 @@
     color var(--transition-base),
     opacity var(--transition-base),
     transform var(--transition-base);
+}
+
+/*
+ * The icon is centred on the line and the first letter overlaps its edge a little.
+ * Fixed slot, so all links line up.
+ */
+.navIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  width: 0.56em;
+  margin-right: -0.08em;
+}
+
+/* Above the icon: the icon's drop-shadow filter would otherwise paint over the letters */
+.navLabel {
+  position: relative;
+  z-index: 1;
+}
+
+/* SVG ignores text-shadow, so the poster shadow is redrawn as a drop shadow */
+.navIcon .navIconSvg {
+  width: 0.48em;
+  height: 0.48em;
+  vertical-align: 0;
+  filter: drop-shadow(var(--shadow-text));
+}
+
+.navList li:first-child .navLink {
+  padding-top: 0;
 }
 
 .navLink[aria-current="page"] {

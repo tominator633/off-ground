@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import type { ComponentType } from "react";
 import { BrandLockup } from "@/components/brand-logo/brand-lockup";
+import { BrandStar } from "@/components/brand-logo/brand-star";
+import { AboutIcon } from "@/components/icons/about-icon";
+import { ContactIcon } from "@/components/icons/contact-icon";
+import { EventsIcon } from "@/components/icons/events-icon";
+import { FaqIcon } from "@/components/icons/faq-icon";
+import { GalleryIcon } from "@/components/icons/gallery-icon";
+import { PartnersIcon } from "@/components/icons/partners-icon";
 import {
   localeLabels,
   locales,
@@ -13,8 +21,25 @@ import {
 } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
 import { rememberLocale } from "@/lib/locale-cookie";
-import { navItems } from "@/lib/navigation";
+import { navItems, type NavKey } from "@/lib/navigation";
 import styles from "./site-header.module.css";
+
+/** Icons in front of the menu links; a section without one keeps an empty slot so the text lines up. */
+const navIcons: Partial<Record<NavKey, ComponentType<{ className?: string }>>> = {
+  // the glitter star from the logo keeps its own colours
+  home: BrandStar,
+  events: EventsIcon,
+  about: AboutIcon,
+  gallery: GalleryIcon,
+  partners: PartnersIcon,
+  faq: FaqIcon,
+  contact: ContactIcon,
+};
+
+function NavIcon({ navKey }: { navKey: NavKey }) {
+  const Icon = navIcons[navKey];
+  return <span className={styles.navIcon}>{Icon ? <Icon className={styles.navIconSvg} /> : null}</span>;
+}
 
 interface SiteHeaderProps {
   lang: Locale;
@@ -103,7 +128,8 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
                 aria-current={pathname === homePath ? "page" : undefined}
                 onClick={() => setMenuOpen(false)}
               >
-                {labels.home}
+                <NavIcon navKey="home" />
+                <span className={styles.navLabel}>{labels.home}</span>
               </Link>
             </li>
             {navItems.map((item) => (
@@ -114,7 +140,8 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
                   aria-current={isActive(item.path) ? "page" : undefined}
                   onClick={() => setMenuOpen(false)}
                 >
-                  {labels[item.key]}
+                  <NavIcon navKey={item.key} />
+                  <span className={styles.navLabel}>{labels[item.key]}</span>
                 </Link>
               </li>
             ))}
