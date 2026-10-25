@@ -32,6 +32,7 @@ export function PhotoBackdrop({ src, position = "center", sizes = "100vw", prior
       />
       <div className={styles.tint} />
       <div className={styles.shade} />
+      <div className={styles.grain} />
     </div>
   );
 }

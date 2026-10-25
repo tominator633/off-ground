@@ -95,8 +95,8 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
 
-  /* Film grain over the page (globals.css) */
-  --grain-opacity: 0.3;
+  /* Film grain over the hero photos (PhotoBackdrop) */
+  --grain-opacity: 0.6;
 }
 
 /* Desktop: the floating bar keeps a bigger gap from the top edge */
