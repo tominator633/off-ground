@@ -9,11 +9,12 @@ import { PhotoBackdrop } from "@/components/photo-backdrop/photo-backdrop";
 import { PillarList } from "@/components/pillar-list/pillar-list";
 import { SectionHeading } from "@/components/section-heading/section-heading";
 import { TieDye } from "@/components/tie-dye/tie-dye";
-import { getEvents } from "@/content/events";
+import { getEvents, getNextEdition } from "@/content/events";
 import { getHighlightPhotos } from "@/content/gallery";
 import { social } from "@/content/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
+import { formatEventDate } from "@/lib/format";
 import { pageMetadata } from "@/lib/metadata";
 import styles from "./page.module.css";
 
@@ -30,27 +31,48 @@ export default async function HomePage() {
   const { home } = dict;
   // Newest event first in the data; the home page shows its line-up.
   const featured = getEvents()[0];
+  const next = getNextEdition();
 
   return (
     <>
       <section className={styles.hero} aria-labelledby="hero-title">
         {/* Photo from the first Off Ground (10/10/2026) */}
         <PhotoBackdrop src={heroPhoto} position="center 60%" />
+        {/* Giant number of the next edition – decorative, the card below says it in words */}
+        <span className={styles.edition} aria-hidden="true">
+          {next.number}
+        </span>
         <div className={`container ${styles.heroContent}`}>
-          <p className={styles.eyebrow}>{home.hero.eyebrow}</p>
-          {/* The main logo; on scroll it flies into the header as its mini version */}
-          <HeroLogo className={styles.heroLogo} headingId="hero-title" />
-          <p className={styles.heroSubtitle}>{home.hero.subtitle}</p>
-          <div className={styles.heroActions}>
-            {featured ? (
-              <ButtonLink href={localizedPath(lang, `/events/${featured.slug}`)}>
-                {home.hero.primaryCta}
-              </ButtonLink>
-            ) : null}
-            <ButtonLink href={localizedPath(lang, "/about")} variant="outline">
-              {home.hero.secondaryCta}
-            </ButtonLink>
+          <div className={styles.heroBrand}>
+            <p className={styles.eyebrow}>{home.hero.eyebrow}</p>
+            {/* The main logo; on scroll it flies into the header as its mini version */}
+            <HeroLogo className={styles.heroLogo} headingId="hero-title" />
           </div>
+
+          {/* Quick look at the next event, on top of the giant number */}
+          <section className={styles.nextCard} aria-labelledby="next-title">
+            <p className={styles.nextLabel}>{home.next.label}</p>
+            <h2 id="next-title" className={styles.nextTitle}>
+              {home.next.title}
+              {next.number}
+            </h2>
+            <dl className={styles.nextFacts}>
+              <div>
+                <dt>{home.next.when}</dt>
+                <dd>{next.date ? formatEventDate(lang, next.date) : home.next.dateTba}</dd>
+              </div>
+              <div>
+                <dt>{home.next.where}</dt>
+                <dd>{next.location ? next.location[lang] : home.next.placeTba}</dd>
+              </div>
+            </dl>
+            <p className={styles.nextText}>{home.next.text}</p>
+            <div className={styles.nextActions}>
+              {/* Battle sign-ups go through the contact form until there is a registration system */}
+              <ButtonLink href={localizedPath(lang, "/contact")}>{home.next.register}</ButtonLink>
+              <InstagramButton href={social.instagram.url}>{home.next.follow}</InstagramButton>
+            </div>
+          </section>
         </div>
       </section>
 

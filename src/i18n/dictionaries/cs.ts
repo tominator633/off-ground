@@ -33,9 +33,17 @@ export const cs: Dictionary = {
   home: {
     hero: {
       eyebrow: "Taneční battle · Praha",
-      subtitle: "Tanečníci, crews a publikum, které rozhoduje o vítězi. Odlep se od země a vstup do kruhu.",
-      primaryCta: "Line-up",
-      secondaryCta: "Co je Off Ground",
+    },
+    next: {
+      label: "Další akce",
+      title: "Off Ground #",
+      text: "Druhý Off Ground se chystá. Battle, showcase a line-up – a o vítězi zase rozhoduješ ty.",
+      when: "Kdy",
+      where: "Kde",
+      dateTba: "Termín brzy oznámíme",
+      placeTba: "Místo upřesníme",
+      register: "Přihlásit se do battlu",
+      follow: "Novinky na Instagramu",
     },
     intro: {
       title: "Co je Off Ground",

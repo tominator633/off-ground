@@ -31,9 +31,17 @@ export const en = {
   home: {
     hero: {
       eyebrow: "Dance battle · Prague",
-      subtitle: "Dancers, crews and a crowd that decides who wins. Off the ground, into the circle.",
-      primaryCta: "See the line-up",
-      secondaryCta: "What is Off Ground",
+    },
+    next: {
+      label: "Next event",
+      title: "Off Ground #",
+      text: "The second Off Ground is on its way. Battle, showcase and a line-up – and once again, you decide who wins.",
+      when: "When",
+      where: "Where",
+      dateTba: "Date coming soon",
+      placeTba: "Venue coming soon",
+      register: "Sign up for the battle",
+      follow: "News on Instagram",
     },
     intro: {
       title: "What is Off Ground",

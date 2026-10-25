@@ -88,6 +88,25 @@ export const events: OffGroundEvent[] = [
   },
 ];
 
+/** The next Off Ground, teased in the home page hero. Facts stay null until they are announced. */
+export interface NextEdition {
+  /** Edition number shown as the giant numeral */
+  number: number;
+  /** ISO date "YYYY-MM-DD" in Prague time */
+  date: string | null;
+  location: Localized | null;
+}
+
+export const nextEdition: NextEdition = {
+  number: 2,
+  date: null,
+  location: null,
+};
+
+export function getNextEdition(): NextEdition {
+  return nextEdition;
+}
+
 export function getEvents(): OffGroundEvent[] {
   return events;
 }

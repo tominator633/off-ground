@@ -16,7 +16,8 @@ Stav: 20. 10. 2026. Vyřešené body přesuňte do `rozhodnuti.md`.
 - Jak se akce jmenuje: „Off Ground“, „OFF GROUND fest“, „Off Ground #1“? Na webu zatím „Off Ground · Burza #4“.
 - Kdo jsou Amathyst, Imellie a defcom (DJs, tanečníci, kapely)? Na webu jsou jen jména.
 - Kdo vyhrál první battle a jak hlasovalo publikum?
-- Kdy a kde bude další Off Ground?
+- Kdy a kde bude další Off Ground (#2)? Hero na úvodu ho už ohlašuje, datum a místo zatím ukazuje jako „brzy oznámíme“ – doplnit do `nextEdition` v `src/content/events.ts`.
+- Jak se tanečníci do battlu #2 přihlásí (formulář, Google Form, e-mail, Instagram)? Tlačítko „Přihlásit se do battlu“ zatím vede na kontaktní formulář.
 
 **Vymyšlené texty (zástupné, přepsat podle organizátora):**
 - úvod „Co je Off Ground“ (zmínka o DJ a kruhu),
