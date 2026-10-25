@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import heroPhoto from "@/assets/images/hero.jpg";
 import battlePhoto from "@/assets/images/sections/event-battle.jpg";
 import type { Locale } from "@/i18n/config";
 
@@ -88,19 +89,52 @@ export const events: OffGroundEvent[] = [
   },
 ];
 
-/** The next Off Ground, teased in the home page hero. Facts stay null until they are announced. */
+/**
+ * Visual theme of an edition. Every theme has its own ad in the home page hero
+ * (src/components/edition-ad/) – a new theme = a new entry here and a new ad component.
+ */
+export type EditionTheme = "zombiehood";
+
+/** The next Off Ground, advertised in the home page hero. Unknown facts stay null. */
 export interface NextEdition {
   /** Edition number shown as the giant numeral */
   number: number;
+  /** Name of the edition, e.g. "Zombiehood" */
+  name: string;
+  theme: EditionTheme;
+  tagline: Localized;
+  text: Localized;
   /** ISO date "YYYY-MM-DD" in Prague time */
   date: string | null;
+  /** "HH:MM" in Prague time */
+  startTime: string | null;
   location: Localized | null;
+  /** Ticket shop; null = not on sale yet (the button then points to Instagram for news) */
+  ticketUrl: string | null;
+  /** Background photo of the home page hero for this edition */
+  heroImage: StaticImageData;
+  /** CSS object-position for the photo crop */
+  heroImagePosition: string;
 }
 
 export const nextEdition: NextEdition = {
   number: 2,
-  date: null,
-  location: null,
+  name: "Zombiehood",
+  theme: "zombiehood",
+  tagline: { cs: "Noc, kdy tančí i mrtví.", en: "The night even the dead dance." },
+  text: {
+    cs: "Dance battle, showcase a line-up až do rána. Přijď v masce – o vítězi rozhoduješ ty.",
+    en: "Dance battle, showcase and a line-up until dawn. Come in costume – you decide who wins.",
+  },
+  // PLACEHOLDER – date, time and venue are made up for the design (Tom, 25. 10. 2026);
+  // replace with the real ones from the organizer, see docs/k-diskusi-s-organizatorem.md.
+  date: "2026-10-31",
+  startTime: "20:00",
+  location: { cs: "Kostnice Holešovice, Praha 7", en: "Kostnice Holešovice, Prague 7" },
+  ticketUrl: null,
+  // Crowd around the circle at the first Off Ground (10/10/2026)
+  heroImage: heroPhoto,
+  heroImagePosition: "center 60%",
 };
 
 export function getNextEdition(): NextEdition {

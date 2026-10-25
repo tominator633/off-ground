@@ -36,14 +36,12 @@ export const cs: Dictionary = {
     },
     next: {
       label: "Další akce",
-      title: "Off Ground #",
-      text: "Druhý Off Ground se chystá. Battle, showcase a line-up – a o vítězi zase rozhoduješ ty.",
-      when: "Kdy",
-      where: "Kde",
+      edition: "Off Ground #",
       dateTba: "Termín brzy oznámíme",
       placeTba: "Místo upřesníme",
+      ticket: "Koupit lístek",
       register: "Přihlásit se do battlu",
-      follow: "Novinky na Instagramu",
+      lineup: "Line-up",
     },
     intro: {
       title: "Co je Off Ground",
@@ -99,10 +97,20 @@ export const cs: Dictionary = {
   about: {
     title: "O nás",
     lead: "Off Ground je taneční battle od tanečníků pro tanečníky – a pro všechny, kdo se rádi dívají.",
-    story: [
-      "Začalo to jedním nápadem: dostat tanečníky z různých stylů a crews na jeden parket a nechat je potkat se v kruhu.",
-      "První Off Ground proběhl 10. 10. 2026. A další přijdou.",
-    ],
+    // Návrh příběhu (vymyšlený pro design) – přepsat podle organizátorů
+    story: {
+      title: "Jak to vzniklo",
+      paragraphs: [
+        "Off Ground začal jako rozhovor dvou kamarádů po jednom tréninku. Oba jsme roky jezdili po battlech a pořád se vraceli se stejným pocitem: v Praze chybí místo, kde se potkají všichni – hip-hop, house, krump, nováčci i staří mazáci.",
+        "Nechtěli jsme další soutěž, kde se tančí pro porotu za stolem. Chtěli jsme kruh. Lidi namačkané kolem tanečníků, křik, tleskání a publikum, které samo rozhodne, kdo vyhrál.",
+        "Název je o momentu, kdy se odlepíš od země – v tanci, v hlavě i v tom, na co si troufneš. Třpytivá hvězda v logu je ten záblesk, když se něco povede.",
+        "Sháněli jsme místo, DJs a kamarády, kteří pomůžou se zvukem i s fotkami. Všechno po večerech a za svoje. 10. 10. 2026 se to poprvé povedlo: kruh se nezavřel až do konce a battle misfits vs underdogs rozhodlo publikum.",
+        "Teď chystáme další ročníky – každý s vlastním tématem, ale se stejnou energií. Off Ground dělají tanečníci pro tanečníky. A pro každého, kdo se přijde dívat.",
+      ],
+      quote: "Chtěli jsme parket, kde nikdo nestojí bokem.",
+      photoAlt: "Dva lidé se objímají na prvním Off Ground",
+      photoCaption: "Off Ground #1 · 10/10/2026",
+    },
     valuesTitle: "Na čem nám záleží",
     values: [
       { title: "Respekt", text: "Battle naplno, respekt ještě víc. Každý tanečník dostane stejný prostor." },

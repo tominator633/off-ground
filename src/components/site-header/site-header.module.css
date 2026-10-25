@@ -138,7 +138,10 @@
   gap: var(--space-2);
 }
 
-/* Menu button: just three pink lines – no circle, no background */
+/*
+ * Menu button: just three white lines – no circle, no background. White, so it fits any
+ * edition theme in the home page hero.
+ */
 .menuToggle {
   display: inline-flex;
   align-items: center;
@@ -149,13 +152,13 @@
   border: 0;
   border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--color-pink);
+  color: var(--color-text);
   cursor: pointer;
-  transition: color var(--transition-base);
+  transition: opacity var(--transition-base);
 }
 
 .menuToggle:hover {
-  color: var(--color-pink-strong);
+  opacity: 0.75;
 }
 
 .burger {
@@ -215,9 +218,15 @@
   opacity: 1;
 }
 
+/*
+ * Phones: the links spread over the whole height of the screen with equal gaps – the same
+ * space above the first, between them and below the last (desktop: centred block below).
+ */
 .navList {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  justify-content: space-evenly;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -239,7 +248,8 @@
   padding: var(--space-1) 0;
   color: var(--color-text);
   font-family: var(--font-nav);
-  font-size: clamp(2.25rem, 1rem + 4.5vw, 5rem);
+  /* phones: as big as the longest item ("časté dotazy") allows; desktop size below */
+  font-size: clamp(2.6rem, 0.5rem + 10vw, 3.5rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.05em;
@@ -368,6 +378,15 @@
   .nav {
     justify-content: center;
     padding-inline: max(var(--gutter), calc((100% - var(--container-width)) / 2 + var(--gutter)));
+  }
+
+  .navList {
+    flex: none;
+    justify-content: flex-start;
+  }
+
+  .navLink {
+    font-size: clamp(2.25rem, 1rem + 4.5vw, 5rem);
   }
 }
 

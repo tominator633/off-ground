@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import heroPhoto from "@/assets/images/hero.jpg";
 import { ButtonLink } from "@/components/button-link/button-link";
+import { EditionAd, editionHeroClass } from "@/components/edition-ad/edition-ad";
 import { HeroLogo } from "@/components/hero-logo/hero-logo";
 import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { LineUp } from "@/components/line-up/line-up";
@@ -14,7 +14,6 @@ import { getHighlightPhotos } from "@/content/gallery";
 import { social } from "@/content/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
-import { formatEventDate } from "@/lib/format";
 import { pageMetadata } from "@/lib/metadata";
 import styles from "./page.module.css";
 
@@ -35,44 +34,32 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className={styles.hero} aria-labelledby="hero-title">
-        {/* Photo from the first Off Ground (10/10/2026) */}
-        <PhotoBackdrop src={heroPhoto} position="center 60%" />
-        {/* Giant number of the next edition – decorative, the card below says it in words */}
+      {/* The edition theme colours the photo and sets the lettering of the giant number */}
+      <section className={`${styles.hero} ${editionHeroClass(next.theme)}`} aria-labelledby="hero-title">
+        {/* Background photo chosen for the next edition */}
+        <PhotoBackdrop src={next.heroImage} position={next.heroImagePosition} grain />
+        {/* Giant number of the next edition – decorative, the ad below says it in words */}
         <span className={styles.edition} aria-hidden="true">
           {next.number}
         </span>
         <div className={`container ${styles.heroContent}`}>
           <div className={styles.heroBrand}>
-            <p className={styles.eyebrow}>{home.hero.eyebrow}</p>
             {/* The main logo; on scroll it flies into the header as its mini version */}
             <HeroLogo className={styles.heroLogo} headingId="hero-title" />
           </div>
 
-          {/* Quick look at the next event, on top of the giant number */}
-          <section className={styles.nextCard} aria-labelledby="next-title">
-            <p className={styles.nextLabel}>{home.next.label}</p>
-            <h2 id="next-title" className={styles.nextTitle}>
-              {home.next.title}
-              {next.number}
-            </h2>
-            <dl className={styles.nextFacts}>
-              <div>
-                <dt>{home.next.when}</dt>
-                <dd>{next.date ? formatEventDate(lang, next.date) : home.next.dateTba}</dd>
-              </div>
-              <div>
-                <dt>{home.next.where}</dt>
-                <dd>{next.location ? next.location[lang] : home.next.placeTba}</dd>
-              </div>
-            </dl>
-            <p className={styles.nextText}>{home.next.text}</p>
-            <div className={styles.nextActions}>
-              {/* Battle sign-ups go through the contact form until there is a registration system */}
-              <ButtonLink href={localizedPath(lang, "/contact")}>{home.next.register}</ButtonLink>
-              <InstagramButton href={social.instagram.url}>{home.next.follow}</InstagramButton>
-            </div>
-          </section>
+          {/* Ad for the next event in its own theme, over the giant number */}
+          <EditionAd
+            edition={next}
+            lang={lang}
+            labels={home.next}
+            // Until tickets are on sale, the button leads to Instagram, where they'll be announced
+            ticketHref={next.ticketUrl ?? social.instagram.url}
+            ticketExternal
+            registerHref={localizedPath(lang, "/contact")}
+            // The line-up section further down this page
+            lineupHref="#lineup"
+          />
         </div>
       </section>
 
@@ -91,7 +78,7 @@ export default async function HomePage() {
       </section>
 
       {featured ? (
-        <section className={styles.lineupSection} aria-labelledby="lineup-title">
+        <section id="lineup" className={styles.lineupSection} aria-labelledby="lineup-title">
           <TieDye className={styles.lineupPoster}>
             <div className="container">
               <h2 id="lineup-title" className={styles.lineupTitle}>

@@ -1,0 +1,125 @@
+/*
+ * "How it started": photo on the left like a print pinned to the wall (tilted, pink offset
+ * shadow like the logo lettering, glitter star sticker), the long story on the right.
+ * The black is lit by pink and blue glows, like the footer.
+ */
+.story {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-8);
+  /* clip, not hidden: hidden would make this a scroll container and break the sticky photo */
+  overflow: clip;
+  background:
+    radial-gradient(40rem 26rem at 0% 15%, rgb(242 123 192 / 0.22), transparent 70%),
+    radial-gradient(44rem 28rem at 100% 90%, rgb(116 189 238 / 0.2), transparent 70%),
+    radial-gradient(30rem 20rem at 60% 40%, rgb(180 131 204 / 0.1), transparent 70%);
+}
+
+.storyInner {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.photoFrame {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 34rem);
+  margin: 0;
+  rotate: -2deg;
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  /* the logo's offset shadow, in pink, plus a soft glow */
+  box-shadow:
+    1.1rem 1.3rem 0 rgb(214 150 214 / 0.65),
+    0 0 4rem rgb(242 123 192 / 0.25);
+}
+
+.photoImage {
+  object-fit: cover;
+}
+
+/* The glitter star stuck on the corner */
+.sticker {
+  position: absolute;
+  top: -2.25rem;
+  right: -1.5rem;
+  width: 5.5rem;
+  height: auto;
+  rotate: 14deg;
+  filter: drop-shadow(0 6px 12px rgb(5 5 7 / 0.6));
+}
+
+.caption {
+  margin-top: var(--space-6);
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.storyText {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 40rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+.storyTitle {
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+  font-size: var(--text-3xl);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  text-shadow: var(--shadow-text);
+}
+
+/* The first paragraph opens the story a size bigger */
+.opening {
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.quote {
+  margin: var(--space-3) 0;
+  padding-left: var(--space-5);
+  border-left: 4px solid var(--color-pink);
+  color: var(--color-pink);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+@media (min-width: 64rem) {
+  .story {
+    padding-block: var(--space-9);
+  }
+
+  .storyInner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+    gap: var(--space-9);
+  }
+
+  /* The photo stays in view while the long story scrolls past */
+  .photoFrame {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-7));
+  }
+
+  .sticker {
+    width: 7rem;
+    top: -3rem;
+    right: -2.25rem;
+  }
+}

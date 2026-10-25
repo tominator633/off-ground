@@ -16,11 +16,6 @@
   font-size: var(--text-lg);
 }
 
-.twoColumns {
-  display: grid;
-  gap: var(--space-5);
-}
-
 .panel {
   padding: var(--space-6) var(--space-5);
   border-radius: var(--radius-lg);
@@ -90,7 +85,6 @@
 }
 
 @media (min-width: 48rem) {
-  .twoColumns,
   .cardGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -104,17 +98,4 @@
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-/* Decorative tie-dye block with the star (stands in for photos) */
-.visual {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-lg);
-}
-
-.visualStar {
-  width: 40%;
-  height: auto;
 }

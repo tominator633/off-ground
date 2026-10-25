@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import eventsPhoto from "@/assets/images/sections/events.jpg";
 import { EventCard } from "@/components/event-card/event-card";
+import { EventsIcon } from "@/components/icons/events-icon";
 import { PageHeader } from "@/components/page-header/page-header";
 import { getEvents } from "@/content/events";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
@@ -17,7 +18,7 @@ export default async function EventsPage() {
 
   return (
     <>
-      <PageHeader title={dict.events.title} lead={dict.events.lead} image={eventsPhoto} imagePosition="center 55%" />
+      <PageHeader icon={EventsIcon} title={dict.events.title} lead={dict.events.lead} image={eventsPhoto} imagePosition="center 55%" />
       <section className={`container ${styles.section}`}>
         <div className={styles.cardGrid}>
           {getEvents().map((event) => (

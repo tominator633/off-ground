@@ -1,8 +1,10 @@
+/* Title block of a subpage: centred and close to the top, so the content starts early */
 .header {
   position: relative;
   isolation: isolate;
-  padding-block: calc(var(--header-height) + var(--space-8)) var(--space-7);
+  padding-block: calc(var(--header-height) + var(--space-4)) var(--space-6);
   overflow: hidden;
+  text-align: center;
   background:
     radial-gradient(60rem 22rem at 10% 0%, rgb(242 123 192 / 0.28), transparent 70%),
     radial-gradient(50rem 20rem at 90% 10%, rgb(116 189 238 / 0.26), transparent 70%),
@@ -18,23 +20,46 @@
   text-shadow: var(--shadow-text);
 }
 
+/*
+ * Section icon left of the title, as in the menu. It sits in the line of text, so with a
+ * title that wraps it stays with the first word. SVG ignores text-shadow → drop shadow.
+ */
+.title .icon {
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.06em;
+  vertical-align: 0.06em;
+  filter: drop-shadow(var(--shadow-text));
+}
+
+/* Above the icon: the icon's filter would otherwise paint over the letters */
+.titleText {
+  position: relative;
+  z-index: 1;
+}
+
 .lead {
   max-width: var(--container-narrow);
-  margin-top: var(--space-4);
+  margin: var(--space-4) auto 0;
   color: var(--color-text-muted);
   font-size: var(--text-lg);
 }
 
-/* With a photo: a large hero, title at the bottom like a poster */
+/* With a photo: a shorter photo band, the title up near the top */
 .withPhoto {
-  display: flex;
-  align-items: flex-end;
-  min-height: 70svh;
-  padding-block: calc(var(--header-height) + var(--space-8)) var(--space-8);
+  min-height: 42svh;
+  padding-block: calc(var(--header-height) + var(--space-4)) var(--space-7);
   background: none;
 }
 
 .withPhoto .lead {
   color: var(--color-text);
   text-shadow: 0 1px 12px rgb(5 5 7 / 0.6);
+}
+
+/* Desktop: bigger, poster-size titles */
+@media (min-width: 64rem) {
+  .title {
+    font-size: clamp(6rem, 2rem + 6.5vw, 9rem);
+  }
 }

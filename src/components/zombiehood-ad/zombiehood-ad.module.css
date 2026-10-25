@@ -1,0 +1,328 @@
+/*
+ * Zombiehood theme (Off Ground #2): Halloween night in teal glow, like a horror game menu.
+ * Theme colours live here, not in tokens.css – they belong to this one edition only.
+ * Motion is transform/opacity only; reduced motion stops it (globals.css).
+ */
+/*
+ * Set on the whole hero: the photo is toned in the night teal of the theme with an orange
+ * pumpkin glow in the corner (PhotoBackdrop reads --photo-tint), and the giant number uses
+ * the dripping lettering.
+ */
+.hero {
+  /* saturated hues: the "color" blend keeps only hue and saturation, the photo gives the light */
+  --photo-tint:
+    radial-gradient(45% 55% at 72% 38%, rgb(0 240 210 / 0.95), transparent 70%),
+    radial-gradient(35% 35% at 12% 10%, rgb(255 130 0 / 0.85), transparent 70%),
+    linear-gradient(160deg, #00b3a4 0%, #008a96 55%, #00d6b8 100%);
+  --edition-font: var(--font-creepster);
+  --edition-weight: 400;
+  --edition-tracking: 0;
+}
+
+.ad,
+.ticket {
+  --zh-teal: #74f5d6;
+  --zh-teal-deep: #0b4a50;
+  --zh-night: #021214;
+  --zh-orange: #ff8c1a;
+  --zh-orange-deep: #d4600b;
+  --zh-flame: #ffd75e;
+  --zh-stem: #2c3a19;
+  --zh-blood: #ff2a2a;
+}
+
+/* No background – the ad sits right on the photo and the giant number */
+.ad {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-6);
+  text-align: center;
+  isolation: isolate;
+}
+
+/* Teal haze behind the lettering */
+.glow {
+  position: absolute;
+  inset: -10% -20%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgb(40 200 185 / 0.42), rgb(10 80 85 / 0.18) 55%, transparent);
+  pointer-events: none;
+}
+
+.label {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgb(2 18 20 / 0.8);
+}
+
+.title {
+  color: var(--zh-teal);
+  font-size: clamp(3rem, 1rem + 11vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 0.25em rgb(80 240 210 / 0.55),
+    0 0.06em 0 var(--zh-teal-deep);
+}
+
+.tagline {
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  font-style: italic;
+  text-shadow: 0 1px 10px rgb(2 18 20 / 0.9);
+}
+
+/* Date and venue between two jack-o'-lanterns */
+.facts {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block: var(--space-2);
+}
+
+.facts p {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.when {
+  color: var(--zh-flame);
+  font-size: var(--text-xl);
+  white-space: nowrap;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 14px rgb(255 140 26 / 0.6);
+}
+
+.where {
+  color: var(--color-text);
+  font-weight: 600;
+  text-shadow: 0 1px 8px rgb(2 18 20 / 0.9);
+}
+
+.pumpkin {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgb(255 140 26 / 0.55));
+  animation: pumpkin-flicker 3.2s steps(1, end) infinite;
+}
+
+.pumpkinMirrored {
+  scale: -1 1;
+  animation-delay: -1.4s;
+}
+
+/* Candle inside: the glow drops for a moment now and then */
+@keyframes pumpkin-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  42% {
+    opacity: 0.75;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  78% {
+    opacity: 0.85;
+  }
+
+  80% {
+    opacity: 1;
+  }
+}
+
+.text {
+  max-width: 26rem;
+  color: var(--color-text);
+  font-weight: 500;
+  text-shadow: 0 1px 10px rgb(2 18 20 / 0.9);
+}
+
+/* Smaller teal outline buttons; the big ticket button below is the main call to action */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-5);
+  border: 2px solid rgb(116 245 214 / 0.6);
+  border-radius: var(--radius-pill);
+  background: rgb(2 18 20 / 0.55);
+  color: var(--zh-teal);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.action:hover {
+  border-color: var(--zh-teal);
+  color: var(--color-text);
+  box-shadow: 0 0 20px rgb(116 245 214 / 0.35);
+}
+
+/* Bats circling the title */
+.bat {
+  position: absolute;
+  z-index: -1;
+  color: var(--zh-night);
+  filter: drop-shadow(0 0 6px rgb(116 245 214 / 0.35));
+  animation: bat-hover 3.6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.batOne {
+  top: 4%;
+  left: 2%;
+  width: 4.5rem;
+  rotate: -12deg;
+}
+
+.batTwo {
+  top: 0;
+  right: 6%;
+  width: 3rem;
+  rotate: 14deg;
+  animation-delay: -1.2s;
+}
+
+.batThree {
+  top: 30%;
+  right: -2%;
+  width: 2.25rem;
+  rotate: -6deg;
+  animation-delay: -2.4s;
+}
+
+@keyframes bat-hover {
+  to {
+    translate: 0.6rem -0.9rem;
+  }
+}
+
+/* Red eyes watching from the dark */
+.eyes {
+  position: absolute;
+  width: 1.6rem;
+  height: 0.5rem;
+  background:
+    radial-gradient(ellipse 30% 45% at 25% 50%, var(--zh-blood) 60%, transparent 70%),
+    radial-gradient(ellipse 30% 45% at 75% 50%, var(--zh-blood) 60%, transparent 70%);
+  filter: drop-shadow(0 0 4px var(--zh-blood));
+  animation: eyes-blink 5s steps(1, end) infinite;
+  pointer-events: none;
+}
+
+.eyesLeft {
+  bottom: 18%;
+  left: -4%;
+}
+
+.eyesRight {
+  top: 18%;
+  right: 2%;
+  animation-delay: -2.3s;
+}
+
+@keyframes eyes-blink {
+  0%,
+  100% {
+    scale: 1 1;
+  }
+
+  94% {
+    scale: 1 0.1;
+  }
+
+  96% {
+    scale: 1 1;
+  }
+}
+
+/*
+ * Ticket button: dark slab with glowing teal lettering, like the game menu buttons.
+ * Phones: sticks to the bottom centre of the screen while the hero is in view.
+ */
+.ticket {
+  position: sticky;
+  bottom: var(--space-4);
+  z-index: 2;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  padding: 0.35em 1.4em;
+  border: 2px solid rgb(116 245 214 / 0.55);
+  border-radius: 1.1rem 0.4rem 1.1rem 0.4rem;
+  background: linear-gradient(180deg, #06282c, var(--zh-night));
+  color: var(--zh-teal);
+  font-size: 1.75rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.35em rgb(116 245 214 / 0.7);
+  box-shadow:
+    0 0 28px rgb(116 245 214 / 0.3),
+    inset 0 0 18px rgb(116 245 214 / 0.12);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.ticket:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 40px rgb(116 245 214 / 0.5),
+    inset 0 0 22px rgb(116 245 214 / 0.2);
+}
+
+@media (min-width: 64rem) {
+  .ad {
+    align-self: center;
+    padding-block: var(--space-7);
+  }
+
+  .facts {
+    gap: var(--space-4);
+  }
+
+  .pumpkin {
+    width: 4.5rem;
+  }
+
+  /* Bottom centre of the hero (the content box spans the whole viewport width) */
+  .ticket {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50% 0;
+    font-size: 2.1rem;
+  }
+}

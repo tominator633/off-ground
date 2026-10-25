@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import faqPhoto from "@/assets/images/sections/faq.jpg";
 import { ButtonLink } from "@/components/button-link/button-link";
+import { FaqIcon } from "@/components/icons/faq-icon";
 import { PageHeader } from "@/components/page-header/page-header";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
@@ -18,7 +19,7 @@ export default async function FaqPage() {
 
   return (
     <>
-      <PageHeader title={dict.faq.title} lead={dict.faq.lead} image={faqPhoto} imagePosition="center 40%" />
+      <PageHeader icon={FaqIcon} title={dict.faq.title} lead={dict.faq.lead} image={faqPhoto} imagePosition="center 40%" />
       <section className={`container ${subpage.section}`}>
         <div className={styles.list}>
           {dict.faq.items.map((item) => (

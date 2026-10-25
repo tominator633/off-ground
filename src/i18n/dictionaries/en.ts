@@ -34,14 +34,12 @@ export const en = {
     },
     next: {
       label: "Next event",
-      title: "Off Ground #",
-      text: "The second Off Ground is on its way. Battle, showcase and a line-up – and once again, you decide who wins.",
-      when: "When",
-      where: "Where",
+      edition: "Off Ground #",
       dateTba: "Date coming soon",
       placeTba: "Venue coming soon",
+      ticket: "Buy a ticket",
       register: "Sign up for the battle",
-      follow: "News on Instagram",
+      lineup: "Line-up",
     },
     intro: {
       title: "What is Off Ground",
@@ -97,10 +95,20 @@ export const en = {
   about: {
     title: "About",
     lead: "Off Ground is a dance battle made by dancers for dancers – and for everyone who loves to watch.",
-    story: [
-      "It started with one idea: bring dancers from different styles and crews to one floor and let them meet in the circle.",
-      "The first Off Ground took place on 10 October 2026. More are coming.",
-    ],
+    // Draft story (made up for the design) – rewrite with the organizers
+    story: {
+      title: "How it started",
+      paragraphs: [
+        "Off Ground started as a chat between two friends after a training session. We'd spent years travelling to battles and kept coming back with the same feeling: Prague was missing a place where everyone meets – hip-hop, house, krump, first-timers and old-school heads.",
+        "We didn't want another contest where you dance for judges behind a table. We wanted a circle. People packed around the dancers, shouting, clapping – and a crowd that decides who wins.",
+        "The name is about the moment you leave the ground – in the dance, in your head and in what you dare to do. The glitter star in the logo is that flash when something just works.",
+        "We hunted for a venue, DJs and friends to help with sound and photos. All of it in the evenings, out of our own pockets. On 10 October 2026 it worked for the first time: the circle never closed and the crowd decided the misfits vs underdogs battle.",
+        "Now we're preparing the next editions – each with its own theme, all with the same energy. Off Ground is made by dancers for dancers. And for everyone who comes to watch.",
+      ],
+      quote: "We wanted a dance floor where nobody stands on the side.",
+      photoAlt: "Two people hugging at the first Off Ground",
+      photoCaption: "Off Ground #1 · 10/10/2026",
+    },
     valuesTitle: "What we care about",
     values: [
       { title: "Respect", text: "Battle hard, respect harder. Every dancer gets the same space." },

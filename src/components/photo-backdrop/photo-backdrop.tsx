@@ -9,6 +9,8 @@ interface PhotoBackdropProps {
   sizes?: string;
   /** Load eagerly – true for heroes above the fold. */
   priority?: boolean;
+  /** Flickering film grain – only the home page hero has it. */
+  grain?: boolean;
 }
 
 /**
@@ -16,7 +18,13 @@ interface PhotoBackdropProps {
  * for legible text and fading into the black page. The parent must be `position: relative`
  * with `isolation: isolate`; its content sits above these layers.
  */
-export function PhotoBackdrop({ src, position = "center", sizes = "100vw", priority = true }: PhotoBackdropProps) {
+export function PhotoBackdrop({
+  src,
+  position = "center",
+  sizes = "100vw",
+  priority = true,
+  grain = false,
+}: PhotoBackdropProps) {
   return (
     <div className={styles.backdrop} aria-hidden="true">
       <Image
@@ -32,7 +40,7 @@ export function PhotoBackdrop({ src, position = "center", sizes = "100vw", prior
       />
       <div className={styles.tint} />
       <div className={styles.shade} />
-      <div className={styles.grain} />
+      {grain ? <div className={styles.grain} /> : null}
     </div>
   );
 }

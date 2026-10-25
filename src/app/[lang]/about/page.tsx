@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { Fragment } from "react";
 import aboutPhoto from "@/assets/images/sections/about.jpg";
+import storyPhoto from "@/assets/images/sections/about-story.jpg";
 import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ButtonLink } from "@/components/button-link/button-link";
+import { AboutIcon } from "@/components/icons/about-icon";
 import { PageHeader } from "@/components/page-header/page-header";
 import { SectionHeading } from "@/components/section-heading/section-heading";
-import { TieDye } from "@/components/tie-dye/tie-dye";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { pageMetadata } from "@/lib/metadata";
 import styles from "@/styles/subpage.module.css";
+import story from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [lang, dict] = await Promise.all([getLocale(), getDictionary()]);
@@ -21,18 +25,38 @@ export default async function AboutPage() {
 
   return (
     <>
-      <PageHeader title={about.title} lead={about.lead} image={aboutPhoto} imagePosition="center 35%" />
+      <PageHeader icon={AboutIcon} title={about.title} lead={about.lead} image={aboutPhoto} imagePosition="center 35%" />
 
-      <section className={`container ${styles.section}`}>
-        <div className={styles.twoColumns}>
-          <div className={styles.prose}>
-            {about.story.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+      <section className={story.story} aria-labelledby="story-title">
+        <div className={`container ${story.storyInner}`}>
+          {/* PLACEHOLDER photo from the first event – replace with a photo of the two organizers */}
+          <figure className={story.photoFrame}>
+            <div className={story.photo}>
+              <Image
+                src={storyPhoto}
+                alt={about.story.photoAlt}
+                fill
+                sizes="(min-width: 64rem) 40vw, 100vw"
+                placeholder="blur"
+                className={story.photoImage}
+              />
+            </div>
+            <BrandStar className={story.sticker} />
+            <figcaption className={story.caption}>{about.story.photoCaption}</figcaption>
+          </figure>
+
+          <div className={story.storyText}>
+            <h2 id="story-title" className={story.storyTitle}>
+              {about.story.title}
+            </h2>
+            {about.story.paragraphs.map((paragraph, index) => (
+              <Fragment key={paragraph}>
+                <p className={index === 0 ? story.opening : undefined}>{paragraph}</p>
+                {/* the quote breaks up the long text after the second paragraph */}
+                {index === 1 ? <blockquote className={story.quote}>{about.story.quote}</blockquote> : null}
+              </Fragment>
             ))}
           </div>
-          <TieDye className={styles.visual}>
-            <BrandStar className={styles.visualStar} />
-          </TieDye>
         </div>
       </section>
 

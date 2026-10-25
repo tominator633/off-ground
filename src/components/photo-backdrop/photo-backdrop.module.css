@@ -10,11 +10,14 @@
   object-fit: cover;
 }
 
-/* "color" blend keeps the photo's light and shadow but paints it in the tie-dye hues */
+/*
+ * "color" blend keeps the photo's light and shadow but paints it in the tie-dye hues.
+ * An ancestor can swap the colours via --photo-tint (the home hero uses the edition theme's).
+ */
 .tint {
   position: absolute;
   inset: 0;
-  background: var(--tie-dye);
+  background: var(--photo-tint, var(--tie-dye));
   mix-blend-mode: color;
   opacity: 0.85;
 }
