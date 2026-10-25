@@ -14,8 +14,15 @@ export function hasLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
 
-/** Picks the best supported locale from an Accept-Language header; Czech when nothing matches. */
-export function negotiateLocale(acceptLanguage: string | null): Locale {
+/** Cookie with the visitor's explicit language choice (set by the language toggle in the menu). */
+export const LOCALE_COOKIE = "NEXT_LOCALE";
+export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+/** GeoIP fallback: visitors from these countries get Czech, everyone else English. */
+const czechSpeakingCountries = new Set(["CZ", "SK"]);
+
+/** Best supported locale from an Accept-Language header, or null when none of ours is listed. */
+export function matchAcceptLanguage(acceptLanguage: string | null): Locale | null {
   const ranked = (acceptLanguage ?? "")
     .split(",")
     .map((part) => {
@@ -30,6 +37,30 @@ export function negotiateLocale(acceptLanguage: string | null): Locale {
   for (const { lang } of ranked) {
     if (hasLocale(lang)) return lang;
   }
+  return null;
+}
+
+/** Picks the best supported locale from an Accept-Language header; Czech when nothing matches. */
+export function negotiateLocale(acceptLanguage: string | null): Locale {
+  return matchAcceptLanguage(acceptLanguage) ?? defaultLocale;
+}
+
+/**
+ * Which language a visitor without a language in the URL should see:
+ * 1. their earlier explicit choice (cookie),
+ * 2. the browser / device language (Accept-Language),
+ * 3. the country from GeoIP (Vercel's x-vercel-ip-country): CZ/SK → Czech, elsewhere English,
+ * 4. Czech.
+ */
+export function resolveLocale(input: {
+  cookie?: string | null;
+  acceptLanguage?: string | null;
+  country?: string | null;
+}): Locale {
+  if (input.cookie && hasLocale(input.cookie)) return input.cookie;
+  const fromBrowser = matchAcceptLanguage(input.acceptLanguage ?? null);
+  if (fromBrowser) return fromBrowser;
+  if (input.country) return czechSpeakingCountries.has(input.country.toUpperCase()) ? "cs" : "en";
   return defaultLocale;
 }
 

@@ -52,7 +52,7 @@ Formulář je hotový a chráněný, ale v produkci nic neodešle, dokud se nena
 
 - provozovatel webu (osoba / spolek / firma) a kontakt,
 - zásady ochrany osobních údajů kvůli kontaktnímu formuláři (Resend, Cloudflare),
-- cookie lišta zatím **není potřeba** – web nepoužívá cookies ani analytiku.
+- cookie lišta zatím **není potřeba** – web nepoužívá analytiku ani sledovací cookies. Jediná cookie je funkční `NEXT_LOCALE` (zapamatovaná volba jazyka, 1 rok), která souhlas nevyžaduje, ale patří do zásad ochrany osobních údajů.
 
 ## 7. Správa obsahu (CMS) – návrh
 
