@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import heroPhoto from "@/assets/images/hero.jpg";
-import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ButtonLink } from "@/components/button-link/button-link";
+import { HeroLogo } from "@/components/hero-logo/hero-logo";
 import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { LineUp } from "@/components/line-up/line-up";
 import { PhotoBackdrop } from "@/components/photo-backdrop/photo-backdrop";
@@ -38,14 +38,8 @@ export default async function HomePage() {
         <PhotoBackdrop src={heroPhoto} position="center 60%" />
         <div className={`container ${styles.heroContent}`}>
           <p className={styles.eyebrow}>{home.hero.eyebrow}</p>
-          <div className={styles.heroLogo}>
-            <BrandStar className={styles.heroStar} />
-            <h1 id="hero-title" className={styles.heroTitle}>
-              Off
-              <br />
-              ground
-            </h1>
-          </div>
+          {/* The main logo; on scroll it flies into the header as its mini version */}
+          <HeroLogo className={styles.heroLogo} headingId="hero-title" />
           <p className={styles.heroSubtitle}>{home.hero.subtitle}</p>
           <div className={styles.heroActions}>
             {featured ? (

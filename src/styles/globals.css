@@ -105,6 +105,23 @@ img {
   border: 0;
 }
 
+/*
+ * Film grain over the whole page, like a printed poster. One static noise tile (SVG
+ * feTurbulence as a data URI – no extra request, no animation), blended with overlay so it
+ * shows on photos and colours but leaves the black background black.
+ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+  mix-blend-mode: overlay;
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+}
+
 /* Set by the site header while the full-screen mobile menu is open */
 html[data-menu-open] {
   overflow: hidden;
@@ -150,7 +167,7 @@ html[data-menu-open] {
 }
 
 /*
- * The navbar pieces (logo, language button, menu button) stay put while the content changes.
+ * The navbar pieces (logo, menu button) stay put while the content changes.
  * Named here, not in the CSS module, because CSS Modules would hash the view-transition-name.
  * Each piece is named on its own (not the whole header): a named element becomes a backdrop
  * root, which would stop glass inside it from blurring the page.
@@ -159,29 +176,22 @@ html[data-menu-open] {
   view-transition-name: site-logo;
 }
 
-[data-vt="site-lang"] {
-  view-transition-name: site-lang;
-}
-
 [data-vt="site-menu-toggle"] {
   view-transition-name: site-menu-toggle;
 }
 
 ::view-transition-group(site-logo),
-::view-transition-group(site-lang),
 ::view-transition-group(site-menu-toggle) {
   animation: none;
   z-index: 100;
 }
 
 ::view-transition-old(site-logo),
-::view-transition-old(site-lang),
 ::view-transition-old(site-menu-toggle) {
   display: none;
 }
 
 ::view-transition-new(site-logo),
-::view-transition-new(site-lang),
 ::view-transition-new(site-menu-toggle) {
   animation: none;
 }

@@ -77,7 +77,8 @@
   --container-medium: 60rem;
   --gutter: clamp(1rem, 4vw, 3.5rem);
   /* Floating header: gap above the bar + bar height = space the page content must clear */
-  --header-offset: 1.25rem;
+  /* phones and tablets: logo and menu button sit close to the top edge (desktop value below) */
+  --header-offset: 0.4rem;
   --header-bar-height: 3.25rem;
   --header-height: calc(var(--header-offset) + var(--header-bar-height));
   --radius-header: 20px;
@@ -93,4 +94,14 @@
   --shadow-glow: 0 0 0 1px rgb(255 255 255 / 0.04), 0 18px 48px -18px rgb(255 79 163 / 0.35);
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
+
+  /* Film grain over the page (globals.css) */
+  --grain-opacity: 0.3;
+}
+
+/* Desktop: the floating bar keeps a bigger gap from the top edge */
+@media (min-width: 64rem) {
+  :root {
+    --header-offset: 1.25rem;
+  }
 }

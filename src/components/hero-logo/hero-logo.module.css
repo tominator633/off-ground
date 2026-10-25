@@ -1,0 +1,5 @@
+/* Shrinks towards its top left corner, which travels to the header's mini logo */
+.flight {
+  transform-origin: 0 0;
+  will-change: transform;
+}

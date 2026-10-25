@@ -26,44 +26,9 @@
   text-transform: uppercase;
 }
 
-/* The big logo: star behind the stacked "Off / ground", as on the Instagram profile picture */
+/* The big logo (BrandLockup) – only its size is set here */
 .heroLogo {
-  position: relative;
-  display: grid;
-  place-items: center;
-  padding-bottom: var(--space-3);
-}
-
-.heroStar {
-  position: absolute;
-  width: 64%;
-  height: auto;
-  left: 26%;
-  top: 2%;
-  /* Slow float – rotate/translate only, runs on the compositor */
-  animation: star-float 7s ease-in-out infinite alternate;
-}
-
-@keyframes star-float {
-  from {
-    rotate: -4deg;
-    translate: 0 0;
-  }
-
-  to {
-    rotate: 5deg;
-    translate: 0 -10px;
-  }
-}
-
-.heroTitle {
-  position: relative;
-  color: var(--color-text);
   font-size: clamp(5rem, 2rem + 16vw, 12rem);
-  line-height: 0.82;
-  letter-spacing: -0.07em;
-  text-align: left;
-  text-shadow: var(--shadow-text);
 }
 
 .heroSubtitle {

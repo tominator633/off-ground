@@ -1,0 +1,42 @@
+/* Size = font-size set by the parent; all other values are in em so every size is the same shape */
+.lockup {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding-bottom: 0.08em;
+}
+
+.star {
+  position: absolute;
+  width: 64%;
+  height: auto;
+  left: 26%;
+  top: 2%;
+  /* Slow float – rotate/translate only, runs on the compositor */
+  animation: star-float 7s ease-in-out infinite alternate;
+}
+
+@keyframes star-float {
+  from {
+    rotate: -4deg;
+    translate: 0 0;
+  }
+
+  to {
+    rotate: 5deg;
+    translate: 0 -0.06em;
+  }
+}
+
+.title {
+  position: relative;
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-logo);
+  font-size: 1em;
+  font-weight: var(--font-display-weight);
+  line-height: 0.82;
+  letter-spacing: -0.07em;
+  text-align: left;
+  text-shadow: var(--shadow-text);
+}

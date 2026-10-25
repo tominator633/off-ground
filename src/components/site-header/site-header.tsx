@@ -3,9 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BrandLogo } from "@/components/brand-logo/brand-logo";
-import { localeLabels, locales, localizedPath, switchLocaleInPath, type Locale } from "@/i18n/config";
+import { BrandLockup } from "@/components/brand-logo/brand-lockup";
+import {
+  localeLabels,
+  locales,
+  localizedPath,
+  switchLocaleInPath,
+  type Locale,
+} from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
+import { rememberLocale } from "@/lib/locale-cookie";
 import { navItems } from "@/lib/navigation";
 import styles from "./site-header.module.css";
 
@@ -20,7 +27,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // On every page the header starts transparent and turns solid once the page is scrolled.
+  // After scrolling, the frosted strip above the bar fades in (header::before/::after).
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -51,19 +58,29 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
     return pathname === full || pathname.startsWith(`${full}/`);
   };
 
-  // Glass on the logo (and language button) only after scrolling and while the menu is closed
-  const solid = scrolled && !menuOpen;
-  const otherLocales = locales.filter((locale) => locale !== lang);
+
+  // An explicit choice beats the automatic detection (browser language / GeoIP) on the next visit
+  const chooseLocale = (locale: Locale) => {
+    rememberLocale(locale);
+    setMenuOpen(false);
+  };
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`} data-menu-open={menuOpen}>
       <a href="#main" className={styles.skipLink}>
         {labels.skipToContent}
       </a>
       {/* Floating bar: logo on the left, language + menu button on the right */}
-      <div className={`${styles.bar} ${solid ? styles.solid : ""}`}>
-        <Link href={homePath} className={styles.brand} data-vt="site-logo" onClick={() => setMenuOpen(false)}>
-          <BrandLogo />
+      <div className={styles.bar}>
+        {/* On the home page the corner stays empty until the big hero logo flies in (HeroLogo) */}
+        <Link
+          href={homePath}
+          className={styles.brand}
+          data-vt="site-logo"
+          data-await-hero={pathname === homePath ? "" : undefined}
+          onClick={() => setMenuOpen(false)}
+        >
+          <BrandLockup className={styles.brandLockup} dock />
           <span className="visually-hidden">{labels.home}</span>
         </Link>
 
@@ -78,6 +95,17 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
           }}
         >
           <ul className={styles.navList}>
+            {/* Home link: the corner logo is hidden while the menu is open */}
+            <li>
+              <Link
+                href={homePath}
+                className={styles.navLink}
+                aria-current={pathname === homePath ? "page" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                {labels.home}
+              </Link>
+            </li>
             {navItems.map((item) => (
               <li key={item.key}>
                 <Link
@@ -92,43 +120,29 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
             ))}
           </ul>
 
-          {/* Phones only: language choice lives in the menu so the bar stays uncluttered */}
-          <div className={styles.menuLanguages} role="group" aria-label={labels.switchLanguage}>
+          {/*
+            Language toggle – only here, in the menu. The language is detected automatically
+            (browser language, then GeoIP), so this is just the fallback for a manual change.
+          */}
+          <div className={styles.langToggle} role="group" aria-label={labels.switchLanguage} data-active={lang}>
             {locales.map((locale) => (
               <Link
                 key={locale}
                 href={switchLocaleInPath(pathname, locale)}
                 hrefLang={locale}
                 lang={locale}
-                className={styles.menuLanguageLink}
+                className={styles.langOption}
                 aria-current={locale === lang ? "true" : undefined}
-                onClick={() => setMenuOpen(false)}
-              >
-                {localeLabels[locale].name}
-              </Link>
-            ))}
-          </div>
-        </nav>
-
-        <div className={styles.actions}>
-          {/* Tablet and up: round language button next to the menu button */}
-          <div className={styles.languages} aria-label={labels.switchLanguage} role="group">
-            {otherLocales.map((locale) => (
-              <Link
-                key={locale}
-                href={switchLocaleInPath(pathname, locale)}
-                hrefLang={locale}
-                lang={locale}
-                className={styles.languageLink}
-                data-vt="site-lang"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => chooseLocale(locale)}
               >
                 <span aria-hidden="true">{localeLabels[locale].short}</span>
                 <span className="visually-hidden">{localeLabels[locale].name}</span>
               </Link>
             ))}
           </div>
+        </nav>
 
+        <div className={styles.actions}>
           <button
             type="button"
             className={styles.menuToggle}

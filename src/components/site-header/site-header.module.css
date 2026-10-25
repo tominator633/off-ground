@@ -63,8 +63,8 @@
 }
 
 /*
- * The bar itself has no background: only the logo turns into a liquid-glass pill after
- * scrolling, and the language button + pink hamburger float on the right.
+ * The bar itself has no background: a small logo on the left and the pink hamburger on the
+ * right float over the page. The language toggle is in the menu.
  */
 .bar {
   position: relative;
@@ -72,7 +72,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  width: calc(100% - 1.5rem);
+  /* phones and tablets: logo and menu button close to the sides */
+  width: calc(100% - 0.5rem);
   height: var(--header-bar-height);
   margin-inline: auto;
   pointer-events: none;
@@ -84,85 +85,57 @@
 }
 
 .brand {
-  --logo-height: 1.9rem;
-  --logo-scale: 0.82;
   display: flex;
   align-items: center;
   min-width: 0;
   height: 100%;
-  padding: 0 var(--space-4) 0 var(--space-3);
-  border: 1px solid transparent;
-  border-radius: var(--radius-header);
+  padding-left: var(--space-2);
   color: var(--color-text);
   text-decoration: none;
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    box-shadow var(--transition-base),
-    opacity var(--transition-base);
 }
 
-.brand:hover {
+/* Mini version of the hero logo – size only, the shape comes from BrandLockup */
+.brandLockup {
+  font-size: 1.1rem;
+  transition: opacity var(--transition-base);
+}
+
+.brand:hover .brandLockup {
   opacity: 0.85;
 }
 
-/* Liquid glass on the logo after scrolling */
-.solid .brand {
-  background-color: var(--glass-bg);
-  border-color: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
-  backdrop-filter: blur(18px) saturate(160%);
+/*
+ * Home page: no logo in the corner while the big one is in the hero. It appears the moment
+ * the flying hero logo lands here (HeroLogo sets html[data-hero-logo="docked"]) – instantly,
+ * so the swap of the two identical logos can't be seen.
+ */
+.brand[data-await-hero] {
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* Right side: language button + menu toggle */
+:global(html[data-hero-logo="docked"]) .brand[data-await-hero] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* With the menu open there is never a logo in the corner – the menu has its own home link */
+.header[data-menu-open="true"] .bar .brand {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The frosted strip would blur the logo while it flies in, so it waits until it lands */
+:global(html[data-hero-logo="hero"]) .scrolled::before,
+:global(html[data-hero-logo="hero"]) .scrolled::after {
+  opacity: 0;
+}
+
+/* Right side: menu toggle */
 .actions {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-}
-
-/* Shown from tablet up; on phones the language choice lives in the menu */
-.languages {
-  display: none;
-  gap: var(--space-2);
-}
-
-.languageLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 1px solid rgb(255 255 255 / 0.35);
-  border-radius: 50%;
-  background: rgb(255 255 255 / 0.1);
-  color: var(--color-text);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    color var(--transition-base),
-    transform var(--transition-base);
-}
-
-/* After scrolling it gets the same glass as the logo, so it stays readable over content */
-.solid .languageLink {
-  background-color: var(--glass-bg);
-  border-color: var(--glass-border);
-  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
-  backdrop-filter: blur(18px) saturate(160%);
-}
-
-.languageLink:hover,
-.solid .languageLink:hover {
-  background: var(--color-pink);
-  border-color: var(--color-pink);
-  color: var(--color-on-accent);
-  transform: translateY(-1px);
 }
 
 /* Menu button: just three pink lines – no circle, no background */
@@ -249,10 +222,6 @@
   list-style: none;
 }
 
-.navList li + li {
-  border-top: 1px solid var(--color-border);
-}
-
 .navList li {
   transform: translateY(0.75rem);
   transition: transform 350ms ease;
@@ -262,14 +231,17 @@
   transform: none;
 }
 
+/* Big, poster-like links – the same style on phones and desktops, only the size scales */
 .navLink {
   display: block;
-  padding: var(--space-4) 0;
+  padding: var(--space-1) 0;
   color: var(--color-text);
   font-family: var(--font-nav);
-  font-size: var(--text-xl);
+  font-size: clamp(2.25rem, 1rem + 4.5vw, 5rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  text-shadow: var(--shadow-text);
   text-decoration: none;
   text-transform: lowercase;
   white-space: nowrap;
@@ -283,96 +255,92 @@
   color: var(--color-pink);
 }
 
-/* Language choice at the bottom of the mobile menu */
-.menuLanguages {
-  display: flex;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-  padding-block: var(--space-4) var(--space-2);
-  border-top: 1px solid var(--color-border);
+.navLink:hover:not([aria-current="page"]) {
+  color: var(--color-pink);
+  transform: translateX(0.75rem);
 }
 
-.menuLanguageLink {
+/*
+ * Language toggle at the bottom of the menu: a pill with two options and a pink thumb
+ * that slides under the active one (only transform is animated).
+ */
+.langToggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 8.5rem;
+  margin-top: var(--space-6);
+  padding: 0.25rem;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: var(--radius-pill);
+  isolation: isolate;
+}
+
+.langToggle::before {
+  content: "";
+  position: absolute;
+  inset: 0.25rem auto 0.25rem 0.25rem;
+  z-index: -1;
+  width: calc(50% - 0.25rem);
+  border-radius: var(--radius-pill);
+  background: var(--color-pink);
+  transition: transform var(--transition-base);
+}
+
+.langToggle[data-active="en"]::before {
+  transform: translateX(100%);
+}
+
+.langOption {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.75rem;
-  padding: 0 var(--space-5);
-  border: 1px solid rgb(255 255 255 / 0.35);
+  min-height: 2.5rem;
   border-radius: var(--radius-pill);
   color: var(--color-text);
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-decoration: none;
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    color var(--transition-base);
+  transition: color var(--transition-base);
 }
 
-.menuLanguageLink[aria-current="true"] {
-  border-color: var(--color-pink);
-  color: var(--color-pink);
+.langOption[aria-current="true"] {
+  color: var(--color-on-accent);
   pointer-events: none;
 }
 
-.menuLanguageLink:hover {
-  background: var(--color-pink);
-  border-color: var(--color-pink);
-  color: var(--color-on-accent);
+.langOption:not([aria-current="true"]):hover {
+  color: var(--color-pink);
 }
 
-@media (min-width: 26rem) {
-  .brand {
-    --logo-height: 2rem;
-    --logo-scale: 0.9;
+/* Wider than 500 px */
+@media (min-width: 31.3125rem) {
+  .brandLockup {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .bar {
+    width: 97%;
   }
 }
 
 @media (min-width: 48rem) {
-  .bar {
-    width: 97%;
+  .brandLockup {
+    font-size: 1.45rem;
   }
 
-  .brand {
-    --logo-height: 2.15rem;
-    --logo-scale: 0.98;
-  }
-
-  .languages {
-    display: flex;
-  }
-
-  .menuLanguages {
-    display: none;
-  }
-
-  /* Bigger, poster-like menu on larger screens */
+  /* Menu centred vertically and aligned with the page container on larger screens */
   .nav {
     justify-content: center;
     padding-inline: max(var(--gutter), calc((100% - var(--container-width)) / 2 + var(--gutter)));
   }
-
-  .navList li + li {
-    border-top: 0;
-  }
-
-  .navLink {
-    padding: var(--space-1) 0;
-    font-size: clamp(2.5rem, 1rem + 4.5vw, 5rem);
-    line-height: 1.05;
-    letter-spacing: -0.05em;
-    text-shadow: var(--shadow-text);
-  }
-
-  .navLink:hover:not([aria-current="page"]) {
-    color: var(--color-pink);
-    transform: translateX(0.75rem);
-  }
 }
 
 @media (hover: none) {
-  .navLink:hover:not([aria-current="page"]),
-  .languageLink:hover {
+  .navLink:hover:not([aria-current="page"]) {
     transform: none;
   }
 }
