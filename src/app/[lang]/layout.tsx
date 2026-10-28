@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { EditionMenuPromo } from "@/components/edition-ad/edition-ad";
 import { SiteFooter } from "@/components/site-footer/site-footer";
 import { SiteHeader } from "@/components/site-header/site-header";
-import { locales } from "@/i18n/config";
+import { getNextEdition } from "@/content/events";
+import { social } from "@/content/site";
+import { locales, localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { interTight } from "@/lib/fonts";
 import { isIndexingAllowed, siteUrl } from "@/lib/metadata";
@@ -32,11 +35,28 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const lang = await getLocale();
   const dict = await getDictionary();
+  const next = getNextEdition();
 
   return (
     <html lang={lang} className={interTight.variable} data-scroll-behavior="smooth">
       <body>
-        <SiteHeader lang={lang} labels={dict.nav} />
+        <SiteHeader
+          lang={lang}
+          labels={dict.nav}
+          promo={
+            <EditionMenuPromo
+              edition={next}
+              lang={lang}
+              labels={dict.home.next}
+              // Until tickets are on sale, the button leads to Instagram, where they'll be announced
+              ticketHref={next.ticketUrl ?? social.instagram.url}
+              ticketExternal
+              registerHref={localizedPath(lang, "/contact")}
+              lineupHref={`${localizedPath(lang)}#lineup`}
+              homeHref={localizedPath(lang)}
+            />
+          }
+        />
         <main id="main" tabIndex={-1}>
           {children}
         </main>

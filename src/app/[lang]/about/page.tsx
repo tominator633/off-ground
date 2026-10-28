@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Fragment } from "react";
-import aboutPhoto from "@/assets/images/sections/about.jpg";
 import storyPhoto from "@/assets/images/sections/about-story.jpg";
 import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ButtonLink } from "@/components/button-link/button-link";
-import { PageHeader } from "@/components/page-header/page-header";
+import { GlowBackdrop } from "@/components/glow-backdrop/glow-backdrop";
+import { PageTitle } from "@/components/page-title/page-title";
 import { SectionHeading } from "@/components/section-heading/section-heading";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
@@ -24,9 +24,12 @@ export default async function AboutPage() {
 
   return (
     <>
-      <PageHeader title={about.title} lead={about.lead} image={aboutPhoto} imagePosition="center 35%" />
+      {/* No title block: "o nás" is shown in the header from the start, the story opens the page */}
+      <PageTitle title={about.title} />
 
       <section className={story.story} aria-labelledby="story-title">
+        {/* Pink and blue glows with watermark stars from the logo */}
+        <GlowBackdrop />
         <div className={`container ${story.storyInner}`}>
           {/* PLACEHOLDER photo from the first event – replace with a photo of the two organizers */}
           <figure className={story.photoFrame}>

@@ -166,10 +166,19 @@ export const en = {
   contact: {
     title: "Contact",
     lead: "Questions, battle sign-up, partnership or just want to say hi? Send us a message.",
+    details: {
+      text: "Write to us through the form, or find us here:",
+      phone: "phone",
+      email: "e-mail",
+      address: "address",
+      instagram: "instagram",
+      soon: "coming soon",
+      mapSoon: "Map – coming once the venue is set",
+    },
     form: {
-      name: "Your name",
-      email: "Your e-mail",
-      message: "Your message",
+      name: "Name",
+      email: "E-mail",
+      message: "Message",
       honeypot: "Leave this field empty",
       submit: "Send message",
       sending: "Sending…",

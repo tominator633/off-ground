@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import type { ComponentType } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { BrandLockup } from "@/components/brand-logo/brand-lockup";
 import { BrandStar } from "@/components/brand-logo/brand-star";
 import { AboutIcon } from "@/components/icons/about-icon";
@@ -44,9 +44,11 @@ function NavIcon({ navKey }: { navKey: NavKey }) {
 interface SiteHeaderProps {
   lang: Locale;
   labels: Dictionary["nav"];
+  /** Promo of the next event for the open menu (rendered on the server, see EditionMenuPromo) */
+  promo?: ReactNode;
 }
 
-export function SiteHeader({ lang, labels }: SiteHeaderProps) {
+export function SiteHeader({ lang, labels, promo }: SiteHeaderProps) {
   const pathname = usePathname();
   const homePath = localizedPath(lang);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -109,7 +111,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
           <span className="visually-hidden">{labels.home}</span>
         </Link>
 
-        {/* Subpages put a small copy of their title here once it has flown up (PageTitle) */}
+        {/* Subpages show their title here (PageTitle); empty on the home page */}
         <span className={styles.titleDock} data-title-dock aria-hidden="true" />
 
         <nav
@@ -117,9 +119,10 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
           aria-label={labels.mainNavigation}
           className={styles.nav}
           data-open={menuOpen}
-          // A tap on the empty glass closes the menu
+          // A tap on the empty glass or on any link (incl. the event promo) closes the menu
           onClick={(event) => {
-            if (event.target === event.currentTarget) setMenuOpen(false);
+            const target = event.target as Element;
+            if (target === event.currentTarget || target.closest("a")) setMenuOpen(false);
           }}
         >
           <ul className={styles.navList}>
@@ -150,11 +153,23 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
             ))}
           </ul>
 
+          {/* The next event: full themed ad on desktop, one themed button on phones */}
+          {promo ? <div className={styles.promo}>{promo}</div> : null}
+        </nav>
+
+        <div className={styles.actions}>
           {/*
-            Language toggle – only here, in the menu. The language is detected automatically
-            (browser language, then GeoIP), so this is just the fallback for a manual change.
+            Language toggle – shown only while the menu is open, next to the close button
+            (desktop: to its left; phones: upright under it). The language is detected
+            automatically (browser language, then GeoIP), so this is the manual fallback.
           */}
-          <div className={styles.langToggle} role="group" aria-label={labels.switchLanguage} data-active={lang}>
+          <div
+            className={styles.langToggle}
+            role="group"
+            aria-label={labels.switchLanguage}
+            data-active={lang}
+            data-open={menuOpen}
+          >
             {locales.map((locale) => (
               <Link
                 key={locale}
@@ -163,6 +178,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
                 lang={locale}
                 className={styles.langOption}
                 aria-current={locale === lang ? "true" : undefined}
+                tabIndex={menuOpen ? undefined : -1}
                 onClick={() => chooseLocale(locale)}
               >
                 <span aria-hidden="true">{localeLabels[locale].short}</span>
@@ -170,9 +186,7 @@ export function SiteHeader({ lang, labels }: SiteHeaderProps) {
               </Link>
             ))}
           </div>
-        </nav>
 
-        <div className={styles.actions}>
           <button
             type="button"
             className={styles.menuToggle}

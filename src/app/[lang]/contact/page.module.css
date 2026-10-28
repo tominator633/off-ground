@@ -1,0 +1,150 @@
+/* The whole page is one photo over the full viewport (like the home page hero), content on it */
+.stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: calc(var(--header-height) + var(--space-6)) var(--space-7);
+  isolation: isolate;
+}
+
+/* Extra darkening over the photo, so the floating content reads well (after the photo layers) */
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(5 5 7 / 0.45);
+  pointer-events: none;
+}
+
+/*
+ * Phones: the lead first, then the form, then the contact details.
+ * Desktop: details on the left, the form on the right (like a classic contact page).
+ */
+.layout {
+  display: grid;
+  gap: var(--space-7);
+  max-width: 72rem;
+}
+
+.info {
+  display: contents;
+}
+
+.lead {
+  order: -2;
+  color: var(--color-blue);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  text-shadow:
+    var(--shadow-text),
+    0 2px 18px rgb(5 5 7 / 0.7);
+}
+
+.formColumn {
+  order: -1;
+}
+
+.infoText {
+  color: var(--color-text-muted);
+  text-shadow: 0 1px 8px rgb(5 5 7 / 0.9);
+}
+
+/* Contact details: pink poster-style labels (like the form labels) with the values under them */
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A pink icon instead of a written label (the label is there for screen readers only) */
+.detail {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--color-text);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  text-shadow: 0 1px 8px rgb(5 5 7 / 0.9);
+}
+
+.detail .detailIcon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-pink);
+  filter: drop-shadow(0 1px 6px rgb(5 5 7 / 0.8));
+}
+
+.detail a {
+  text-decoration-color: rgb(242 123 192 / 0.6);
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-base);
+}
+
+.detail a:hover {
+  color: var(--color-pink);
+}
+
+/* Not known yet – visibly a placeholder, not a made-up value */
+.soon {
+  color: var(--color-text-subtle);
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Placeholder for the map: dark glass with a dashed pink frame */
+.map {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--space-3);
+  aspect-ratio: 16 / 9;
+  padding: var(--space-4);
+  border: 2px dashed rgb(242 123 192 / 0.45);
+  border-radius: var(--radius-md);
+  background: rgb(5 5 7 / 0.5);
+  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
+  backdrop-filter: blur(12px);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.mapStar {
+  width: 3rem;
+  height: auto;
+  opacity: 0.8;
+}
+
+@media (min-width: 64rem) {
+  .stage {
+    padding-block: calc(var(--header-height) + var(--space-4)) var(--space-5);
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .info {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .lead,
+  .formColumn {
+    order: 0;
+  }
+
+  .map {
+    aspect-ratio: 2 / 1;
+  }
+}

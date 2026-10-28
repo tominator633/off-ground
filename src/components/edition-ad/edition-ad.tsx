@@ -1,8 +1,13 @@
 import type { ComponentType } from "react";
-import { ZombiehoodAd, zombiehoodHeroClass } from "@/components/zombiehood-ad/zombiehood-ad";
+import {
+  ZombiehoodAd,
+  ZombiehoodMenuButton,
+  zombiehoodHeroClass,
+} from "@/components/zombiehood-ad/zombiehood-ad";
 import type { EditionTheme, NextEdition } from "@/content/events";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
+import styles from "./edition-ad.module.css";
 
 export interface EditionAdProps {
   edition: NextEdition;
@@ -13,11 +18,24 @@ export interface EditionAdProps {
   ticketExternal: boolean;
   registerHref: string;
   lineupHref: string;
+  /**
+   * "hero" = right side of the home page hero (ticket button at the bottom of the hero);
+   * "menu" = right side of the open menu (desktop); "banner" = the wide banner on the events page.
+   */
+  placement?: "hero" | "menu" | "banner";
+}
+
+interface EditionMenuButtonProps {
+  edition: NextEdition;
+  href: string;
+  label: string;
 }
 
 interface EditionThemeDesign {
-  /** The ad on the right side of the hero, with its ticket button */
+  /** The ad on the right side of the hero (and of the desktop menu), with its ticket button */
   Ad: ComponentType<EditionAdProps>;
+  /** Small themed button for the menu on phones */
+  MenuButton: ComponentType<EditionMenuButtonProps>;
   /**
    * Class for the whole hero section; it may set --photo-tint (colours over the photo) and
    * --edition-font / --edition-weight / --edition-tracking (lettering of the giant number).
@@ -25,9 +43,9 @@ interface EditionThemeDesign {
   heroClass: string;
 }
 
-/** Every edition theme has its own look of the home page hero. */
+/** Every edition theme has its own look of the home page hero and of the menu promo. */
 const themes: Record<EditionTheme, EditionThemeDesign> = {
-  zombiehood: { Ad: ZombiehoodAd, heroClass: zombiehoodHeroClass },
+  zombiehood: { Ad: ZombiehoodAd, MenuButton: ZombiehoodMenuButton, heroClass: zombiehoodHeroClass },
 };
 
 export function editionHeroClass(theme: EditionTheme): string {
@@ -41,4 +59,27 @@ export function editionHeroClass(theme: EditionTheme): string {
 export function EditionAd(props: EditionAdProps) {
   const { Ad } = themes[props.edition.theme];
   return <Ad {...props} />;
+}
+
+interface EditionMenuPromoProps extends Omit<EditionAdProps, "placement"> {
+  /** Where the phone button leads (the home page, whose hero has the full ad) */
+  homeHref: string;
+}
+
+/**
+ * The next edition in the open menu: the full themed ad on desktop, one themed button on
+ * phones and tablets.
+ */
+export function EditionMenuPromo({ homeHref, ...props }: EditionMenuPromoProps) {
+  const { Ad, MenuButton } = themes[props.edition.theme];
+  return (
+    <>
+      <div className={styles.menuAd}>
+        <Ad {...props} placement="menu" />
+      </div>
+      <div className={styles.menuButton}>
+        <MenuButton edition={props.edition} href={homeHref} label={props.labels.label} />
+      </div>
+    </>
+  );
 }

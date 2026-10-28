@@ -58,13 +58,28 @@ export function ZombiehoodAd({
   ticketExternal,
   registerHref,
   lineupHref,
+  placement = "hero",
 }: EditionAdProps) {
   const time = formatTimeRange(edition.startTime, null);
   const when = edition.date ? [formatPosterDate(edition.date), time].filter(Boolean).join(" · ") : labels.dateTba;
+  // The ad can be on the page twice (home hero + menu), so the heading id depends on where it is
+  const titleId = `${placement}-next-title`;
+  // In the hero the ticket button sits at the bottom centre of the hero; elsewhere, under the ad
+  const ticketClass = `${creepster.className} ${styles.ticket} ${placement !== "hero" ? styles.ticketInline : ""}`;
+
+  const ticket = ticketExternal ? (
+    <a href={ticketHref} className={ticketClass} target="_blank" rel="noopener noreferrer">
+      {labels.ticket}
+    </a>
+  ) : (
+    <Link href={ticketHref} className={ticketClass}>
+      {labels.ticket}
+    </Link>
+  );
 
   return (
     <>
-      <section className={styles.ad} aria-labelledby="next-title">
+      <section className={styles.ad} aria-labelledby={titleId}>
         <div className={styles.glow} aria-hidden="true" />
         <Bat className={`${styles.bat} ${styles.batOne}`} />
         <Bat className={`${styles.bat} ${styles.batTwo}`} />
@@ -76,7 +91,7 @@ export function ZombiehoodAd({
           {labels.label} · {labels.edition}
           {edition.number}
         </p>
-        <h2 id="next-title" className={`${creepster.className} ${styles.title}`}>
+        <h2 id={titleId} className={`${creepster.className} ${styles.title}`}>
           {edition.name}
         </h2>
         <p className={styles.tagline}>{edition.tagline[lang]}</p>
@@ -100,22 +115,27 @@ export function ZombiehoodAd({
             {labels.lineup}
           </Link>
         </div>
+        {placement !== "hero" ? ticket : null}
       </section>
 
-      {ticketExternal ? (
-        <a
-          href={ticketHref}
-          className={`${creepster.className} ${styles.ticket}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {labels.ticket}
-        </a>
-      ) : (
-        <Link href={ticketHref} className={`${creepster.className} ${styles.ticket}`}>
-          {labels.ticket}
-        </Link>
-      )}
+      {placement === "hero" ? ticket : null}
     </>
+  );
+}
+
+interface ZombiehoodMenuButtonProps {
+  edition: EditionAdProps["edition"];
+  href: string;
+  label: string;
+}
+
+/** Phones: in the menu, the next event is just this one themed button instead of the whole ad. */
+export function ZombiehoodMenuButton({ edition, href, label }: ZombiehoodMenuButtonProps) {
+  return (
+    <Link href={href} className={styles.menuButton}>
+      <span className={styles.menuButtonLabel}>{label}</span>
+      <span className={`${creepster.className} ${styles.menuButtonName}`}>{edition.name}</span>
+      {edition.date ? <span className={styles.menuButtonDate}>{formatPosterDate(edition.date)}</span> : null}
+    </Link>
   );
 }

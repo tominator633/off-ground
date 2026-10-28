@@ -28,8 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const [lang, dict] = await Promise.all([getLocale(), getDictionary()]);
   const { home } = dict;
-  // Newest event first in the data; the home page shows its line-up.
-  const featured = getEvents()[0];
+  // The home page shows the line-up of the most recent past event.
+  const featured = getEvents().find((event) => event.status === "past");
   const next = getNextEdition();
 
   return (

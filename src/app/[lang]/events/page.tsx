@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import eventsPhoto from "@/assets/images/sections/events.jpg";
+import { EditionAd, editionHeroClass } from "@/components/edition-ad/edition-ad";
 import { EventCard } from "@/components/event-card/event-card";
-import { PageHeader } from "@/components/page-header/page-header";
-import { getEvents } from "@/content/events";
+import { GlowBackdrop } from "@/components/glow-backdrop/glow-backdrop";
+import { PageTitle } from "@/components/page-title/page-title";
+import { PhotoBackdrop } from "@/components/photo-backdrop/photo-backdrop";
+import { getEvents, getNextEdition } from "@/content/events";
+import { social } from "@/content/site";
+import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { pageMetadata } from "@/lib/metadata";
-import styles from "@/styles/subpage.module.css";
+import styles from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [lang, dict] = await Promise.all([getLocale(), getDictionary()]);
@@ -14,23 +18,51 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function EventsPage() {
   const [lang, dict] = await Promise.all([getLocale(), getDictionary()]);
+  const next = getNextEdition();
 
   return (
     <>
-      <PageHeader title={dict.events.title} lead={dict.events.lead} image={eventsPhoto} imagePosition="center 55%" />
-      <section className={`container ${styles.section}`}>
-        <div className={styles.cardGrid}>
-          {getEvents().map((event) => (
-            <EventCard
-              key={event.slug}
-              event={event}
+      {/* No title block: "akce" is in the header, the next event opens the page */}
+      <PageTitle title={dict.events.title} />
+      <div className={styles.page}>
+        <GlowBackdrop />
+
+        {/* The next event first: a dominant banner across the whole width, in its own theme */}
+        <section className={`${styles.banner} ${editionHeroClass(next.theme)}`}>
+          <PhotoBackdrop src={next.heroImage} position={next.heroImagePosition} />
+          <span className={styles.edition} aria-hidden="true">
+            {next.number}
+          </span>
+          <div className={`container ${styles.bannerInner}`}>
+            <EditionAd
+              edition={next}
               lang={lang}
-              labels={dict.events}
-              learnMore={dict.common.learnMore}
+              labels={dict.home.next}
+              // Until tickets are on sale, the button leads to Instagram, where they'll be announced
+              ticketHref={next.ticketUrl ?? social.instagram.url}
+              ticketExternal
+              registerHref={localizedPath(lang, "/contact")}
+              lineupHref={`${localizedPath(lang)}#lineup`}
+              placement="banner"
             />
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+
+        {/* All other editions: upcoming first, then the past ones */}
+        <section className={`container ${styles.list}`} aria-label={dict.events.title}>
+          <div className={styles.grid}>
+            {getEvents().map((event) => (
+              <EventCard
+                key={event.slug}
+                event={event}
+                lang={lang}
+                labels={dict.events}
+                learnMore={dict.common.learnMore}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
     </>
   );
 }

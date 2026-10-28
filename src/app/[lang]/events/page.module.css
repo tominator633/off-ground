@@ -1,0 +1,74 @@
+/* The whole page on the glow background (GlowBackdrop) */
+.page {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+/*
+ * The next event as a dominant banner across the whole viewport width: its photo toned in the
+ * edition theme's colours (the theme class sets --photo-tint), the giant edition number and the
+ * themed ad on top – like a smaller home page hero without the logo.
+ */
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 70svh;
+  /* starts at the very top, under the floating header – no visible edge behind the header */
+  padding-block: calc(var(--header-height) + var(--space-5)) var(--space-6);
+  isolation: isolate;
+  overflow: clip;
+}
+
+.bannerInner {
+  display: grid;
+  justify-items: center;
+}
+
+/* Same as the home page number: the theme's lettering, see-through like part of the background */
+.edition {
+  position: absolute;
+  top: 50%;
+  right: -0.1em;
+  translate: 0 -50%;
+  color: var(--color-text);
+  font-family: var(--edition-font, var(--font-logo));
+  font-size: min(110svh, 120vw);
+  font-weight: var(--edition-weight, var(--font-display-weight));
+  line-height: 0.75;
+  letter-spacing: var(--edition-tracking, -0.07em);
+  text-shadow: var(--shadow-text);
+  opacity: 0.22;
+  pointer-events: none;
+  user-select: none;
+}
+
+.list {
+  padding-block: var(--space-8);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 48rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .banner {
+    min-height: 80svh;
+  }
+
+  .edition {
+    right: var(--gutter);
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

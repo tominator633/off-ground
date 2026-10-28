@@ -1,10 +1,25 @@
+/*
+ * No box around the form: each field floats on the photo on its own.
+ * Wider screens: name and e-mail side by side, everything else across the full width.
+ */
 .form {
   display: grid;
-  gap: var(--space-5);
-  padding: var(--space-6) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  gap: var(--space-4);
+}
+
+@media (min-width: 48rem) {
+  .form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-4);
+  }
+
+  .form > * {
+    grid-column: 1 / -1;
+  }
+
+  .form > .half {
+    grid-column: auto;
+  }
 }
 
 .field {
@@ -12,32 +27,57 @@
   gap: var(--space-2);
 }
 
+/* Pink labels in the poster lettering of the menu: bold, tight, lowercase, with the offset shadow */
 .field label {
-  font-weight: 600;
+  color: var(--color-pink);
+  font-family: var(--font-nav);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+  text-shadow:
+    var(--shadow-text),
+    0 1px 10px rgb(5 5 7 / 0.8);
 }
 
+/* Floating fields: each one a small piece of dark glass that lights up pink while you type */
 .field input,
 .field textarea {
   width: 100%;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-bg);
+  padding: 0.85rem var(--space-4);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: var(--radius-md);
+  background: rgb(5 5 7 / 0.5);
+  /* Literal value on purpose: the CSS bundler drops backdrop-filter written via var() */
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px -14px rgb(5 5 7 / 0.8);
   color: var(--color-text);
   font: inherit;
-  transition: border-color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.field input:hover,
+.field textarea:hover {
+  border-color: rgb(255 255 255 / 0.35);
 }
 
 .field textarea {
   resize: vertical;
-  min-height: 9rem;
+  min-height: 6.5rem;
 }
 
 .field input:focus-visible,
 .field textarea:focus-visible {
   outline: none;
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgb(54 163 255 / 0.3);
+  border-color: var(--color-pink);
+  background: rgb(5 5 7 / 0.62);
+  box-shadow:
+    0 0 0 3px rgb(242 123 192 / 0.3),
+    0 12px 30px -14px rgb(5 5 7 / 0.8);
 }
 
 .field [aria-invalid="true"] {
@@ -57,15 +97,16 @@
 }
 
 .note {
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
   font-size: var(--text-sm);
+  text-shadow: 0 1px 8px rgb(5 5 7 / 0.9);
 }
 
 .success {
-  padding: var(--space-6) var(--space-5);
+  padding: var(--space-5);
   border: 1px solid var(--color-success);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  background: rgb(74 222 128 / 0.08);
   color: var(--color-text);
   font-size: var(--text-lg);
 }
@@ -79,6 +120,8 @@
   overflow: hidden;
 }
 
+/* Full-width send button at the bottom of the card */
 .form button {
-  justify-self: start;
+  width: 100%;
+  min-height: 3.5rem;
 }

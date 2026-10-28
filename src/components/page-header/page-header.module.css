@@ -1,4 +1,7 @@
-/* Title block of a subpage: centred and close to the top, so the content starts early */
+/*
+ * Top of a subpage: the lead, centred right under the site header (the title itself sits in
+ * the middle of the site header), so the content starts early.
+ */
 .header {
   position: relative;
   isolation: isolate;
@@ -11,39 +14,29 @@
     radial-gradient(40rem 18rem at 55% 0%, rgb(240 144 122 / 0.18), transparent 70%);
 }
 
-/* White, tight, lowercase and with the offset shadow – like the menu links */
-.title {
-  color: var(--color-text);
-  font-family: var(--font-nav);
-  font-size: clamp(3rem, 1.6rem + 6vw, 6rem);
-  line-height: 0.95;
-  letter-spacing: -0.065em;
-  text-shadow: var(--shadow-text);
-  text-transform: lowercase;
-}
-
 .lead {
   max-width: var(--container-narrow);
-  margin: var(--space-4) auto 0;
+  margin-inline: auto;
   color: var(--color-text-muted);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.4;
 }
 
-/* With a photo: a shorter photo band, the title up near the top */
+/* With a photo: a short photo band with the lead in the middle */
 .withPhoto {
-  min-height: 42svh;
+  display: flex;
+  align-items: center;
+  min-height: 34svh;
   padding-block: calc(var(--header-height) + var(--space-4)) var(--space-7);
   background: none;
+}
+
+.withPhoto > :global(.container) {
+  width: 100%;
 }
 
 .withPhoto .lead {
   color: var(--color-text);
   text-shadow: 0 1px 12px rgb(5 5 7 / 0.6);
-}
-
-/* Desktop: bigger, poster-size titles */
-@media (min-width: 64rem) {
-  .title {
-    font-size: clamp(6rem, 2rem + 6.5vw, 9rem);
-  }
 }

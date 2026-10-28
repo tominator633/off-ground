@@ -168,10 +168,19 @@ export const cs: Dictionary = {
   contact: {
     title: "Kontakt",
     lead: "Dotaz, přihláška do battlu, partnerství, nebo nás chceš jen pozdravit? Napiš nám.",
+    details: {
+      text: "Napiš nám přes formulář, nebo nás najdi tady:",
+      phone: "telefon",
+      email: "e-mail",
+      address: "adresa",
+      instagram: "instagram",
+      soon: "doplníme",
+      mapSoon: "Mapa – doplníme, až bude jasné místo",
+    },
     form: {
-      name: "Tvoje jméno",
-      email: "Tvůj e-mail",
-      message: "Tvoje zpráva",
+      name: "Jméno",
+      email: "E-mail",
+      message: "Zpráva",
       honeypot: "Toto pole nech prázdné",
       submit: "Odeslat zprávu",
       sending: "Odesílám…",

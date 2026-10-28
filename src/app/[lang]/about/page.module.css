@@ -1,18 +1,15 @@
 /*
  * "How it started": photo on the left like a print pinned to the wall (tilted, pink offset
  * shadow like the logo lettering, glitter star sticker), the long story on the right.
- * The black is lit by pink and blue glows, like the footer.
+ * Background: GlowBackdrop (pink and blue glows, watermark stars).
  */
 .story {
   position: relative;
   isolation: isolate;
-  padding-block: var(--space-8);
+  /* the story opens the page, so it clears the fixed header */
+  padding-block: calc(var(--header-height) + var(--space-6)) var(--space-8);
   /* clip, not hidden: hidden would make this a scroll container and break the sticky photo */
   overflow: clip;
-  background:
-    radial-gradient(40rem 26rem at 0% 15%, rgb(242 123 192 / 0.22), transparent 70%),
-    radial-gradient(44rem 28rem at 100% 90%, rgb(116 189 238 / 0.2), transparent 70%),
-    radial-gradient(30rem 20rem at 60% 40%, rgb(180 131 204 / 0.1), transparent 70%);
 }
 
 .storyInner {
@@ -72,9 +69,10 @@
   font-size: var(--text-lg);
 }
 
+/* Brand blue, so the story title pairs with the pink quote */
 .storyTitle {
   margin-bottom: var(--space-2);
-  color: var(--color-text);
+  color: var(--color-blue);
   font-size: var(--text-3xl);
   line-height: 0.95;
   letter-spacing: -0.06em;
@@ -102,7 +100,7 @@
 
 @media (min-width: 64rem) {
   .story {
-    padding-block: var(--space-9);
+    padding-block: calc(var(--header-height) + var(--space-8)) var(--space-9);
   }
 
   .storyInner {

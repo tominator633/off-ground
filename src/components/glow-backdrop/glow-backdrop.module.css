@@ -1,0 +1,50 @@
+/* Pink glow top left, blue glow on the right side and bottom, a touch of lilac between */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(40rem 26rem at 0% 10%, rgb(242 123 192 / 0.24), transparent 70%),
+    radial-gradient(38rem 30rem at 100% 35%, rgb(116 189 238 / 0.24), transparent 70%),
+    radial-gradient(44rem 26rem at 20% 100%, rgb(116 189 238 / 0.16), transparent 70%),
+    radial-gradient(30rem 20rem at 60% 55%, rgb(180 131 204 / 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+/* Faint glitter stars in different sizes and angles */
+.mark {
+  position: absolute;
+  height: auto;
+  opacity: 0.08;
+}
+
+.markOne {
+  /* starts below the fixed header */
+  top: calc(var(--header-height) + var(--space-7));
+  right: -4rem;
+  width: 22rem;
+  rotate: 14deg;
+}
+
+.markTwo {
+  bottom: 6%;
+  left: -3rem;
+  width: 16rem;
+  rotate: -18deg;
+  opacity: 0.06;
+}
+
+.markThree {
+  top: 48%;
+  right: 12%;
+  width: 6rem;
+  rotate: 32deg;
+  opacity: 0.12;
+}
+
+.markFour {
+  bottom: 2%;
+  right: 30%;
+  width: 9rem;
+  rotate: 6deg;
+}

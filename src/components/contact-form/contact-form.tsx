@@ -37,7 +37,7 @@ export function ContactForm({ lang, labels }: ContactFormProps) {
     <form action={formAction} className={styles.form}>
       <input type="hidden" name={formFields.locale} value={lang} />
 
-      <div className={styles.field}>
+      <div className={`${styles.field} ${styles.half}`}>
         <label htmlFor="contact-name">{labels.name}</label>
         <input
           id="contact-name"
@@ -57,7 +57,7 @@ export function ContactForm({ lang, labels }: ContactFormProps) {
         ) : null}
       </div>
 
-      <div className={styles.field}>
+      <div className={`${styles.field} ${styles.half}`}>
         <label htmlFor="contact-email">{labels.email}</label>
         <input
           id="contact-email"
@@ -82,7 +82,7 @@ export function ContactForm({ lang, labels }: ContactFormProps) {
         <textarea
           id="contact-message"
           name={formFields.message}
-          rows={7}
+          rows={4}
           required
           minLength={contactLimits.messageMin}
           maxLength={contactLimits.messageMax}

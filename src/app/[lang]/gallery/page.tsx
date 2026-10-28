@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import galleryPhoto from "@/assets/images/sections/gallery.jpg";
-import { PageHeader } from "@/components/page-header/page-header";
+import { PageTitle } from "@/components/page-title/page-title";
 import { PhotoGallery } from "@/components/photo-gallery/photo-gallery";
 import { getGalleryPhotos } from "@/content/gallery";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
@@ -17,8 +16,9 @@ export default async function GalleryPage() {
 
   return (
     <>
-      <PageHeader title={dict.gallery.title} lead={dict.gallery.lead} image={galleryPhoto} imagePosition="center 40%" />
-      <section className={`container ${subpage.section}`}>
+      {/* No title block: "galerie" is in the header and the photos start right at the top */}
+      <PageTitle title={dict.gallery.title} />
+      <section className={`container ${subpage.section} ${subpage.pageStart}`}>
         <PhotoGallery photos={getGalleryPhotos()} alt={dict.common.photoAlt} labels={dict.gallery} />
       </section>
     </>

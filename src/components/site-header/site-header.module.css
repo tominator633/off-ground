@@ -120,7 +120,7 @@
 }
 
 /*
- * Middle of the bar: the current section's title after it flies up from the page.
+ * Middle of the bar: the current section's title on every subpage (PageTitle).
  * Leaves room for the logo and the menu button on the sides; hidden while the menu is open.
  */
 .titleDock {
@@ -149,8 +149,9 @@
   opacity: 0;
 }
 
-/* Right side: menu toggle */
+/* Right side: menu toggle (and the language toggle while the menu is open) */
 .actions {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -218,6 +219,7 @@
   flex-direction: column;
   /* the first link almost touches the top edge (no logo while the menu is open) */
   padding: var(--space-1) calc(var(--gutter) + var(--space-3)) var(--space-7);
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
   background-color: rgb(5 5 7 / 0.72);
@@ -321,34 +323,48 @@
 }
 
 /*
- * Language toggle at the bottom of the menu: a pill with two options and a pink thumb
- * that slides under the active one (only transform is animated).
+ * Language toggle next to the close button, only while the menu is open: a pill with two
+ * options and a pink thumb that slides under the active one (only transform is animated).
+ * Phones: upright, right under the close button (like the stacked buttons on a phone's side).
+ * Desktop: lying, to the left of the close button.
  */
 .langToggle {
-  position: relative;
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0.075rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 8.5rem;
-  margin-top: var(--space-6);
-  padding: 0.25rem;
+  grid-template-rows: 1fr 1fr;
+  width: 2.6rem;
+  padding: 0.2rem;
   border: 1px solid rgb(255 255 255 / 0.35);
   border-radius: var(--radius-pill);
+  background: rgb(5 5 7 / 0.4);
   isolation: isolate;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--transition-base),
+    visibility var(--transition-base);
+}
+
+.langToggle[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
 }
 
 .langToggle::before {
   content: "";
   position: absolute;
-  inset: 0.25rem auto 0.25rem 0.25rem;
+  inset: 0.2rem 0.2rem auto;
   z-index: -1;
-  width: calc(50% - 0.25rem);
+  height: calc(50% - 0.2rem);
   border-radius: var(--radius-pill);
   background: var(--color-pink);
   transition: transform var(--transition-base);
 }
 
 .langToggle[data-active="en"]::before {
-  transform: translateX(100%);
+  transform: translateY(100%);
 }
 
 .langOption {
@@ -374,6 +390,11 @@
   color: var(--color-pink);
 }
 
+/* The next event in the menu: a themed button at the bottom on phones, the full ad on desktop */
+.promo {
+  margin-top: var(--space-5);
+}
+
 /* Wider than 500 px */
 @media (min-width: 31.3125rem) {
   .brandLockup {
@@ -384,6 +405,35 @@
 @media (min-width: 64rem) {
   .bar {
     width: 97%;
+  }
+
+  /* Language toggle lying to the left of the close button */
+  .actions {
+    gap: var(--space-3);
+  }
+
+  /* relative (not static): the pink thumb must be sized and placed by the toggle itself */
+  .langToggle {
+    position: relative;
+    top: auto;
+    right: auto;
+    grid-template-rows: none;
+    grid-template-columns: 1fr 1fr;
+    width: 6.5rem;
+  }
+
+  .langToggle::before {
+    inset: 0.2rem auto 0.2rem 0.2rem;
+    width: calc(50% - 0.2rem);
+    height: auto;
+  }
+
+  .langToggle[data-active="en"]::before {
+    transform: translateX(100%);
+  }
+
+  .langOption {
+    min-height: 2.2rem;
   }
 }
 
@@ -405,6 +455,24 @@
 
   .navLink {
     font-size: clamp(2.25rem, 1rem + 4.5vw, 5rem);
+  }
+
+  .promo {
+    margin-top: var(--space-7);
+  }
+}
+
+/* Desktop: links on the left half, the next event's ad on the right half */
+@media (min-width: 64rem) {
+  .nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--space-7);
+  }
+
+  .promo {
+    margin-top: 0;
   }
 }
 

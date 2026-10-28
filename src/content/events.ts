@@ -48,7 +48,63 @@ export interface OneOffEvent extends EventBase {
 
 export type OffGroundEvent = RecurringEvent | OneOffEvent;
 
+/**
+ * Order: upcoming events from the soonest, then past events from the newest.
+ * The next edition itself (Zombiehood) lives in `nextEdition` below, not here.
+ */
 export const events: OffGroundEvent[] = [
+  // PLACEHOLDER – editions #3 and #4 are made up for the design (Tom, 28. 10. 2026):
+  // names, dates and texts are invented; replace or remove once the real plans are known.
+  {
+    slug: "off-ground-3-winter-cypher",
+    kind: "one-off",
+    status: "upcoming",
+    date: "2027-01-23",
+    startTime: null,
+    endTime: null,
+    location: { cs: "Praha – místo upřesníme", en: "Prague – venue to be announced" },
+    title: { cs: "Off Ground #3 · Winter Cypher", en: "Off Ground #3 · Winter Cypher" },
+    summary: {
+      cs: "Zimní kruh, který nevychladne: cypher, 2 vs 2 battly a DJ set do noci.",
+      en: "A winter circle that never cools down: cypher, 2 vs 2 battles and a DJ set into the night.",
+    },
+    description: {
+      cs: [
+        "Třetí Off Ground přinese zimní cypher – otevřený kruh pro každého, kdo se nebojí vstoupit.",
+        "Line-up, přihlášky do battlů a vstupné zveřejníme na Instagramu.",
+      ],
+      en: [
+        "The third Off Ground brings a winter cypher – an open circle for anyone who dares to step in.",
+        "Line-up, battle sign-ups and tickets will be announced on Instagram.",
+      ],
+    },
+    lineup: [],
+  },
+  {
+    slug: "off-ground-4-neon-spring",
+    kind: "one-off",
+    status: "upcoming",
+    date: "2027-03-20",
+    startTime: null,
+    endTime: null,
+    location: { cs: "Praha – místo upřesníme", en: "Prague – venue to be announced" },
+    title: { cs: "Off Ground #4 · Neon Spring", en: "Off Ground #4 · Neon Spring" },
+    summary: {
+      cs: "Jarní edice v neonech: crew battle, showcase a publikum, které zase rozhoduje.",
+      en: "A spring edition in neon: crew battle, showcase and a crowd that decides once again.",
+    },
+    description: {
+      cs: [
+        "Čtvrtý Off Ground otevře jaro v neonových barvách – crews proti sobě a o vítězi rozhoduješ ty.",
+        "Podrobnosti zveřejníme na Instagramu.",
+      ],
+      en: [
+        "The fourth Off Ground opens spring in neon colours – crews face off and you decide who wins.",
+        "Details will be announced on Instagram.",
+      ],
+    },
+    lineup: [],
+  },
   {
     slug: "off-ground-10-10-2026",
     kind: "one-off",

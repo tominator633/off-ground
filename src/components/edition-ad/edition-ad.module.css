@@ -1,0 +1,19 @@
+/* Menu promo: the themed button on phones and tablets, the full ad on desktop */
+.menuAd {
+  display: none;
+}
+
+.menuButton {
+  display: grid;
+  justify-items: center;
+}
+
+@media (min-width: 64rem) {
+  .menuAd {
+    display: grid;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}

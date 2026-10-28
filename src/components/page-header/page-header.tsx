@@ -7,7 +7,7 @@ import styles from "./page-header.module.css";
 interface PageHeaderProps {
   title: string;
   lead?: string;
-  /** Event photo behind the title (toned like the home page hero). */
+  /** Event photo behind the lead (toned like the home page hero). */
   image?: StaticImageData;
   /** CSS object-position for the photo crop. */
   imagePosition?: string;
@@ -15,15 +15,15 @@ interface PageHeaderProps {
 }
 
 /**
- * Title block at the top of every subpage – centred, with an optional photo band behind it.
- * On scroll the title flies up into the header and stays there (PageTitle).
+ * Top of a subpage. The title itself is shown in the middle of the site header (PageTitle);
+ * here is the lead and optional extras on an optional photo band.
  */
 export function PageHeader({ title, lead, image, imagePosition, children }: PageHeaderProps) {
   return (
     <header className={`${styles.header} ${image ? styles.withPhoto : ""}`}>
       {image ? <PhotoBackdrop src={image} position={imagePosition} /> : null}
       <div className="container">
-        <PageTitle title={title} className={styles.title} />
+        <PageTitle title={title} />
         {lead ? <p className={styles.lead}>{lead}</p> : null}
         {children}
       </div>

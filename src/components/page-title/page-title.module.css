@@ -1,12 +1,4 @@
-/* Shrinks around its top centre while it flies up into the header */
-.title {
-  position: relative;
-  z-index: 1;
-  transform-origin: 50% 0;
-  will-change: transform;
-}
-
-/* The small copy in the middle of the header – same lettering as the menu links */
+/* The section title in the middle of the header – same lettering as the menu links */
 .dockLabel {
   display: block;
   overflow: hidden;

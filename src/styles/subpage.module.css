@@ -4,6 +4,11 @@
   padding-block: var(--space-7);
 }
 
+/* First block of a page without a title block: starts right under the fixed header */
+.pageStart {
+  padding-top: calc(var(--header-height) + var(--space-4));
+}
+
 .narrow {
   max-width: var(--container-narrow);
 }

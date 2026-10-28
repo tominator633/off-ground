@@ -20,7 +20,8 @@
 }
 
 .ad,
-.ticket {
+.ticket,
+.menuButton {
   --zh-teal: #74f5d6;
   --zh-teal-deep: #0b4a50;
   --zh-night: #021214;
@@ -325,4 +326,62 @@
     translate: -50% 0;
     font-size: 2.1rem;
   }
+}
+
+/* In the menu the ticket button sits right under the ad, not at the bottom of the hero */
+.ticket.ticketInline {
+  position: static;
+  translate: none;
+  margin-top: var(--space-3);
+}
+
+/*
+ * Phones: the next event in the menu as one themed button – the dripping name in teal on a
+ * dark slab, like the ticket button.
+ */
+.menuButton {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-5);
+  border: 2px solid rgb(116 245 214 / 0.55);
+  border-radius: 1.1rem 0.4rem 1.1rem 0.4rem;
+  background: linear-gradient(180deg, #06282c, var(--zh-night));
+  box-shadow:
+    0 0 28px rgb(116 245 214 / 0.3),
+    inset 0 0 18px rgb(116 245 214 / 0.12);
+  color: var(--zh-teal);
+  text-align: center;
+  text-decoration: none;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.menuButton:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 40px rgb(116 245 214 / 0.5),
+    inset 0 0 22px rgb(116 245 214 / 0.2);
+}
+
+.menuButtonLabel {
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.menuButtonName {
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.3em rgb(116 245 214 / 0.7);
+}
+
+.menuButtonDate {
+  color: var(--zh-flame);
+  font-weight: 800;
 }
