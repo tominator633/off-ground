@@ -119,6 +119,24 @@
   pointer-events: auto;
 }
 
+/*
+ * Middle of the bar: the current section's title after it flies up from the page.
+ * Leaves room for the logo and the menu button on the sides; hidden while the menu is open.
+ */
+.titleDock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: calc(100% - 9rem);
+  translate: -50% -50%;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.header[data-menu-open="true"] .titleDock {
+  opacity: 0;
+}
+
 /* With the menu open there is never a logo in the corner – the menu has its own home link */
 .header[data-menu-open="true"] .bar .brand {
   opacity: 0;

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import galleryPhoto from "@/assets/images/sections/gallery.jpg";
-import { GalleryIcon } from "@/components/icons/gallery-icon";
 import { PageHeader } from "@/components/page-header/page-header";
 import { PhotoGallery } from "@/components/photo-gallery/photo-gallery";
 import { getGalleryPhotos } from "@/content/gallery";
@@ -18,7 +17,7 @@ export default async function GalleryPage() {
 
   return (
     <>
-      <PageHeader icon={GalleryIcon} title={dict.gallery.title} lead={dict.gallery.lead} image={galleryPhoto} imagePosition="center 40%" />
+      <PageHeader title={dict.gallery.title} lead={dict.gallery.lead} image={galleryPhoto} imagePosition="center 40%" />
       <section className={`container ${subpage.section}`}>
         <PhotoGallery photos={getGalleryPhotos()} alt={dict.common.photoAlt} labels={dict.gallery} />
       </section>

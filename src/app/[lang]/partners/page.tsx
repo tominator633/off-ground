@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import partnersPhoto from "@/assets/images/sections/partners.jpg";
 import { ButtonLink } from "@/components/button-link/button-link";
-import { PartnersIcon } from "@/components/icons/partners-icon";
 import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { PageHeader } from "@/components/page-header/page-header";
 import { partners } from "@/content/site";
@@ -22,7 +21,7 @@ export default async function PartnersPage() {
 
   return (
     <>
-      <PageHeader icon={PartnersIcon} title={labels.title} lead={labels.lead} image={partnersPhoto} imagePosition="center 55%" />
+      <PageHeader title={labels.title} lead={labels.lead} image={partnersPhoto} imagePosition="center 55%" />
       <section className={`container ${subpage.section}`}>
         <article className={`${styles.partner} reveal`}>
           <p className={styles.label}>{labels.official}</p>

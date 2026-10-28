@@ -5,7 +5,6 @@ import aboutPhoto from "@/assets/images/sections/about.jpg";
 import storyPhoto from "@/assets/images/sections/about-story.jpg";
 import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ButtonLink } from "@/components/button-link/button-link";
-import { AboutIcon } from "@/components/icons/about-icon";
 import { PageHeader } from "@/components/page-header/page-header";
 import { SectionHeading } from "@/components/section-heading/section-heading";
 import { localizedPath } from "@/i18n/config";
@@ -25,7 +24,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <PageHeader icon={AboutIcon} title={about.title} lead={about.lead} image={aboutPhoto} imagePosition="center 35%" />
+      <PageHeader title={about.title} lead={about.lead} image={aboutPhoto} imagePosition="center 35%" />
 
       <section className={story.story} aria-labelledby="story-title">
         <div className={`container ${story.storyInner}`}>

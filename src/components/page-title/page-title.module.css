@@ -1,0 +1,29 @@
+/* Shrinks around its top centre while it flies up into the header */
+.title {
+  position: relative;
+  z-index: 1;
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+
+/* The small copy in the middle of the header – same lettering as the menu links */
+.dockLabel {
+  display: block;
+  overflow: hidden;
+  color: var(--color-text);
+  font-family: var(--font-nav);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  text-overflow: ellipsis;
+  text-shadow: var(--shadow-text);
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+@media (min-width: 48rem) {
+  .dockLabel {
+    font-size: 1.6rem;
+  }
+}

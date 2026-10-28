@@ -11,31 +11,15 @@
     radial-gradient(40rem 18rem at 55% 0%, rgb(240 144 122 / 0.18), transparent 70%);
 }
 
-/* White, tight and with the offset shadow – the poster headline style */
+/* White, tight, lowercase and with the offset shadow – like the menu links */
 .title {
   color: var(--color-text);
+  font-family: var(--font-nav);
   font-size: clamp(3rem, 1.6rem + 6vw, 6rem);
   line-height: 0.95;
   letter-spacing: -0.065em;
   text-shadow: var(--shadow-text);
-}
-
-/*
- * Section icon left of the title, as in the menu. It sits in the line of text, so with a
- * title that wraps it stays with the first word. SVG ignores text-shadow → drop shadow.
- */
-.title .icon {
-  width: 0.5em;
-  height: 0.5em;
-  margin-right: 0.06em;
-  vertical-align: 0.06em;
-  filter: drop-shadow(var(--shadow-text));
-}
-
-/* Above the icon: the icon's filter would otherwise paint over the letters */
-.titleText {
-  position: relative;
-  z-index: 1;
+  text-transform: lowercase;
 }
 
 .lead {

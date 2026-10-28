@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/button-link/button-link";
 import { LineUp } from "@/components/line-up/line-up";
-import { EventsIcon } from "@/components/icons/events-icon";
 import { PageHeader } from "@/components/page-header/page-header";
 import { TieDye } from "@/components/tie-dye/tie-dye";
 import { getEvent, getEvents } from "@/content/events";
@@ -48,7 +47,6 @@ async function EventDetail({ params }: { params: PageProps<"/[lang]/events/[slug
   return (
     <>
       <PageHeader
-        icon={EventsIcon}
         title={event.title[lang]}
         lead={event.summary[lang]}
         image={event.image}
