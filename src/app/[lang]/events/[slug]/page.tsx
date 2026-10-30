@@ -57,6 +57,7 @@ async function EventDetail({ params }: { params: PageProps<"/[lang]/events/[slug
     <>
       <PageHeader
         title={event.title[lang]}
+        back={{ href: localizedPath(lang, "/events"), label: dict.common.backToEvents }}
         lead={event.summary[lang]}
         image={event.image}
         imagePosition={event.imagePosition}
@@ -65,13 +66,6 @@ async function EventDetail({ params }: { params: PageProps<"/[lang]/events/[slug
           {labels.status[event.status]}
         </p>
       </PageHeader>
-
-      {/* Back to the overview right under the header, so it is at hand on phones too */}
-      <div className={`container ${styles.backBar}`}>
-        <ButtonLink href={localizedPath(lang, "/events")} variant="outline">
-          ← {dict.common.backToEvents}
-        </ButtonLink>
-      </div>
 
       <div className={`container ${styles.layout}`}>
         <article className={styles.content}>

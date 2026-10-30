@@ -1,6 +1,7 @@
 /* The section title in the middle of the header – same lettering as the menu links */
 .dockLabel {
   display: block;
+  min-width: 0;
   overflow: hidden;
   color: var(--color-text);
   font-family: var(--font-nav);
@@ -14,8 +15,45 @@
   white-space: nowrap;
 }
 
+/* Round back button – the same outline and dark glass as the round buttons in the open menu */
+.back {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: var(--radius-pill);
+  background: rgb(5 5 7 / 0.4);
+  color: var(--color-text);
+  /* the dock ignores the pointer (it lies over the bar), the button takes it back */
+  pointer-events: auto;
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.back:hover {
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+  transform: translateX(-2px);
+}
+
+.backIcon {
+  width: 1.15rem;
+  height: 1.15rem;
+  vertical-align: 0;
+}
+
 @media (min-width: 48rem) {
   .dockLabel {
     font-size: 1.6rem;
+  }
+
+  .back {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 }

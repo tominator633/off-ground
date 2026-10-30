@@ -109,8 +109,11 @@ export function SiteHeader({ lang, labels, promo }: SiteHeaderProps) {
           <span className="visually-hidden">{labels.home}</span>
         </Link>
 
-        {/* Subpages show their title here (PageTitle); empty on the home page */}
-        <span className={styles.titleDock} data-title-dock aria-hidden="true" />
+        {/*
+          Subpages show their title here (PageTitle, the text is aria-hidden – the page has its
+          h1) and on some a round back button; empty on the home page.
+        */}
+        <span className={styles.titleDock} data-title-dock />
 
         <nav
           id="site-menu"

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { PageTitle } from "@/components/page-title/page-title";
@@ -41,11 +40,11 @@ async function Album({ params }: { params: PageProps<"/[lang]/gallery/[album]">[
 
   return (
     <>
-      <PageTitle title={album.title[lang]} />
+      <PageTitle
+        title={album.title[lang]}
+        back={{ href: localizedPath(lang, "/gallery"), label: dict.gallery.backToGallery }}
+      />
       <section className={`container ${styles.album}`}>
-        <Link href={localizedPath(lang, "/gallery")} className={styles.back}>
-          ← {dict.gallery.backToGallery}
-        </Link>
         <PhotoGallery photos={album.photos} alt={dict.common.photoAlt} labels={dict.gallery} />
       </section>
     </>

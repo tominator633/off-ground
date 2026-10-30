@@ -127,13 +127,18 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   max-width: calc(100% - 9rem);
   translate: -50% -50%;
   pointer-events: none;
   transition: opacity var(--transition-base);
 }
 
+/* Hidden with the menu open – visibility too, so the back button can't be hit through it */
 .header[data-menu-open="true"] .titleDock {
+  visibility: hidden;
   opacity: 0;
 }
 

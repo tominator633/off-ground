@@ -12,18 +12,20 @@ interface PageHeaderProps {
   /** CSS object-position for the photo crop. */
   imagePosition?: string;
   children?: ReactNode;
+  /** Round back button next to the title in the site header */
+  back?: { href: string; label: string };
 }
 
 /**
  * Top of a subpage. The title itself is shown in the middle of the site header (PageTitle);
  * here is the lead and optional extras on an optional photo band.
  */
-export function PageHeader({ title, lead, image, imagePosition, children }: PageHeaderProps) {
+export function PageHeader({ title, lead, image, imagePosition, children, back }: PageHeaderProps) {
   return (
     <header className={`${styles.header} ${image ? styles.withPhoto : ""}`}>
       {image ? <PhotoBackdrop src={image} position={imagePosition} /> : null}
       <div className="container">
-        <PageTitle title={title} />
+        <PageTitle title={title} back={back} />
         {lead ? <p className={styles.lead}>{lead}</p> : null}
         {children}
       </div>

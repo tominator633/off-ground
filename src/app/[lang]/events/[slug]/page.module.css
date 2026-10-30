@@ -24,7 +24,7 @@
 .layout {
   display: grid;
   gap: var(--space-7);
-  padding-block: var(--space-5) var(--space-7);
+  padding-block: var(--space-6) var(--space-7);
 }
 
 /* Line-up as a tie-dye poster */
@@ -97,11 +97,6 @@
 .joinTitle {
   color: var(--color-text);
   font-size: var(--text-xl);
-}
-
-/* Back to the overview, right under the header */
-.backBar {
-  padding-top: var(--space-6);
 }
 
 /*
