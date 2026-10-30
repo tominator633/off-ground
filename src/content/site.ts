@@ -13,17 +13,17 @@ export const contactDetails: {
   email: string | null;
   address: string | null;
   /**
-   * true = the values are made up for the design (Tom, 28. 10. 2026). They are shown as plain
-   * text, not as tel:/mailto: links, so nobody calls or writes to a stranger by mistake.
-   * Set to false once the real details are in.
+   * true = the values are made up for a design draft. They are then shown as plain text, not as
+   * tel:/mailto: links, so nobody calls or writes to a stranger by mistake.
    */
   placeholder: boolean;
 } = {
-  phone: "+420 777 123 456",
-  // offground.cz has no DNS records (28. 10. 2026) – mail to it goes nowhere
-  email: "info@offground.cz",
-  address: "Kostnice Holešovice, Praha 7",
-  placeholder: true,
+  // Organizer contact from the first event's Boom Events page (30. 10. 2026)
+  phone: "+420 792 645 345",
+  email: "offgroundevent@gmail.com",
+  // No street address known – only the city (the first event was at Burza #4, Holešovická tržnice)
+  address: "Praha",
+  placeholder: false,
 };
 
 export const partners = {

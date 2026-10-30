@@ -111,8 +111,9 @@ export const events: OffGroundEvent[] = [
     status: "past",
     date: "2026-10-10",
     startTime: "19:00",
-    endTime: null,
-    location: { cs: "Burza #4, Praha", en: "Burza #4, Prague" },
+    // until 1:00 the next day (Boom Events page of the event)
+    endTime: "01:00",
+    location: { cs: "Burza #4, Holešovická tržnice, Praha", en: "Burza #4, Holešovice Market, Prague" },
     image: battlePhoto,
     imagePosition: "center 45%",
     title: { cs: "Off Ground · Burza #4", en: "Off Ground · Burza #4" },

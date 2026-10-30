@@ -519,7 +519,10 @@
   }
 }
 
-/* Desktop: links on the left half, the next event's ad on the right half */
+/*
+ * Desktop: the next event's ad on the left half, the links on the right half – close to the
+ * menu button in the top right corner, so the mouse has a short way to them.
+ */
 @media (min-width: 64rem) {
   .nav {
     display: grid;
@@ -528,7 +531,14 @@
     column-gap: var(--space-7);
   }
 
+  .navList {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
   .promo {
+    grid-column: 1;
+    grid-row: 1;
     margin-top: 0;
   }
 }

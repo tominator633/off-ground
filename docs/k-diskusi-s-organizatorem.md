@@ -12,8 +12,8 @@ Stav: 20. 10. 2026. Vyřešené body přesuňte do `rozhodnuti.md`.
 - oficiální partner **rest.art – bar & cinema**, „sídlí na Podolské vodárně na Praze 4“.
 
 **Nejasné – potřebuju doplnit:**
-- Co je „Burza #4“ – místo konání, nebo název/číslo série? Kde přesně se akce konala (adresa)?
-- Jak se akce jmenuje: „Off Ground“, „OFF GROUND fest“, „Off Ground #1“? Na webu zatím „Off Ground · Burza #4“.
+- ~~Co je „Burza #4“~~ – podle stránky akce na Boom Events místo v Holešovické tržnici (akce 10. 10. 19:00 – 11. 10. 1:00). Přesná adresa?
+- Jak se akce jmenuje: „Off Ground“, „OFF GROUND fest“ (tak je na Boom Events), „Off Ground #1“? Na webu zatím „Off Ground · Burza #4“.
 - Kdo jsou Amathyst, Imellie a defcom (DJs, tanečníci, kapely)? Na webu jsou jen jména.
 - Kdo vyhrál první battle a jak hlasovalo publikum?
 - Off Ground #2 „Zombiehood“: hero na úvodu ho už propaguje se **smyšleným** datem 31. 10. 2026 20:00 a místem „Kostnice Holešovice, Praha 7“ (jen pro návrh) – skutečné datum, čas, místo a název doplnit do `nextEdition` v `src/content/events.ts`.
@@ -41,7 +41,7 @@ Stav: 20. 10. 2026. Vyřešené body přesuňte do `rozhodnuti.md`.
 
 ## 4. Kontaktní formulář – co je potřeba zařídit
 
-**Kontakty na stránce Kontakt** jsou teď **smyšlené** (telefon +420 777 123 456, e-mail info@offground.cz, adresa Kostnice Holešovice, Praha 7) a nejsou klikací: skutečné doplnit do `contactDetails` v `src/content/site.ts` a přepnout `placeholder` na `false`. Chceme na webu zveřejnit telefon? Jaký e-mail (ideálně na vlastní doméně)? Jaká adresa – sídlo, nebo místo konání? Pro mapu Google Maps je potřeba upravit CSP.
+**Kontakty na stránce Kontakt** jsou převzaté ze stránky první akce na Boom Events (telefon +420 792 645 345, e-mail offgroundevent@gmail.com) – je v pořádku je mít veřejně i na webu? Adresa je zatím jen „Praha“: chceme uvést sídlo, nebo místo konání? Pro mapu Google Maps je potřeba adresa a úprava CSP.
 
 Formulář je hotový a chráněný, ale v produkci nic neodešle, dokud se nenastaví:
 1. kam mají zprávy chodit (`CONTACT_TO_EMAIL`) – e-mail organizátora,
