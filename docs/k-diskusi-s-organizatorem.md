@@ -22,7 +22,7 @@ Stav: 20. 10. 2026. Vyřešené body přesuňte do `rozhodnuti.md`.
 - Jak se tanečníci do battlu #2 přihlásí (formulář, Google Form, e-mail, Instagram)? Tlačítko „Přihlásit se do battlu“ zatím vede na kontaktní formulář.
 
 **Vymyšlené texty (zástupné, přepsat podle organizátora):**
-- stránka „O nás“ → sekce „Jak to vzniklo“: celý příběh vzniku a citát jsou vymyšlené pro návrh – potřebujeme skutečný příběh a **fotku obou organizátorů** (teď je tam zástupná černobílá fotka dvou lidí z první akce, `src/assets/images/sections/about-story.jpg`),
+- stránka „O nás“ → sekce „Jak to vzniklo“: celý příběh vzniku a citát jsou vymyšlené pro návrh – potřebujeme skutečný příběh (fotka obou zakladatelů už je doplněná, 30. 10. 2026 – souhlasí oba se zveřejněním?),
 - úvod „Co je Off Ground“ (zmínka o DJ a kruhu),
 - „Jak to probíhá“ (4 karty), stránka „O nás“ včetně hodnot (respekt, otevřený kruh, publikum),
 - FAQ (přihlášení do battlu, vstupné, další termín) – odpovědi jsou obecné, bez konkrétních čísel,

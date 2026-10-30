@@ -108,8 +108,8 @@ export const cs: Dictionary = {
         "Teď chystáme další ročníky – každý s vlastním tématem, ale se stejnou energií. Off Ground dělají tanečníci pro tanečníky. A pro každého, kdo se přijde dívat.",
       ],
       quote: "Chtěli jsme parket, kde nikdo nestojí bokem.",
-      photoAlt: "Dva lidé se objímají na prvním Off Ground",
-      photoCaption: "Off Ground #1 · 10/10/2026",
+      photoAlt: "Zakladatelé Off Ground spolu před barem s řetězy žárovek",
+      photoCaption: "Zakladatelé Off Ground",
     },
     valuesTitle: "Na čem nám záleží",
     values: [

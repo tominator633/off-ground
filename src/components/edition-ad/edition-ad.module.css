@@ -3,9 +3,9 @@
   display: none;
 }
 
+/* the themed button spans the full width of the menu */
 .menuButton {
   display: grid;
-  justify-items: center;
 }
 
 @media (min-width: 64rem) {

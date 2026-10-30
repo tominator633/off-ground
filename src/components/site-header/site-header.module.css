@@ -159,25 +159,39 @@
 
 /*
  * Menu button: just three white lines – no circle, no background. White, so it fits any
- * edition theme in the home page hero.
+ * edition theme in the home page hero. Once open, the close button (×) gets the same round
+ * outline as the language toggle and the Instagram button next to it.
  */
 .menuToggle {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
   padding: 0;
-  border: 0;
-  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
   background: transparent;
   color: var(--color-text);
   cursor: pointer;
-  transition: opacity var(--transition-base);
+  transition:
+    opacity var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base);
 }
 
 .menuToggle:hover {
   opacity: 0.75;
+}
+
+.menuToggle[aria-expanded="true"] {
+  border-color: rgb(255 255 255 / 0.35);
+  background: rgb(5 5 7 / 0.4);
+}
+
+.menuToggle[aria-expanded="true"] .burger {
+  width: 1.25rem;
 }
 
 .burger {
@@ -328,10 +342,28 @@
  * Phones: upright, right under the close button (like the stacked buttons on a phone's side).
  * Desktop: lying, to the left of the close button.
  */
-.langToggle {
+.menuTools {
   position: absolute;
   top: calc(100% + var(--space-2));
   right: 0.075rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--transition-base),
+    visibility var(--transition-base);
+}
+
+.menuTools[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+}
+
+.langToggle {
+  position: relative;
   display: grid;
   grid-template-rows: 1fr 1fr;
   width: 2.6rem;
@@ -340,16 +372,34 @@
   border-radius: var(--radius-pill);
   background: rgb(5 5 7 / 0.4);
   isolation: isolate;
-  visibility: hidden;
-  opacity: 0;
-  transition:
-    opacity var(--transition-base),
-    visibility var(--transition-base);
 }
 
-.langToggle[data-open="true"] {
-  visibility: visible;
-  opacity: 1;
+/* Round Instagram button – the same outline as the language toggle and the close button */
+.roundButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: var(--radius-pill);
+  background: rgb(5 5 7 / 0.4);
+  color: var(--color-text);
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.roundButton:hover {
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+}
+
+.roundButton .roundIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  vertical-align: 0;
 }
 
 .langToggle::before {
@@ -407,19 +457,26 @@
     width: 97%;
   }
 
-  /* Language toggle lying to the left of the close button */
+  /* Instagram, language toggle and close button in one row, all the same height */
   .actions {
     gap: var(--space-3);
   }
 
-  /* relative (not static): the pink thumb must be sized and placed by the toggle itself */
+  .menuTools {
+    position: static;
+    flex-direction: row-reverse;
+    gap: var(--space-3);
+  }
+
   .langToggle {
-    position: relative;
-    top: auto;
-    right: auto;
     grid-template-rows: none;
     grid-template-columns: 1fr 1fr;
     width: 6.5rem;
+  }
+
+  .roundButton {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .langToggle::before {

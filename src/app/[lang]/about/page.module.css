@@ -27,7 +27,8 @@
 
 .photo {
   position: relative;
-  aspect-ratio: 4 / 3;
+  /* portrait: the photo of the two founders */
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: var(--radius-md);
   /* the logo's offset shadow, in pink, plus a soft glow */
@@ -38,6 +39,8 @@
 
 .photoImage {
   object-fit: cover;
+  /* keep the faces in the frame */
+  object-position: center 25%;
 }
 
 /* The glitter star stuck on the corner */

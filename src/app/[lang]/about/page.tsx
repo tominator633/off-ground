@@ -31,7 +31,7 @@ export default async function AboutPage() {
         {/* Pink and blue glows with watermark stars from the logo */}
         <GlowBackdrop />
         <div className={`container ${story.storyInner}`}>
-          {/* PLACEHOLDER photo from the first event – replace with a photo of the two organizers */}
+          {/* The two founders (photo from Tom, 30. 10. 2026) */}
           <figure className={story.photoFrame}>
             <div className={story.photo}>
               <Image

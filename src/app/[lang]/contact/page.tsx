@@ -5,8 +5,8 @@ import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ContactForm } from "@/components/contact-form/contact-form";
 import { ContactIcon } from "@/components/icons/contact-icon";
 import { EmailIcon } from "@/components/icons/email-icon";
-import { InstagramIcon } from "@/components/icons/instagram-icon";
 import { LocationIcon } from "@/components/icons/location-icon";
+import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { PageTitle } from "@/components/page-title/page-title";
 import { PhotoBackdrop } from "@/components/photo-backdrop/photo-backdrop";
 import { contactDetails, social } from "@/content/site";
@@ -27,8 +27,9 @@ export default async function ContactPage() {
   const soon = <span className={styles.soon}>{details.soon}</span>;
   const linked = (value: string, href: string) => (placeholder ? value : <a href={href}>{value}</a>);
 
-  // Each detail is an icon; the label is only for screen readers
-  const items: { label: string; Icon: ComponentType<{ className?: string }>; value: ReactNode }[] = [
+  // Each detail is an icon; the label is only for screen readers. Instagram is the same
+  // outlined button as in the footer (it brings its own icon).
+  const items: { label: string; Icon?: ComponentType<{ className?: string }>; value: ReactNode }[] = [
     {
       label: details.phone,
       Icon: ContactIcon,
@@ -37,11 +38,10 @@ export default async function ContactPage() {
     { label: details.email, Icon: EmailIcon, value: email ? linked(email, `mailto:${email}`) : soon },
     {
       label: details.instagram,
-      Icon: InstagramIcon,
       value: (
-        <a href={social.instagram.url} target="_blank" rel="noopener noreferrer">
+        <InstagramButton href={social.instagram.url} size="sm">
           {social.instagram.handle}
-        </a>
+        </InstagramButton>
       ),
     },
     { label: details.address, Icon: LocationIcon, value: address ?? soon },
@@ -61,9 +61,9 @@ export default async function ContactPage() {
             <ul className={styles.details}>
               {items.map(({ label, Icon, value }) => (
                 <li key={label} className={styles.detail}>
-                  <Icon className={styles.detailIcon} />
+                  {Icon ? <Icon className={styles.detailIcon} /> : null}
                   <span className="visually-hidden">{label}: </span>
-                  <span>{value}</span>
+                  {Icon ? <span className={styles.detailText}>{value}</span> : value}
                 </li>
               ))}
             </ul>

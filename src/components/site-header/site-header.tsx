@@ -11,7 +11,9 @@ import { ContactIcon } from "@/components/icons/contact-icon";
 import { EventsIcon } from "@/components/icons/events-icon";
 import { FaqIcon } from "@/components/icons/faq-icon";
 import { GalleryIcon } from "@/components/icons/gallery-icon";
+import { InstagramIcon } from "@/components/icons/instagram-icon";
 import { PartnersIcon } from "@/components/icons/partners-icon";
+import { social } from "@/content/site";
 import {
   localeLabels,
   locales,
@@ -159,32 +161,39 @@ export function SiteHeader({ lang, labels, promo }: SiteHeaderProps) {
 
         <div className={styles.actions}>
           {/*
-            Language toggle – shown only while the menu is open, next to the close button
-            (desktop: to its left; phones: upright under it). The language is detected
-            automatically (browser language, then GeoIP), so this is the manual fallback.
+            Menu tools – shown only while the menu is open, next to the close button
+            (desktop: in a row to its left; phones: stacked under it). The language is
+            detected automatically (browser language, then GeoIP), so the toggle is the
+            manual fallback.
           */}
-          <div
-            className={styles.langToggle}
-            role="group"
-            aria-label={labels.switchLanguage}
-            data-active={lang}
-            data-open={menuOpen}
-          >
-            {locales.map((locale) => (
-              <Link
-                key={locale}
-                href={switchLocaleInPath(pathname, locale)}
-                hrefLang={locale}
-                lang={locale}
-                className={styles.langOption}
-                aria-current={locale === lang ? "true" : undefined}
-                tabIndex={menuOpen ? undefined : -1}
-                onClick={() => chooseLocale(locale)}
-              >
-                <span aria-hidden="true">{localeLabels[locale].short}</span>
-                <span className="visually-hidden">{localeLabels[locale].name}</span>
-              </Link>
-            ))}
+          <div className={styles.menuTools} data-open={menuOpen}>
+            <div className={styles.langToggle} role="group" aria-label={labels.switchLanguage} data-active={lang}>
+              {locales.map((locale) => (
+                <Link
+                  key={locale}
+                  href={switchLocaleInPath(pathname, locale)}
+                  hrefLang={locale}
+                  lang={locale}
+                  className={styles.langOption}
+                  aria-current={locale === lang ? "true" : undefined}
+                  tabIndex={menuOpen ? undefined : -1}
+                  onClick={() => chooseLocale(locale)}
+                >
+                  <span aria-hidden="true">{localeLabels[locale].short}</span>
+                  <span className="visually-hidden">{localeLabels[locale].name}</span>
+                </Link>
+              ))}
+            </div>
+            <a
+              href={social.instagram.url}
+              className={styles.roundButton}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={menuOpen ? undefined : -1}
+            >
+              <InstagramIcon className={styles.roundIcon} />
+              <span className="visually-hidden">Instagram {social.instagram.handle}</span>
+            </a>
           </div>
 
           <button

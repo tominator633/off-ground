@@ -25,7 +25,7 @@ npm run dev
 
 - **Next.js 16** (App Router, TypeScript, Turbopack, Cache Components, React Compiler)
 - **CSS Modules** + design tokeny v [src/styles/tokens.css](src/styles/tokens.css) – žádný Tailwind ani UI knihovny
-- **next/font** – jedno písmo Inter Tight (vč. `latin-ext` kvůli češtině), **next/image** (AVIF/WebP) pro budoucí fotky
+- **next/font** – Inter Tight pro logo, nadpisy a menu, Encode Sans Expanded pro běžný text (obě vč. `latin-ext` kvůli češtině), **next/image** (AVIF/WebP) pro budoucí fotky
 - **Zod** pro validaci formuláře, **Vitest** pro testy
 - Hosting **Vercel**; e-maily **Resend**; ochrana proti botům **Cloudflare Turnstile**
 

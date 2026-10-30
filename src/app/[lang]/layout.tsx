@@ -6,7 +6,7 @@ import { getNextEdition } from "@/content/events";
 import { social } from "@/content/site";
 import { locales, localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
-import { interTight } from "@/lib/fonts";
+import { encodeSansExpanded, interTight } from "@/lib/fonts";
 import { isIndexingAllowed, siteUrl } from "@/lib/metadata";
 import "@/styles/globals.css";
 
@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const next = getNextEdition();
 
   return (
-    <html lang={lang} className={interTight.variable} data-scroll-behavior="smooth">
+    <html lang={lang} className={`${interTight.variable} ${encodeSansExpanded.variable}`} data-scroll-behavior="smooth">
       <body>
         <SiteHeader
           lang={lang}

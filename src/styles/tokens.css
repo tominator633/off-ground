@@ -38,10 +38,14 @@
   --color-error: #ff6b81;
   --color-focus: var(--color-blue);
 
-  /* Typography – one font for everything (next/font, see src/lib/fonts.ts) */
-  --font-body: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-display: var(--font-body);
-  --font-logo: var(--font-body);
+  /*
+   * Typography (next/font, see src/lib/fonts.ts): poster lettering (Inter Tight) for the logo,
+   * headings and menu; Encode Sans Expanded for running text.
+   */
+  --font-poster: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: var(--font-encode-sans-expanded), Arial, sans-serif;
+  --font-display: var(--font-poster);
+  --font-logo: var(--font-poster);
   /* Navigation: the same bold, tight lettering as the "Off ground" logo */
   --font-nav: var(--font-logo);
   /* Headings like the posters: bold, very tight tracking, offset shadow */

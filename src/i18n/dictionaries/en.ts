@@ -106,8 +106,8 @@ export const en = {
         "Now we're preparing the next editions – each with its own theme, all with the same energy. Off Ground is made by dancers for dancers. And for everyone who comes to watch.",
       ],
       quote: "We wanted a dance floor where nobody stands on the side.",
-      photoAlt: "Two people hugging at the first Off Ground",
-      photoCaption: "Off Ground #1 · 10/10/2026",
+      photoAlt: "The founders of Off Ground together in front of a bar with string lights",
+      photoCaption: "The founders of Off Ground",
     },
     valuesTitle: "What we care about",
     values: [
