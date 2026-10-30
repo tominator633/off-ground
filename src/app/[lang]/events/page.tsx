@@ -41,8 +41,7 @@ export default async function EventsPage() {
               // Until tickets are on sale, the button leads to Instagram, where they'll be announced
               ticketHref={next.ticketUrl ?? social.instagram.url}
               ticketExternal
-              registerHref={localizedPath(lang, "/contact")}
-              lineupHref={`${localizedPath(lang)}#lineup`}
+              // Only two buttons, as on the home page: the event detail and the ticket
               detailHref={localizedPath(lang, `/events/${next.slug}`)}
               placement="banner"
             />

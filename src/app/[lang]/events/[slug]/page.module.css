@@ -24,7 +24,7 @@
 .layout {
   display: grid;
   gap: var(--space-7);
-  padding-block: var(--space-6) var(--space-7);
+  padding-block: var(--space-5) var(--space-7);
 }
 
 /* Line-up as a tie-dye poster */
@@ -99,14 +99,110 @@
   font-size: var(--text-xl);
 }
 
-.back {
-  color: var(--color-blue);
-  font-weight: 600;
-  text-decoration: none;
+/* Back to the overview, right under the header */
+.backBar {
+  padding-top: var(--space-6);
 }
 
-.back:hover {
-  text-decoration: underline;
+/*
+ * The ticket button is shaped like a ticket: a stub with the icon, a dashed perforation with a
+ * punched notch at its top and bottom, then "koupit lístek →" on one line. Outlined like the
+ * Instagram button (white 2px on transparent); on hover it fills pink, the text turns dark,
+ * the icon tilts and the arrow moves on.
+ */
+.ticketBox {
+  --stub: 4.75rem;
+  --notch: 0.9rem;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--stub) minmax(0, 1fr);
+  min-height: 5.5rem;
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.ticketBox:hover {
+  border-color: var(--color-pink);
+  background: var(--color-pink);
+  color: var(--color-on-accent);
+  transform: translateY(-2px);
+}
+
+/* Notches punched out of the outline where the perforation meets it (page colour circles) */
+.ticketBox::before,
+.ticketBox::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--stub) - var(--notch) / 2);
+  width: var(--notch);
+  height: var(--notch);
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+
+.ticketBox::before {
+  top: calc(var(--notch) / -2 - 1px);
+}
+
+.ticketBox::after {
+  bottom: calc(var(--notch) / -2 - 1px);
+}
+
+.ticketStub {
+  display: grid;
+  place-items: center;
+}
+
+.ticketIcon {
+  width: 2.6rem;
+  height: 2.6rem;
+  transition: transform var(--transition-base);
+}
+
+.ticketBox:hover .ticketIcon {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+/* The perforation is the dashed left edge of the label */
+.ticketText {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-inline: var(--space-4);
+  border-left: 2px dashed currentColor;
+  font-family: var(--font-poster);
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.ticketArrow {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  transition: transform var(--transition-base);
+}
+
+.ticketBox:hover .ticketArrow {
+  transform: translateX(4px);
+}
+
+/* Google Maps link under the venue */
+.mapLink {
+  display: flex;
+  margin-top: var(--space-3);
 }
 
 @media (min-width: 64rem) {
@@ -114,8 +210,13 @@
     grid-template-columns: minmax(0, 1fr) 20rem;
   }
 
+  /*
+   * The boxes stay in view while the long line-up and text scroll past (like the photo on
+   * About). align-self: start – a stretched grid item is as tall as the row and can't stick.
+   */
   .sidebar {
     position: sticky;
     top: calc(var(--header-height) + var(--space-5));
+    align-self: start;
   }
 }

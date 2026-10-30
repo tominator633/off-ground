@@ -25,7 +25,7 @@ export const cs: Dictionary = {
     learnMore: "Zjistit víc",
     getInTouch: "Napiš nám",
     allEvents: "Všechny akce",
-    backToEvents: "Zpět na všechny akce",
+    backToEvents: "Zpět na přehled akcí",
     photoAlt: "Fotka z prvního Off Ground",
   },
   home: {
@@ -59,11 +59,6 @@ export const cs: Dictionary = {
         { title: "Rozhoduješ ty", text: "Vítěze nevybírá porota za stolem – o vítězi rozhoduješ TY." },
       ],
     },
-    lineup: {
-      title: "Line-up",
-      intro: "Takhle proběhl první Off Ground.",
-      detail: "Detail akce",
-    },
     gallery: {
       title: "Momenty",
       cta: "Celá galerie",
@@ -93,6 +88,7 @@ export const cs: Dictionary = {
     timeToBeAnnounced: "Čas upřesníme",
     about: "O akci",
     lineup: "Line-up",
+    openMap: "Otevřít v Mapách Google",
     partner: "Partner",
     nextTitle: "Další Off Ground?",
     nextText: "Další termín oznámíme na Instagramu. Chceš soutěžit nebo vystoupit? Napiš nám.",

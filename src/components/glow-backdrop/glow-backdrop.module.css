@@ -16,6 +16,11 @@
   pointer-events: none;
 }
 
+/* In the middle of a page: fades out at the top as well, so neither edge shows */
+.backdrop.fadeBoth {
+  mask-image: linear-gradient(to bottom, transparent, #000 12rem, #000 calc(100% - 12rem), transparent);
+}
+
 /* Faint glitter stars in different sizes and angles */
 .mark {
   position: absolute;
@@ -52,4 +57,90 @@
   right: 30%;
   width: 9rem;
   rotate: 6deg;
+}
+
+/*
+ * "long" layout: glows alternating left and right down the whole block, and ten stars of
+ * different sizes and angles scattered from top to bottom (positions in % of the height).
+ */
+.backdrop.long {
+  background:
+    radial-gradient(40rem 26rem at 0% 6%, rgb(242 123 192 / 0.2), transparent 70%),
+    radial-gradient(38rem 28rem at 100% 28%, rgb(116 189 238 / 0.18), transparent 70%),
+    radial-gradient(40rem 26rem at 0% 52%, rgb(180 131 204 / 0.14), transparent 70%),
+    radial-gradient(38rem 28rem at 100% 76%, rgb(242 123 192 / 0.16), transparent 70%),
+    radial-gradient(40rem 24rem at 10% 96%, rgb(116 189 238 / 0.14), transparent 70%);
+}
+
+.long1 {
+  top: 2%;
+  right: -4rem;
+  width: 18rem;
+  rotate: 14deg;
+}
+
+.long2 {
+  top: 12%;
+  left: -3rem;
+  width: 10rem;
+  rotate: -18deg;
+}
+
+.long3 {
+  top: 22%;
+  right: 10%;
+  width: 5rem;
+  rotate: 32deg;
+  opacity: 0.12;
+}
+
+.long4 {
+  top: 32%;
+  left: 6%;
+  width: 7rem;
+  rotate: 8deg;
+}
+
+.long5 {
+  top: 43%;
+  right: -5rem;
+  width: 20rem;
+  rotate: -10deg;
+  opacity: 0.06;
+}
+
+.long6 {
+  top: 54%;
+  left: -4rem;
+  width: 14rem;
+  rotate: 22deg;
+}
+
+.long7 {
+  top: 64%;
+  right: 24%;
+  width: 6rem;
+  rotate: -24deg;
+  opacity: 0.1;
+}
+
+.long8 {
+  top: 74%;
+  left: 12%;
+  width: 9rem;
+  rotate: 12deg;
+}
+
+.long9 {
+  top: 84%;
+  right: -3rem;
+  width: 15rem;
+  rotate: 18deg;
+}
+
+.long10 {
+  top: 93%;
+  left: 32%;
+  width: 6rem;
+  rotate: -8deg;
 }

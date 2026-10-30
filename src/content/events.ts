@@ -33,6 +33,8 @@ interface EventBase {
   image?: StaticImageData;
   /** CSS object-position for the photo crop. */
   imagePosition?: string;
+  /** Venue position for the Google Maps link on the detail page; none = no link */
+  coordinates?: { lat: number; lng: number };
 }
 
 export interface RecurringEvent extends EventBase {
@@ -48,6 +50,20 @@ export interface OneOffEvent extends EventBase {
 
 export type OffGroundEvent = RecurringEvent | OneOffEvent;
 
+/** Line-up of the first Off Ground (10/10/2026) – Zombiehood reuses it for now. */
+const firstLineup: LineupItem[] = [
+  { time: "19:00", title: "doors" },
+  { time: "19:30", title: "Amathyst" },
+  { time: "20:30", title: "Hip-hop freestyle showcase" },
+  {
+    time: "21:00",
+    title: "dance battle",
+    versus: ["misfits", "underdogs"],
+  },
+  { time: "22:00", title: "Imellie" },
+  { time: "23:00", title: "defcom" },
+];
+
 /**
  * Off Ground #2 – the next edition. A regular event (it has its own detail page) and the source
  * of the date, time and venue that `nextEdition` below advertises.
@@ -62,6 +78,8 @@ const zombiehood: OneOffEvent = {
   startTime: "20:00",
   endTime: null,
   location: { cs: "Kostnice Holešovice, Praha 7", en: "Kostnice Holešovice, Prague 7" },
+  // PLACEHOLDER – made-up point in Holešovice for the made-up venue (Tom, 30. 10. 2026)
+  coordinates: { lat: 50.1036, lng: 14.4389 },
   // Crowd around the circle at the first Off Ground (10/10/2026)
   image: heroPhoto,
   imagePosition: "center 60%",
@@ -74,15 +92,16 @@ const zombiehood: OneOffEvent = {
     cs: [
       "Druhý Off Ground vychází na Halloween. Kruh se promění v noc živých mrtvých – battle, showcase a DJ sety až do rána.",
       "Přijď v masce nebo kostýmu. O vítězi battlu rozhoduje publikum, takže i ty.",
-      "Line-up, přihlášky do battlu a lístky zveřejníme na Instagramu.",
+      "Přihlášky do battlu a lístky zveřejníme na Instagramu.",
     ],
     en: [
       "The second Off Ground falls on Halloween. The circle turns into a night of the living dead – battle, showcase and DJ sets until dawn.",
       "Come in a mask or costume. The crowd decides who wins the battle – and that means you.",
-      "Line-up, battle sign-ups and tickets will be announced on Instagram.",
+      "Battle sign-ups and tickets will be announced on Instagram.",
     ],
   },
-  lineup: [],
+  // PLACEHOLDER – the same line-up as the first Off Ground (Tom, 30. 10. 2026) until the real one is known
+  lineup: firstLineup,
 };
 
 /** Order: upcoming events from the soonest, then past events from the newest. */
@@ -166,18 +185,7 @@ export const events: OffGroundEvent[] = [
         "The crowd decided the winner. Photos from the night are coming to the gallery soon.",
       ],
     },
-    lineup: [
-      { time: "19:00", title: "doors" },
-      { time: "19:30", title: "Amathyst" },
-      { time: "20:30", title: "Hip-hop freestyle showcase" },
-      {
-        time: "21:00",
-        title: "dance battle",
-        versus: ["misfits", "underdogs"],
-      },
-      { time: "22:00", title: "Imellie" },
-      { time: "23:00", title: "defcom" },
-    ],
+    lineup: firstLineup,
   },
 ];
 

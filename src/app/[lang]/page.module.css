@@ -94,74 +94,197 @@
   gap: var(--space-3);
 }
 
+/* The black part under the hero: one shared backdrop of glows and stars (GlowBackdrop) */
+.blackPart {
+  position: relative;
+  isolation: isolate;
+  /* clip, not hidden: hidden would make this a scroll container and break the sticky FAQ title */
+  overflow: clip;
+}
+
 /* Shared section rhythm */
 .section {
   padding-block: var(--space-8);
 }
 
-.centered {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-7);
+/*
+ * What Off Ground is: centred – the poster title on top, under it the first paragraph as a big
+ * statement filled with the brand gradient (pink → lilac → blue) and the second one smaller.
+ * A stronger pink and blue glow sits right behind the text.
+ */
+.intro {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-6);
+  padding-block: var(--space-9) var(--space-8);
+  text-align: center;
+  isolation: isolate;
 }
 
-.prose {
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 10% 0;
+  z-index: -1;
+  background:
+    radial-gradient(45% 55% at 30% 55%, rgb(242 123 192 / 0.28), transparent 70%),
+    radial-gradient(45% 55% at 70% 50%, rgb(116 189 238 / 0.24), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.introText {
   display: grid;
-  gap: var(--space-4);
-  max-width: var(--container-narrow);
+  justify-items: center;
+  gap: var(--space-5);
+  max-width: 54rem;
+}
+
+/* Gradient-filled lettering; the shadow is a drop shadow, text-shadow would cover the gradient */
+.statement {
+  background: linear-gradient(100deg, var(--color-pink) 0%, var(--color-lilac) 45%, var(--color-blue) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: var(--font-poster);
+  font-size: clamp(1.7rem, 1.1rem + 2.4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  filter: drop-shadow(0 0.25rem 1.25rem rgb(242 123 192 / 0.25));
+}
+
+.introMore {
+  max-width: 34rem;
   color: var(--color-text-muted);
   font-size: var(--text-lg);
 }
 
-/* Line-up poster */
-.lineupSection {
-  padding-block: var(--space-6);
-}
-
-.lineupPoster {
+/* How it works: poster title and intro, the parts below (PillarList) */
+.format {
   padding-block: var(--space-8);
 }
 
-.lineupTitle {
-  margin-bottom: var(--space-3);
-  color: var(--color-text);
-  font-size: clamp(3.5rem, 2rem + 8vw, 7rem);
-  line-height: 0.9;
-  letter-spacing: -0.07em;
-  text-align: center;
-  text-shadow: var(--shadow-text);
-}
-
-.lineupIntro {
-  margin-bottom: var(--space-7);
-  color: var(--color-text);
-  font-weight: 500;
-  text-align: center;
-}
-
-/* Moments – three event photos */
-.photoStrip {
+.formatHead {
   display: grid;
   gap: var(--space-4);
+  margin-bottom: var(--space-7);
+}
+
+/* The intro in blue poster lettering – stands out from the white title and the gradient above */
+.formatIntro {
+  max-width: 30rem;
+  color: var(--color-blue);
+  font-family: var(--font-poster);
+  font-size: clamp(1.4rem, 1rem + 1.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 1.5rem rgb(116 189 238 / 0.35);
+}
+
+@media (min-width: 64rem) {
+  .formatHead {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    column-gap: var(--space-8);
+    align-items: end;
+  }
+}
+
+/*
+ * Moments: three photos as prints on a wall – tilted different ways, the middle one a bit
+ * lower, each with an offset shadow in a brand colour (like the photo on About). The prints
+ * are not links – the gallery button is the only way on.
+ */
+.moments {
+  padding-block: var(--space-8) var(--space-9);
+}
+
+.momentsHead {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.prints {
+  display: grid;
+  gap: var(--space-8);
   margin: 0;
-  padding: 0;
+  padding: 0 0 var(--space-4);
   list-style: none;
 }
 
-.photoItem {
+.print {
+  --tilt: -3deg;
+  --shadow: rgb(214 150 214 / 0.65);
+
+  position: relative;
+  width: 86%;
+}
+
+.print:nth-child(2) {
+  --tilt: 2.5deg;
+  --shadow: rgb(116 189 238 / 0.6);
+
+  justify-self: end;
+}
+
+.print:nth-child(3) {
+  --tilt: -1.5deg;
+  --shadow: rgb(180 131 204 / 0.65);
+}
+
+.printFrame {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  rotate: var(--tilt);
+  box-shadow:
+    0.9rem 1rem 0 var(--shadow),
+    0 0 3rem rgb(242 123 192 / 0.15);
 }
 
-.photo {
+.printImage {
   object-fit: cover;
-  transition: transform var(--transition-base);
 }
 
-.photoItem:hover .photo {
-  transform: scale(1.03);
+.printSticker {
+  position: absolute;
+  top: -2rem;
+  right: -1.25rem;
+  width: 4.5rem;
+  height: auto;
+  rotate: 14deg;
+  filter: drop-shadow(0 6px 12px rgb(5 5 7 / 0.6));
+  pointer-events: none;
+}
+
+@media (min-width: 48rem) {
+  .momentsHead {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}
+
+@media (min-width: 64rem) {
+  /* Three prints side by side, the middle one lower */
+  .prints {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-7);
+    padding-bottom: var(--space-8);
+  }
+
+  .print {
+    width: auto;
+  }
+
+  .print:nth-child(2) {
+    justify-self: stretch;
+    translate: 0 var(--space-8);
+  }
 }
 
 /*
@@ -238,6 +361,71 @@
   margin-bottom: var(--space-1);
 }
 
+/*
+ * FAQ: a soft pink and blue glow behind the section that fades out at the top and bottom (no
+ * visible edge to the neighbours), the poster title on the left, the questions on the right.
+ */
+.faq {
+  position: relative;
+  padding-block: var(--space-8);
+  isolation: isolate;
+}
+
+.faq::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(34rem 22rem at 8% 40%, rgb(242 123 192 / 0.16), transparent 70%),
+    radial-gradient(30rem 22rem at 92% 70%, rgb(116 189 238 / 0.14), transparent 70%);
+  mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  pointer-events: none;
+}
+
+.faqInner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.faqIntro {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: var(--space-4);
+}
+
+/* Big lowercase poster lettering, like the menu links and the line-up title (FAQ, Moments) */
+.posterTitle {
+  font-family: var(--font-poster);
+  font-size: clamp(3.25rem, 1.5rem + 7vw, 6.5rem);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.07em;
+  text-transform: lowercase;
+  text-shadow: var(--shadow-text);
+}
+
+.faqLead {
+  max-width: 22rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+@media (min-width: 64rem) {
+  .faqInner {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    column-gap: var(--space-8);
+  }
+
+  /* The title stays in view while the questions scroll past */
+  .faqIntro {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+    align-self: start;
+  }
+}
+
 /* Call to action */
 .cta {
   display: grid;
@@ -265,8 +453,3 @@
 
 
 
-@media (min-width: 48rem) {
-  .photoStrip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}

@@ -116,12 +116,16 @@ export function ZombiehoodAd({
         <p className={styles.text}>{edition.text[lang]}</p>
         <div className={styles.actions}>
           {/* Battle sign-ups go through the contact form until there is a registration system */}
-          <Link href={registerHref} className={styles.action}>
-            {labels.register}
-          </Link>
-          <Link href={lineupHref} className={styles.action}>
-            {labels.lineup}
-          </Link>
+          {registerHref ? (
+            <Link href={registerHref} className={styles.action}>
+              {labels.register}
+            </Link>
+          ) : null}
+          {lineupHref ? (
+            <Link href={lineupHref} className={styles.action}>
+              {labels.lineup}
+            </Link>
+          ) : null}
           {detailHref ? (
             <Link href={detailHref} className={styles.action} tabIndex={-1} aria-hidden="true">
               {labels.detail} →

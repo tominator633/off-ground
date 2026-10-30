@@ -1,6 +1,11 @@
+/*
+ * Poster index without cards: a thin line above each part, a giant outlined number (pink and
+ * blue in turn), the title in the poster lettering and a short text. On hover the number fills
+ * with its colour. Phones: one under another; tablets 2 × 2; desktop four in a row.
+ */
 .list {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-7) var(--space-6);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -8,75 +13,63 @@
 
 .card {
   --accent: var(--color-pink);
-  position: relative;
+
   display: grid;
   align-content: start;
   gap: var(--space-3);
-  padding: var(--space-6) var(--space-5) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  overflow: hidden;
-  transition:
-    transform var(--transition-base),
-    border-color var(--transition-base);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
 }
 
 .card:nth-child(even) {
   --accent: var(--color-blue);
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: var(--accent);
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
-}
-
 .number {
-  font-family: var(--font-display);
-  font-weight: var(--font-display-weight);
-  font-size: var(--text-2xl);
-  line-height: 1;
+  color: transparent;
+  font-family: var(--font-poster);
+  font-size: clamp(4.5rem, 3rem + 5vw, 7rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  -webkit-text-stroke: 2px var(--accent);
+  transition: color var(--transition-base);
+}
+
+.card:hover .number {
   color: var(--accent);
 }
 
 .title {
-  font-size: var(--text-xl);
+  font-family: var(--font-poster);
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+  text-shadow: var(--shadow-text);
 }
 
 .text {
+  max-width: 24rem;
   color: var(--color-text-muted);
 }
 
 .points {
   display: grid;
   gap: var(--space-1);
-  margin: var(--space-2) 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: var(--text-sm);
+  margin: 0;
+  padding-left: 1.1em;
+  color: var(--color-text-muted);
 }
 
-.points li::before {
-  content: "✔";
-  margin-right: var(--space-2);
-  color: var(--accent);
-}
-
-@media (min-width: 48rem) {
+@media (min-width: 40rem) {
   .list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 72rem) {
   .list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

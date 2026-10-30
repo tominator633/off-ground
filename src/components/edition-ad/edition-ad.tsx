@@ -16,8 +16,9 @@ export interface EditionAdProps {
   ticketHref: string;
   /** The ticket link leaves the site (shop or Instagram) */
   ticketExternal: boolean;
-  registerHref: string;
-  lineupHref: string;
+  /** Battle sign-up and line-up buttons; each is left out when not given (home hero) */
+  registerHref?: string;
+  lineupHref?: string;
   /** The edition's detail page; when set, the whole ad links to it (events page banner) */
   detailHref?: string;
   /**

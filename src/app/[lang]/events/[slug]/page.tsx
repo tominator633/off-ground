@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/button-link/button-link";
+import { LocationIcon } from "@/components/icons/location-icon";
+import { TicketIcon } from "@/components/icons/ticket-icon";
+import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { LineUp } from "@/components/line-up/line-up";
 import { PageHeader } from "@/components/page-header/page-header";
 import { TieDye } from "@/components/tie-dye/tie-dye";
-import { getEvent, getEvents } from "@/content/events";
+import { getEvent, getEvents, getNextEdition } from "@/content/events";
+import { social } from "@/content/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { formatEventDate, formatTimeRange } from "@/lib/format";
@@ -43,6 +46,12 @@ async function EventDetail({ params }: { params: PageProps<"/[lang]/events/[slug
   const labels = dict.events;
   const when = event.kind === "recurring" ? event.schedule[lang] : formatEventDate(lang, event.date);
   const time = formatTimeRange(event.startTime, event.endTime) ?? labels.timeToBeAnnounced;
+  // The next edition sells tickets: the sidebar box offers them instead of "Next Off Ground?"
+  const next = getNextEdition();
+  const isNext = next.slug === event.slug;
+  const mapHref = event.coordinates
+    ? `https://www.google.com/maps/search/?api=1&query=${event.coordinates.lat},${event.coordinates.lng}`
+    : null;
 
   return (
     <>
@@ -56,6 +65,13 @@ async function EventDetail({ params }: { params: PageProps<"/[lang]/events/[slug
           {labels.status[event.status]}
         </p>
       </PageHeader>
+
+      {/* Back to the overview right under the header, so it is at hand on phones too */}
+      <div className={`container ${styles.backBar}`}>
+        <ButtonLink href={localizedPath(lang, "/events")} variant="outline">
+          ← {dict.common.backToEvents}
+        </ButtonLink>
+      </div>
 
       <div className={`container ${styles.layout}`}>
         <article className={styles.content}>
@@ -86,19 +102,49 @@ async function EventDetail({ params }: { params: PageProps<"/[lang]/events/[slug
             </div>
             <div>
               <dt>{labels.where}</dt>
-              <dd>{event.location[lang]}</dd>
+              <dd>
+                {event.location[lang]}
+                {mapHref ? (
+                  // Same outline button as Instagram in the footer, with a map pin
+                  <span className={styles.mapLink}>
+                    <InstagramButton href={mapHref} size="sm" icon={LocationIcon}>
+                      {labels.openMap}
+                    </InstagramButton>
+                  </span>
+                ) : null}
+              </dd>
             </div>
           </dl>
-          <div className={styles.join}>
-            <h2 className={styles.joinTitle}>{labels.nextTitle}</h2>
-            <p>{labels.nextText}</p>
-            <ButtonLink href={localizedPath(lang, "/contact")}>{dict.common.getInTouch}</ButtonLink>
-          </div>
-          <Link href={localizedPath(lang, "/events")} className={styles.back}>
-            ← {dict.common.backToEvents}
-          </Link>
+          {isNext ? (
+            // The whole box is one big ticket button. Until tickets are on sale it leads to
+            // Instagram, where they'll be announced.
+            <a
+              href={next.ticketUrl ?? social.instagram.url}
+              className={styles.ticketBox}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {/* Shaped like a ticket: the stub with the icon, a perforation, then the label */}
+              <span className={styles.ticketStub}>
+                <TicketIcon className={styles.ticketIcon} />
+              </span>
+              <span className={styles.ticketText}>
+                {dict.home.next.ticket}
+                <span className={styles.ticketArrow} aria-hidden="true">
+                  →
+                </span>
+              </span>
+            </a>
+          ) : (
+            <div className={styles.join}>
+              <h2 className={styles.joinTitle}>{labels.nextTitle}</h2>
+              <p>{labels.nextText}</p>
+              <ButtonLink href={localizedPath(lang, "/contact")}>{dict.common.getInTouch}</ButtonLink>
+            </div>
+          )}
         </aside>
       </div>
     </>
   );
 }
+

@@ -4,7 +4,7 @@ interface PillarListProps {
   items: { title: string; text: string; points?: string[] }[];
 }
 
-/** Numbered feature cards with alternating pink and blue accents. */
+/** Numbered poster index: giant outlined numbers, alternating pink and blue, no cards. */
 export function PillarList({ items }: PillarListProps) {
   return (
     <ul className={styles.list}>

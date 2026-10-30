@@ -51,8 +51,8 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
               // Until tickets are on sale, the button leads to Instagram, where they'll be announced
               ticketHref={next.ticketUrl ?? social.instagram.url}
               ticketExternal
-              registerHref={localizedPath(lang, "/contact")}
-              lineupHref={`${localizedPath(lang)}#lineup`}
+              // Only two buttons, as in the home hero: the event detail and the ticket
+              detailHref={localizedPath(lang, `/events/${next.slug}`)}
               homeHref={localizedPath(lang)}
             />
           }

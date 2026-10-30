@@ -1,26 +1,25 @@
-/* FAQ: cards that open on click; the + turns into × when open */
+/*
+ * FAQ as a poster index: thin lines between the rows, a small number, the question in the
+ * poster lettering and a round toggle (outlined like the menu buttons). Open: the question and
+ * number turn pink, the toggle fills pink and its + turns into ×, the answer fades in.
+ */
 .list {
+  --toggle: 2.75rem;
+
   display: grid;
-  gap: var(--space-3);
-  max-width: var(--container-medium);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .item {
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  transition: border-color var(--transition-fast);
-}
-
-.item[open] {
-  border-color: var(--color-pink);
+  border-top: 1px solid var(--color-border);
 }
 
 .question {
-  position: relative;
-  padding: var(--space-4) calc(var(--space-5) + 1.5rem) var(--space-4) var(--space-5);
-  font-size: var(--text-lg);
-  font-weight: 600;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) var(--toggle);
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
   cursor: pointer;
   list-style: none;
 }
@@ -29,25 +28,109 @@
   display: none;
 }
 
-.question::after {
-  content: "+";
-  position: absolute;
-  right: var(--space-5);
-  top: 50%;
-  transform: translateY(-50%);
+.number {
+  align-self: start;
+  padding-top: 0.35em;
   color: var(--color-blue);
-  font-family: var(--font-display);
-  font-weight: var(--font-display-weight);
-  font-size: var(--text-xl);
-  transition: transform var(--transition-fast);
+  font-family: var(--font-poster);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--transition-base);
 }
 
-.item[open] .question::after {
-  transform: translateY(-50%) rotate(45deg);
+.text {
+  font-family: var(--font-poster);
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-shadow: var(--shadow-text);
+  transition:
+    color var(--transition-base),
+    transform var(--transition-base);
+}
+
+/* Round toggle with a + drawn from two bars; the bars turn into × when open */
+.toggle {
+  position: relative;
+  width: var(--toggle);
+  height: var(--toggle);
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.toggle::before,
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--color-text);
+  translate: -50% -50%;
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.toggle::after {
+  transform: rotate(90deg);
+}
+
+.question:hover .text {
+  transform: translateX(0.35rem);
+}
+
+.question:hover .toggle {
+  border-color: var(--color-pink);
+}
+
+.item[open] .number,
+.item[open] .text {
   color: var(--color-pink);
 }
 
+.item[open] .toggle {
+  border-color: var(--color-pink);
+  background: var(--color-pink);
+  transform: rotate(45deg);
+}
+
+.item[open] .toggle::before,
+.item[open] .toggle::after {
+  background: var(--color-on-accent);
+}
+
+/* Lined up under the question text, not under the number */
 .answer {
-  padding: 0 var(--space-5) var(--space-5);
+  max-width: 40rem;
+  padding: 0 0 var(--space-6) calc(2ch + var(--space-4));
   color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+/* Wider screens: the answer keeps clear of the toggle column too */
+@media (min-width: 48rem) {
+  .answer {
+    padding-right: calc(var(--toggle) + var(--space-4));
+  }
+}
+
+.item[open] .answer {
+  animation: answer-in 300ms ease both;
+}
+
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
 }

@@ -57,11 +57,6 @@ export const en = {
         { title: "You decide", text: "The winner isn't picked by a jury behind a table – it's up to you." },
       ],
     },
-    lineup: {
-      title: "Line-up",
-      intro: "This is how the first Off Ground went down.",
-      detail: "Event details",
-    },
     gallery: {
       title: "Moments",
       cta: "Full gallery",
@@ -91,6 +86,7 @@ export const en = {
     timeToBeAnnounced: "Time to be announced",
     about: "About the event",
     lineup: "Line-up",
+    openMap: "Open in Google Maps",
     partner: "Partner",
     nextTitle: "Next Off Ground?",
     nextText: "The next date will be announced on Instagram. Want to compete or perform? Write to us.",
