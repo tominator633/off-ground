@@ -16,7 +16,7 @@ Stav: 20. 10. 2026. Vyřešené body přesuňte do `rozhodnuti.md`.
 - Jak se akce jmenuje: „Off Ground“, „OFF GROUND fest“ (tak je na Boom Events), „Off Ground #1“? Na webu zatím „Off Ground · Burza #4“.
 - Kdo jsou Amathyst, Imellie a defcom (DJs, tanečníci, kapely)? Na webu jsou jen jména.
 - Kdo vyhrál první battle a jak hlasovalo publikum?
-- Off Ground #2 „Zombiehood“: hero na úvodu ho už propaguje se **smyšleným** datem 31. 10. 2026 20:00 a místem „Kostnice Holešovice, Praha 7“ (jen pro návrh) – skutečné datum, čas, místo a název doplnit do `nextEdition` v `src/content/events.ts`.
+- Off Ground #2 „Zombiehood“: hero na úvodu ho už propaguje se **smyšleným** datem 31. 10. 2026 20:00 a místem „Kostnice Holešovice, Praha 7“ (jen pro návrh) – skutečné datum, čas a místo doplnit do akce `zombiehood` v `src/content/events.ts` (reklama je z ní přebírá), název do `nextEdition`. Vymyšlený je i popis akce na jejím detailu `/events/off-ground-2-zombiehood`.
 - Ročníky **#3 Winter Cypher (23. 1. 2027)** a **#4 Neon Spring (20. 3. 2027)** na stránce Akce jsou **vymyšlené** pro návrh – nahradit skutečnými plány nebo smazat v `src/content/events.ts`.
 - Kde se budou prodávat lístky na #2 (odkaz na e-shop / GoOut / Ticketportal)? Tlačítko „Koupit lístek“ zatím vede na Instagram.
 - Jak se tanečníci do battlu #2 přihlásí (formulář, Google Form, e-mail, Instagram)? Tlačítko „Přihlásit se do battlu“ zatím vede na kontaktní formulář.

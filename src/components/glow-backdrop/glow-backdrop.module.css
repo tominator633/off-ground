@@ -1,4 +1,8 @@
-/* Pink glow top left, blue glow on the right side and bottom, a touch of lilac between */
+/*
+ * Pink glow top left, blue glow on the right side and lower left, a touch of lilac between.
+ * No glow sits on the bottom edge and the whole layer fades out over the last 20rem, so the
+ * section melts into the black above the footer instead of ending in a visible line.
+ */
 .backdrop {
   position: absolute;
   inset: 0;
@@ -6,8 +10,9 @@
   background:
     radial-gradient(40rem 26rem at 0% 10%, rgb(242 123 192 / 0.24), transparent 70%),
     radial-gradient(38rem 30rem at 100% 35%, rgb(116 189 238 / 0.24), transparent 70%),
-    radial-gradient(44rem 26rem at 20% 100%, rgb(116 189 238 / 0.16), transparent 70%),
+    radial-gradient(44rem 26rem at 15% 75%, rgb(116 189 238 / 0.16), transparent 70%),
     radial-gradient(30rem 20rem at 60% 55%, rgb(180 131 204 / 0.1), transparent 70%);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 20rem), transparent);
   pointer-events: none;
 }
 

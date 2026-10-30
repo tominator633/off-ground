@@ -43,23 +43,26 @@ export default async function EventsPage() {
               ticketExternal
               registerHref={localizedPath(lang, "/contact")}
               lineupHref={`${localizedPath(lang)}#lineup`}
+              detailHref={localizedPath(lang, `/events/${next.slug}`)}
               placement="banner"
             />
           </div>
         </section>
 
-        {/* All other editions: upcoming first, then the past ones */}
+        {/* All other editions (the next one is the banner above): upcoming first, then the past ones */}
         <section className={`container ${styles.list}`} aria-label={dict.events.title}>
           <div className={styles.grid}>
-            {getEvents().map((event) => (
-              <EventCard
-                key={event.slug}
-                event={event}
-                lang={lang}
-                labels={dict.events}
-                learnMore={dict.common.learnMore}
-              />
-            ))}
+            {getEvents()
+              .filter((event) => event.slug !== next.slug)
+              .map((event) => (
+                <EventCard
+                  key={event.slug}
+                  event={event}
+                  lang={lang}
+                  labels={dict.events}
+                  learnMore={dict.common.learnMore}
+                />
+              ))}
           </div>
         </section>
       </div>

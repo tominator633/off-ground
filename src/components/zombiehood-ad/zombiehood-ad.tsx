@@ -58,6 +58,7 @@ export function ZombiehoodAd({
   ticketExternal,
   registerHref,
   lineupHref,
+  detailHref,
   placement = "hero",
 }: EditionAdProps) {
   const time = formatTimeRange(edition.startTime, null);
@@ -79,7 +80,7 @@ export function ZombiehoodAd({
 
   return (
     <>
-      <section className={styles.ad} aria-labelledby={titleId}>
+      <section className={`${styles.ad} ${detailHref ? styles.linked : ""}`} aria-labelledby={titleId}>
         <div className={styles.glow} aria-hidden="true" />
         <Bat className={`${styles.bat} ${styles.batOne}`} />
         <Bat className={`${styles.bat} ${styles.batTwo}`} />
@@ -92,7 +93,14 @@ export function ZombiehoodAd({
           {edition.number}
         </p>
         <h2 id={titleId} className={`${creepster.className} ${styles.title}`}>
-          {edition.name}
+          {detailHref ? (
+            // The whole ad is clickable through the title link, like the event cards
+            <Link href={detailHref} className={styles.titleLink}>
+              {edition.name}
+            </Link>
+          ) : (
+            edition.name
+          )}
         </h2>
         <p className={styles.tagline}>{edition.tagline[lang]}</p>
 
@@ -114,6 +122,11 @@ export function ZombiehoodAd({
           <Link href={lineupHref} className={styles.action}>
             {labels.lineup}
           </Link>
+          {detailHref ? (
+            <Link href={detailHref} className={styles.action} tabIndex={-1} aria-hidden="true">
+              {labels.detail} →
+            </Link>
+          ) : null}
         </div>
         {placement !== "hero" ? ticket : null}
       </section>

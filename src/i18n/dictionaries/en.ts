@@ -38,6 +38,7 @@ export const en = {
       ticket: "Buy a ticket",
       register: "Sign up for the battle",
       lineup: "Line-up",
+      detail: "Event details",
     },
     intro: {
       title: "What is Off Ground",

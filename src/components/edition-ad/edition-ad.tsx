@@ -18,6 +18,8 @@ export interface EditionAdProps {
   ticketExternal: boolean;
   registerHref: string;
   lineupHref: string;
+  /** The edition's detail page; when set, the whole ad links to it (events page banner) */
+  detailHref?: string;
   /**
    * "hero" = right side of the home page hero (ticket button at the bottom of the hero);
    * "menu" = right side of the open menu (desktop); "banner" = the wide banner on the events page.

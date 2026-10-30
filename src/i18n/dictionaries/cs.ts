@@ -40,6 +40,7 @@ export const cs: Dictionary = {
       ticket: "Koupit lístek",
       register: "Přihlásit se do battlu",
       lineup: "Line-up",
+      detail: "Detail akce",
     },
     intro: {
       title: "Co je Off Ground",

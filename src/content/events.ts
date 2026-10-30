@@ -49,10 +49,45 @@ export interface OneOffEvent extends EventBase {
 export type OffGroundEvent = RecurringEvent | OneOffEvent;
 
 /**
- * Order: upcoming events from the soonest, then past events from the newest.
- * The next edition itself (Zombiehood) lives in `nextEdition` below, not here.
+ * Off Ground #2 – the next edition. A regular event (it has its own detail page) and the source
+ * of the date, time and venue that `nextEdition` below advertises.
  */
+// PLACEHOLDER – date, time, venue and texts are made up for the design (Tom, 25. 10. 2026);
+// replace with the real ones from the organizer, see docs/k-diskusi-s-organizatorem.md.
+const zombiehood: OneOffEvent = {
+  slug: "off-ground-2-zombiehood",
+  kind: "one-off",
+  status: "upcoming",
+  date: "2026-10-31",
+  startTime: "20:00",
+  endTime: null,
+  location: { cs: "Kostnice Holešovice, Praha 7", en: "Kostnice Holešovice, Prague 7" },
+  // Crowd around the circle at the first Off Ground (10/10/2026)
+  image: heroPhoto,
+  imagePosition: "center 60%",
+  title: { cs: "Off Ground #2 · Zombiehood", en: "Off Ground #2 · Zombiehood" },
+  summary: {
+    cs: "Noc, kdy tančí i mrtví: dance battle, showcase a line-up až do rána. Přijď v masce – o vítězi rozhoduješ ty.",
+    en: "The night even the dead dance: dance battle, showcase and a line-up until dawn. Come in costume – you decide who wins.",
+  },
+  description: {
+    cs: [
+      "Druhý Off Ground vychází na Halloween. Kruh se promění v noc živých mrtvých – battle, showcase a DJ sety až do rána.",
+      "Přijď v masce nebo kostýmu. O vítězi battlu rozhoduje publikum, takže i ty.",
+      "Line-up, přihlášky do battlu a lístky zveřejníme na Instagramu.",
+    ],
+    en: [
+      "The second Off Ground falls on Halloween. The circle turns into a night of the living dead – battle, showcase and DJ sets until dawn.",
+      "Come in a mask or costume. The crowd decides who wins the battle – and that means you.",
+      "Line-up, battle sign-ups and tickets will be announced on Instagram.",
+    ],
+  },
+  lineup: [],
+};
+
+/** Order: upcoming events from the soonest, then past events from the newest. */
 export const events: OffGroundEvent[] = [
+  zombiehood,
   // PLACEHOLDER – editions #3 and #4 are made up for the design (Tom, 28. 10. 2026):
   // names, dates and texts are invented; replace or remove once the real plans are known.
   {
@@ -154,6 +189,8 @@ export type EditionTheme = "zombiehood";
 
 /** The next Off Ground, advertised in the home page hero. Unknown facts stay null. */
 export interface NextEdition {
+  /** Slug of the edition's event in `events` – its detail page */
+  slug: string;
   /** Edition number shown as the giant numeral */
   number: number;
   /** Name of the edition, e.g. "Zombiehood" */
@@ -175,6 +212,7 @@ export interface NextEdition {
 }
 
 export const nextEdition: NextEdition = {
+  slug: zombiehood.slug,
   number: 2,
   name: "Zombiehood",
   theme: "zombiehood",
@@ -183,13 +221,11 @@ export const nextEdition: NextEdition = {
     cs: "Dance battle, showcase a line-up až do rána. Přijď v masce – o vítězi rozhoduješ ty.",
     en: "Dance battle, showcase and a line-up until dawn. Come in costume – you decide who wins.",
   },
-  // PLACEHOLDER – date, time and venue are made up for the design (Tom, 25. 10. 2026);
-  // replace with the real ones from the organizer, see docs/k-diskusi-s-organizatorem.md.
-  date: "2026-10-31",
-  startTime: "20:00",
-  location: { cs: "Kostnice Holešovice, Praha 7", en: "Kostnice Holešovice, Prague 7" },
+  // Facts come from the event itself, so the ad and the detail page always agree
+  date: zombiehood.date,
+  startTime: zombiehood.startTime,
+  location: zombiehood.location,
   ticketUrl: null,
-  // Crowd around the circle at the first Off Ground (10/10/2026)
   heroImage: heroPhoto,
   heroImagePosition: "center 60%",
 };
