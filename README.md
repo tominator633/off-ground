@@ -36,7 +36,7 @@ src/
   app/
     [lang]/            všechny stránky pod /en a /cs (root layout je tady)
       page.tsx         úvod
-      events/ events/[slug]/ about/ gallery/ partners/ faq/ contact/
+      events/ events/[slug]/ about/ gallery/ contact/
       not-found.tsx
     robots.ts, icon.svg (favicon = symbol z loga)
   proxy.ts             přesměruje / a cesty bez jazyka na /en nebo /cs podle prohlížeče

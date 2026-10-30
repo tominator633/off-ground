@@ -1,0 +1,5 @@
+/* Album cards across the whole width, one under another; the first starts under the floating header */
+.albums {
+  display: grid;
+  gap: var(--space-6);
+}

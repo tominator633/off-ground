@@ -50,6 +50,13 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "64kb",
     },
   },
+  async redirects() {
+    // FAQ and Partners used to be their own pages; they are now sections on the home page
+    return [
+      { source: "/:lang(cs|en)/faq", destination: "/:lang#faq", permanent: true },
+      { source: "/:lang(cs|en)/partners", destination: "/:lang#partner", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { AlbumCard } from "@/components/album-card/album-card";
 import { PageTitle } from "@/components/page-title/page-title";
-import { PhotoGallery } from "@/components/photo-gallery/photo-gallery";
-import { getGalleryPhotos } from "@/content/gallery";
+import { getAlbums } from "@/content/gallery";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { pageMetadata } from "@/lib/metadata";
-import subpage from "@/styles/subpage.module.css";
+import styles from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [lang, dict] = await Promise.all([getLocale(), getDictionary()]);
@@ -12,15 +12,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function GalleryPage() {
-  const dict = await getDictionary();
+  const [lang, dict] = await Promise.all([getLocale(), getDictionary()]);
 
   return (
     <>
-      {/* No title block: "galerie" is in the header and the photos start right at the top */}
+      {/* "galerie" is in the header; one wide card per edition, the newest first, from the very top */}
       <PageTitle title={dict.gallery.title} />
-      <section className={`container ${subpage.section} ${subpage.pageStart}`}>
-        <PhotoGallery photos={getGalleryPhotos()} alt={dict.common.photoAlt} labels={dict.gallery} />
-      </section>
+      <div className={styles.albums}>
+        {getAlbums().map((album) => (
+          <AlbumCard key={album.slug} album={album} lang={lang} labels={dict.gallery} photoAlt={dict.common.photoAlt} />
+        ))}
+      </div>
     </>
   );
 }

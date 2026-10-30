@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import restArtLogo from "@/assets/images/partners/rest-art.png";
 import { ButtonLink } from "@/components/button-link/button-link";
 import { EditionAd, editionHeroClass } from "@/components/edition-ad/edition-ad";
+import { FaqList } from "@/components/faq-list/faq-list";
 import { HeroLogo } from "@/components/hero-logo/hero-logo";
 import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { LineUp } from "@/components/line-up/line-up";
@@ -11,7 +13,7 @@ import { SectionHeading } from "@/components/section-heading/section-heading";
 import { TieDye } from "@/components/tie-dye/tie-dye";
 import { getEvents, getNextEdition } from "@/content/events";
 import { getHighlightPhotos } from "@/content/gallery";
-import { social } from "@/content/site";
+import { partners, social } from "@/content/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { pageMetadata } from "@/lib/metadata";
@@ -119,17 +121,42 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className={`container ${styles.section}`} aria-labelledby="partner-title">
+      {/* Partner (was its own page; /partners redirects here) */}
+      <section id="partner" className={`container ${styles.section}`} aria-labelledby="partner-title">
         <div className={`${styles.partner} reveal`}>
           <p className={styles.partnerLabel} id="partner-title">
             {home.partner.title}
           </p>
-          <p className={styles.partnerName}>rest.art</p>
+          <a
+            href={partners.restArt.website}
+            className={styles.partnerLogoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={restArtLogo} alt={home.partner.logoAlt} className={styles.partnerLogo} sizes="18rem" />
+          </a>
           <p className={styles.partnerText}>{home.partner.text}</p>
-          <ButtonLink href={localizedPath(lang, "/partners")} variant="outline">
-            {home.partner.cta}
-          </ButtonLink>
+          <div className={styles.heroActions}>
+            <ButtonLink href={partners.restArt.website} target="_blank" rel="noopener noreferrer">
+              {home.partner.website} ↗
+            </ButtonLink>
+            <InstagramButton href={partners.restArt.instagram}>{home.partner.instagram}</InstagramButton>
+          </div>
+          {/* Invitation for new partners (from the former Partners page) */}
+          <div className={styles.partnerBecome}>
+            <h3 className={styles.partnerBecomeTitle}>{home.partner.becomeTitle}</h3>
+            <p className={styles.partnerText}>{home.partner.becomeText}</p>
+            <ButtonLink href={localizedPath(lang, "/contact")} variant="outline">
+              {dict.common.getInTouch}
+            </ButtonLink>
+          </div>
         </div>
+      </section>
+
+      {/* FAQ (was its own page; /faq redirects here) */}
+      <section id="faq" className={`container ${styles.section}`} aria-labelledby="faq-title">
+        <SectionHeading id="faq-title" title={dict.faq.title} intro={dict.faq.lead} />
+        <FaqList items={dict.faq.items} />
       </section>
 
       <section className="container" aria-labelledby="cta-title">

@@ -1,0 +1,26 @@
+/* Placeholder while the album streams in (client navigation to an unknown slug) */
+.fallback {
+  min-height: 100svh;
+}
+
+/* Starts right under the fixed header, the title of the album is in the header */
+.album {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: calc(var(--header-height) + var(--space-4)) var(--space-8);
+}
+
+.back {
+  justify-self: start;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color var(--transition-base);
+}
+
+.back:hover {
+  color: var(--color-pink);
+}

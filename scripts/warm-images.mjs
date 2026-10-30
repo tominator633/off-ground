@@ -10,7 +10,7 @@ if (!/^https?:\/\//.test(base)) {
 }
 
 const locales = ["cs", "en"];
-const pages = ["", "/events", "/about", "/gallery", "/partners", "/faq", "/contact"];
+const pages = ["", "/events", "/about", "/gallery", "/gallery/off-ground-1", "/contact"];
 const formats = ["image/avif", "image/webp"];
 const CONCURRENCY = 4;
 

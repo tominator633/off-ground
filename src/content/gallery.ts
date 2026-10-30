@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import type { Locale } from "@/i18n/config";
 import photo01 from "@/assets/images/gallery/01.jpg";
 import photo02 from "@/assets/images/gallery/02.jpg";
 import photo03 from "@/assets/images/gallery/03.jpg";
@@ -52,6 +53,40 @@ const photos: StaticImageData[] = [
 
 export function getGalleryPhotos(): GalleryPhoto[] {
   return photos.map((src) => ({ src }));
+}
+
+/** One album per edition: a wide card with a photo collage on /gallery, its own page with all photos. */
+export interface GalleryAlbum {
+  slug: string;
+  /** ISO date "YYYY-MM-DD" of the event */
+  date: string;
+  title: Record<Locale, string>;
+  place: Record<Locale, string>;
+  description: Record<Locale, string>;
+  photos: GalleryPhoto[];
+}
+
+/** Newest album first. */
+const albums: GalleryAlbum[] = [
+  {
+    slug: "off-ground-1",
+    date: "2026-10-10",
+    title: { cs: "Off Ground #1 · Burza #4", en: "Off Ground #1 · Burza #4" },
+    place: { cs: "Holešovická tržnice, Praha", en: "Holešovice Market, Prague" },
+    description: {
+      cs: "První Off Ground: dance battle misfits vs underdogs, freestyle showcase, venkovní párty a after party do jedné ráno.",
+      en: "The first Off Ground: the misfits vs underdogs dance battle, a freestyle showcase, an outdoor party and an after party until 1 a.m.",
+    },
+    photos: getGalleryPhotos(),
+  },
+];
+
+export function getAlbums(): GalleryAlbum[] {
+  return albums;
+}
+
+export function getAlbum(slug: string): GalleryAlbum | undefined {
+  return albums.find((album) => album.slug === slug);
 }
 
 /** Three landscape shots for the "Moments" teaser on the home page. */

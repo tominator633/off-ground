@@ -16,6 +16,8 @@
   --color-blue-strong: #2f9dff;
   --color-coral: #f0907a;
   --color-lilac: #b483cc;
+  /* rest.art brand orange – only for the partner card on the home page */
+  --color-rest-art: #f08815;
   --color-on-accent: #050507;
   --gradient-brand: linear-gradient(115deg, var(--color-pink) 0%, var(--color-blue) 100%);
   --gradient-brand-soft: linear-gradient(115deg, rgb(242 123 192 / 0.16) 0%, rgb(116 189 238 / 0.16) 100%);
@@ -77,7 +79,7 @@
   --container-width: 90rem;
   /* readable line length for running text */
   --container-narrow: 46rem;
-  /* wider blocks like the FAQ list or the contact form */
+  /* wider blocks like the contact form */
   --container-medium: 60rem;
   --gutter: clamp(1rem, 4vw, 3.5rem);
   /* Floating header: gap above the bar + bar height = space the page content must clear */

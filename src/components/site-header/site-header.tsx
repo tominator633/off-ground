@@ -9,10 +9,8 @@ import { BrandStar } from "@/components/brand-logo/brand-star";
 import { AboutIcon } from "@/components/icons/about-icon";
 import { ContactIcon } from "@/components/icons/contact-icon";
 import { EventsIcon } from "@/components/icons/events-icon";
-import { FaqIcon } from "@/components/icons/faq-icon";
 import { GalleryIcon } from "@/components/icons/gallery-icon";
 import { InstagramIcon } from "@/components/icons/instagram-icon";
-import { PartnersIcon } from "@/components/icons/partners-icon";
 import { social } from "@/content/site";
 import {
   localeLabels,
@@ -33,8 +31,6 @@ const navIcons: Partial<Record<NavKey, ComponentType<{ className?: string }>>> =
   events: EventsIcon,
   about: AboutIcon,
   gallery: GalleryIcon,
-  partners: PartnersIcon,
-  faq: FaqIcon,
   contact: ContactIcon,
 };
 

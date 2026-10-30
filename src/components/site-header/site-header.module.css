@@ -282,8 +282,11 @@
   padding: var(--space-1) 0;
   color: var(--color-text);
   font-family: var(--font-nav);
-  /* phones: as big as the longest item ("časté dotazy") allows; desktop size below */
-  font-size: clamp(2.6rem, 0.5rem + 10vw, 3.5rem);
+  /*
+   * Phones: as big as the longest item ("kontakt", ~3.7em wide with its icon) allows next to
+   * the language switcher, and five lines still fit the height; larger screens below
+   */
+  font-size: max(2.6rem, min(19vw, 11svh, 5rem));
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.05em;
@@ -510,8 +513,9 @@
     justify-content: flex-start;
   }
 
+  /* Tablets: one column with the event button below, so the height sets the limit */
   .navLink {
-    font-size: clamp(2.25rem, 1rem + 4.5vw, 5rem);
+    font-size: max(2.6rem, min(13vw, 9svh, 7rem));
   }
 
   .promo {
@@ -534,6 +538,11 @@
   .navList {
     grid-column: 2;
     grid-row: 1;
+  }
+
+  /* Half the screen wide: "kontakt" must fit the column and five lines the height */
+  .navLink {
+    font-size: max(3rem, min(11vw, 14svh, 9rem));
   }
 
   .promo {

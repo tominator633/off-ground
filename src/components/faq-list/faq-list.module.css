@@ -1,3 +1,4 @@
+/* FAQ: cards that open on click; the + turns into × when open */
 .list {
   display: grid;
   gap: var(--space-3);

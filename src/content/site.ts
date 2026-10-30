@@ -27,5 +27,8 @@ export const contactDetails: {
 };
 
 export const partners = {
-  restArt: { instagram: "https://www.instagram.com/rest.art_bar/" },
+  restArt: {
+    website: "https://www.restartbar.net/",
+    instagram: "https://www.instagram.com/rest.art_bar/",
+  },
 };

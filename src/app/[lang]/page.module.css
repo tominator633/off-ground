@@ -164,37 +164,78 @@
   transform: scale(1.03);
 }
 
-/* Partner */
+/*
+ * Partner – black card lit by rest.art's orange: a strong glow rising from the bottom left,
+ * a softer one at the top right and a thin orange rim. The middle stays black, so the logo
+ * (white on black) sits on it without a visible box.
+ */
 .partner {
+  position: relative;
   display: grid;
   justify-items: center;
   gap: var(--space-3);
   padding: var(--space-7) var(--space-5);
+  overflow: hidden;
   border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background:
+    radial-gradient(60% 70% at 0% 100%, color-mix(in srgb, var(--color-rest-art) 45%, transparent), transparent 70%),
+    radial-gradient(45% 55% at 100% 0%, color-mix(in srgb, var(--color-rest-art) 22%, transparent), transparent 70%),
+    var(--color-bg);
+  border: 1px solid color-mix(in srgb, var(--color-rest-art) 40%, transparent);
+  box-shadow: 0 1.5rem 4rem -2rem color-mix(in srgb, var(--color-rest-art) 55%, transparent);
   text-align: center;
 }
 
 .partnerLabel {
-  color: var(--color-pink);
+  color: var(--color-rest-art);
   font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.partnerName {
-  font-size: var(--text-3xl);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.06em;
+/* The partner's logo (white lettering on black) */
+.partnerLogoLink {
+  display: grid;
+  place-items: center;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  transition: transform var(--transition-base);
+}
+
+.partnerLogoLink:hover {
+  transform: translateY(-2px);
+}
+
+.partnerLogo {
+  width: min(70vw, 18rem);
+  height: auto;
 }
 
 .partnerText {
   max-width: 30rem;
   margin-bottom: var(--space-3);
   color: var(--color-text-muted);
+}
+
+/* "Become a partner" at the bottom of the card, under a thin orange line */
+.partnerBecome {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  width: min(100%, 30rem);
+  margin-top: var(--space-5);
+  padding-top: var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--color-rest-art) 35%, transparent);
+}
+
+.partnerBecomeTitle {
+  font-size: var(--text-2xl);
+}
+
+.partnerBecome .partnerText {
+  margin-bottom: var(--space-1);
 }
 
 /* Call to action */
