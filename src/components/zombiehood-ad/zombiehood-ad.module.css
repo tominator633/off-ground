@@ -299,7 +299,11 @@
 }
 
 /*
- * Ticket button: dark slab with glowing teal lettering, like the game menu buttons.
+ * Ticket button: a dark slab with glowing teal lettering, shaped like a ticket – a stub with
+ * the ticket icon, a dashed perforation and notches punched out at its top and bottom (like
+ * the ticket button on the event detail). The notches are real holes (mask), because in the
+ * hero the button sits over the photo. The mask would cut the outer glow off, so the glow is
+ * on the link and the shape on the body inside it.
  * Phones: sticks to the bottom centre of the screen while the hero is in view.
  */
 .ticket {
@@ -308,22 +312,13 @@
   z-index: 2;
   justify-self: center;
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 3.5rem;
-  padding: 0.35em 1.4em;
-  border: 2px solid rgb(116 245 214 / 0.55);
   border-radius: 1.1rem 0.4rem 1.1rem 0.4rem;
-  background: linear-gradient(180deg, #06282c, var(--zh-night));
   color: var(--zh-teal);
   font-size: 1.75rem;
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
-  text-shadow: 0 0 0.35em rgb(116 245 214 / 0.7);
-  box-shadow:
-    0 0 28px rgb(116 245 214 / 0.3),
-    inset 0 0 18px rgb(116 245 214 / 0.12);
+  box-shadow: 0 0 28px rgb(116 245 214 / 0.3);
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-base);
@@ -331,9 +326,52 @@
 
 .ticket:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 0 40px rgb(116 245 214 / 0.5),
-    inset 0 0 22px rgb(116 245 214 / 0.2);
+  box-shadow: 0 0 40px rgb(116 245 214 / 0.5);
+}
+
+.ticketBody {
+  display: grid;
+  grid-template-columns: 4rem auto;
+  min-height: 3.5rem;
+  border: 2px solid rgb(116 245 214 / 0.55);
+  border-radius: inherit;
+  background: linear-gradient(180deg, #06282c, var(--zh-night));
+  box-shadow: inset 0 0 18px rgb(116 245 214 / 0.12);
+  /* two half-height layers, each with a hole on the perforation line (4rem from the left) */
+  mask:
+    radial-gradient(circle 0.6rem at 4rem 0, transparent 98%, #000) top / 100% 51% no-repeat,
+    radial-gradient(circle 0.6rem at 4rem 100%, transparent 98%, #000) bottom / 100% 51% no-repeat;
+  transition: box-shadow var(--transition-base);
+}
+
+.ticket:hover .ticketBody {
+  box-shadow: inset 0 0 22px rgb(116 245 214 / 0.2);
+}
+
+.ticketStub {
+  display: grid;
+  place-items: center;
+}
+
+.ticketIcon {
+  width: 2.2rem;
+  height: 2.2rem;
+  filter: drop-shadow(0 0 0.3rem rgb(116 245 214 / 0.7));
+  transition: transform var(--transition-base);
+}
+
+.ticket:hover .ticketIcon {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+/* The perforation is the dashed left edge of the label */
+.ticketLabel {
+  display: flex;
+  align-items: center;
+  padding: 0.3em 1.1em 0.3em 0.9em;
+  border-left: 2px dashed rgb(116 245 214 / 0.55);
+  text-shadow: 0 0 0.35em rgb(116 245 214 / 0.7);
+  white-space: nowrap;
 }
 
 @media (min-width: 64rem) {

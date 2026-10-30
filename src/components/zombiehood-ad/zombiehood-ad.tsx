@@ -1,6 +1,7 @@
 import { Creepster } from "next/font/google";
 import Link from "next/link";
 import type { EditionAdProps } from "@/components/edition-ad/edition-ad";
+import { TicketIcon } from "@/components/icons/ticket-icon";
 import { formatPosterDate, formatTimeRange } from "@/lib/format";
 import styles from "./zombiehood-ad.module.css";
 
@@ -68,13 +69,23 @@ export function ZombiehoodAd({
   // In the hero the ticket button sits at the bottom centre of the hero; elsewhere, under the ad
   const ticketClass = `${creepster.className} ${styles.ticket} ${placement !== "hero" ? styles.ticketInline : ""}`;
 
+  // Shaped like a ticket (like the ticket button on the event detail): stub with the icon,
+  // a perforation with punched notches, then the label
+  const ticketBody = (
+    <span className={styles.ticketBody}>
+      <span className={styles.ticketStub}>
+        <TicketIcon className={styles.ticketIcon} />
+      </span>
+      <span className={styles.ticketLabel}>{labels.ticket}</span>
+    </span>
+  );
   const ticket = ticketExternal ? (
     <a href={ticketHref} className={ticketClass} target="_blank" rel="noopener noreferrer">
-      {labels.ticket}
+      {ticketBody}
     </a>
   ) : (
     <Link href={ticketHref} className={ticketClass}>
-      {labels.ticket}
+      {ticketBody}
     </Link>
   );
 
