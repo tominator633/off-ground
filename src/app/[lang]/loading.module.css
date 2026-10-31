@@ -1,0 +1,6 @@
+/* The loading star in the middle of the screen */
+.loading {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+}
