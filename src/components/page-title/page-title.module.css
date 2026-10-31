@@ -35,10 +35,12 @@
     transform var(--transition-fast);
 }
 
-.back:hover {
-  border-color: var(--color-pink);
-  color: var(--color-pink);
-  transform: translateX(-2px);
+@media (hover: hover) {
+  .back:hover {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+    transform: translateX(-2px);
+  }
 }
 
 .backIcon {

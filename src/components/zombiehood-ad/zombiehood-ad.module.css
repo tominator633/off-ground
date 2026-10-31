@@ -182,10 +182,12 @@
     box-shadow var(--transition-base);
 }
 
-.action:hover {
-  border-color: var(--zh-teal);
-  color: var(--color-text);
-  box-shadow: 0 0 20px rgb(116 245 214 / 0.35);
+@media (hover: hover) {
+  .action:hover {
+    border-color: var(--zh-teal);
+    color: var(--color-text);
+    box-shadow: 0 0 20px rgb(116 245 214 / 0.35);
+  }
 }
 
 /*
@@ -213,11 +215,18 @@
   transition: text-shadow var(--transition-base);
 }
 
-.linked:hover .title,
-.linked:focus-within .title {
+.linked:has(:focus-visible) .title {
   text-shadow:
     0 0 0.4em rgb(80 240 210 / 0.9),
     0 0.06em 0 var(--zh-teal-deep);
+}
+
+@media (hover: hover) {
+  .linked:hover .title {
+    text-shadow:
+      0 0 0.4em rgb(80 240 210 / 0.9),
+      0 0.06em 0 var(--zh-teal-deep);
+  }
 }
 
 /* Bats circling the title */
@@ -324,9 +333,11 @@
     box-shadow var(--transition-base);
 }
 
-.ticket:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 40px rgb(116 245 214 / 0.5);
+@media (hover: hover) {
+  .ticket:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgb(116 245 214 / 0.5);
+  }
 }
 
 .ticketBody {
@@ -344,8 +355,10 @@
   transition: box-shadow var(--transition-base);
 }
 
-.ticket:hover .ticketBody {
-  box-shadow: inset 0 0 22px rgb(116 245 214 / 0.2);
+@media (hover: hover) {
+  .ticket:hover .ticketBody {
+    box-shadow: inset 0 0 22px rgb(116 245 214 / 0.2);
+  }
 }
 
 .ticketStub {
@@ -360,8 +373,10 @@
   transition: transform var(--transition-base);
 }
 
-.ticket:hover .ticketIcon {
-  transform: rotate(-12deg) scale(1.08);
+@media (hover: hover) {
+  .ticket:hover .ticketIcon {
+    transform: rotate(-12deg) scale(1.08);
+  }
 }
 
 /* The perforation is the dashed left edge of the label */
@@ -428,11 +443,13 @@
     box-shadow var(--transition-base);
 }
 
-.menuButton:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 40px rgb(116 245 214 / 0.5),
-    inset 0 0 22px rgb(116 245 214 / 0.2);
+@media (hover: hover) {
+  .menuButton:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 40px rgb(116 245 214 / 0.5),
+      inset 0 0 22px rgb(116 245 214 / 0.2);
+  }
 }
 
 .menuButtonLabel {

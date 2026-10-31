@@ -327,8 +327,10 @@
   transition: transform var(--transition-base);
 }
 
-.partnerLogoLink:hover {
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .partnerLogoLink:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .partnerLogo {
@@ -450,6 +452,4 @@
   color: var(--color-text-muted);
   font-size: var(--text-lg);
 }
-
-
 

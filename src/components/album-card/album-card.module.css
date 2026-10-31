@@ -33,9 +33,14 @@
   transition: transform 600ms ease;
 }
 
-.link:hover .photo,
 .link:focus-visible .photo {
   transform: scale(1.05);
+}
+
+@media (hover: hover) {
+  .link:hover .photo {
+    transform: scale(1.05);
+  }
 }
 
 .info {
@@ -62,8 +67,10 @@
   transition: color var(--transition-base);
 }
 
-.link:hover .title {
-  color: var(--color-pink);
+@media (hover: hover) {
+  .link:hover .title {
+    color: var(--color-pink);
+  }
 }
 
 .place {

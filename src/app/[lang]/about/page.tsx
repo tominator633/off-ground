@@ -6,11 +6,9 @@ import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ButtonLink } from "@/components/button-link/button-link";
 import { GlowBackdrop } from "@/components/glow-backdrop/glow-backdrop";
 import { PageTitle } from "@/components/page-title/page-title";
-import { SectionHeading } from "@/components/section-heading/section-heading";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { pageMetadata } from "@/lib/metadata";
-import styles from "@/styles/subpage.module.css";
 import story from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -62,19 +60,28 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className={`container ${styles.section}`} aria-labelledby="values-title">
-        <SectionHeading id="values-title" title={about.valuesTitle} />
-        <ul className={`${styles.cardGrid} ${styles.plainList}`} data-columns="3">
-          {about.values.map((value) => (
-            <li key={value.title} className={`${styles.valueCard} reveal`}>
-              <h3 className={styles.valueTitle}>{value.title}</h3>
-              <p>{value.text}</p>
+      {/*
+        Values as a numbered poster index (like the FAQ on the home page): a small coloured
+        number, the value in poster lettering, its text beside it, thin lines between.
+      */}
+      <section className={`container ${story.values}`} aria-labelledby="values-title">
+        <h2 id="values-title" className={`${story.valuesTitle} reveal`}>
+          {about.valuesTitle}
+        </h2>
+        <ul className={story.manifesto}>
+          {about.values.map((value, index) => (
+            <li key={value.title} className={`${story.manifestoRow} reveal`}>
+              <span className={story.manifestoNumber} aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className={story.manifestoWord}>{value.title}</h3>
+              <p className={story.manifestoText}>{value.text}</p>
             </li>
           ))}
         </ul>
-        <div className={styles.actions}>
-          <ButtonLink href={localizedPath(lang, "/contact")}>{dict.common.getInTouch}</ButtonLink>
-        </div>
+        <ButtonLink href={localizedPath(lang, "/contact")} variant="outline" className={story.manifestoCta}>
+          {dict.common.getInTouch} →
+        </ButtonLink>
       </section>
     </>
   );

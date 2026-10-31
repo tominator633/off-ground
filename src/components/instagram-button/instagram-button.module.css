@@ -18,11 +18,13 @@
     transform var(--transition-fast);
 }
 
-.button:hover {
-  border-color: var(--color-pink);
-  background: var(--color-pink);
-  color: var(--color-on-accent);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .button:hover {
+    border-color: var(--color-pink);
+    background: var(--color-pink);
+    color: var(--color-on-accent);
+    transform: translateY(-2px);
+  }
 }
 
 /* Same height as the other buttons (ButtonLink) */

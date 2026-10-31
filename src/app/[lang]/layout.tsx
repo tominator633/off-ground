@@ -53,7 +53,6 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
               ticketExternal
               // Only two buttons, as in the home hero: the event detail and the ticket
               detailHref={localizedPath(lang, `/events/${next.slug}`)}
-              homeHref={localizedPath(lang)}
             />
           }
         />

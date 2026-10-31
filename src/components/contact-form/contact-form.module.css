@@ -60,9 +60,11 @@
     box-shadow var(--transition-fast);
 }
 
-.field input:hover,
-.field textarea:hover {
-  border-color: rgb(255 255 255 / 0.35);
+@media (hover: hover) {
+  .field input:hover,
+  .field textarea:hover {
+    border-color: rgb(255 255 255 / 0.35);
+  }
 }
 
 .field textarea {

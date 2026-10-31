@@ -35,8 +35,6 @@
   font-size: var(--text-sm);
 }
 
-
-
 .social {
   margin-top: var(--space-4);
 }
@@ -68,8 +66,10 @@
   transition: color var(--transition-fast);
 }
 
-.links a:hover {
-  color: var(--color-pink);
+@media (hover: hover) {
+  .links a:hover {
+    color: var(--color-pink);
+  }
 }
 
 .bottom {

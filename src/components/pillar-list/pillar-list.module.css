@@ -36,8 +36,10 @@
   transition: color var(--transition-base);
 }
 
-.card:hover .number {
-  color: var(--accent);
+@media (hover: hover) {
+  .card:hover .number {
+    color: var(--accent);
+  }
 }
 
 .title {

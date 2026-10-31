@@ -10,6 +10,8 @@ html {
   color-scheme: dark;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* no grey flash over tapped links – touch screens get the press below instead */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -53,6 +55,17 @@ img {
 :focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 3px;
+}
+
+/*
+ * Touch screens have no hover (hover effects sit in @media (hover: hover) in the components):
+ * a tapped link or button is pressed in for a moment instead, like a button in an app. The
+ * separate scale property leaves the components' own transforms alone.
+ */
+@media (hover: none) {
+  :where(a, button, summary, [role="button"]):active {
+    scale: 0.97;
+  }
 }
 
 ::selection {

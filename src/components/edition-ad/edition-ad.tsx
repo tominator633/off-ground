@@ -64,16 +64,16 @@ export function EditionAd(props: EditionAdProps) {
   return <Ad {...props} />;
 }
 
-interface EditionMenuPromoProps extends Omit<EditionAdProps, "placement"> {
-  /** Where the phone button leads (the home page, whose hero has the full ad) */
-  homeHref: string;
+interface EditionMenuPromoProps extends Omit<EditionAdProps, "placement" | "detailHref"> {
+  /** The edition's detail page – the desktop ad and the phone button both lead there */
+  detailHref: string;
 }
 
 /**
  * The next edition in the open menu: the full themed ad on desktop, one themed button on
  * phones and tablets.
  */
-export function EditionMenuPromo({ homeHref, ...props }: EditionMenuPromoProps) {
+export function EditionMenuPromo(props: EditionMenuPromoProps) {
   const { Ad, MenuButton } = themes[props.edition.theme];
   return (
     <>
@@ -81,7 +81,7 @@ export function EditionMenuPromo({ homeHref, ...props }: EditionMenuPromoProps) 
         <Ad {...props} placement="menu" />
       </div>
       <div className={styles.menuButton}>
-        <MenuButton edition={props.edition} href={homeHref} label={props.labels.label} />
+        <MenuButton edition={props.edition} href={props.detailHref} label={props.labels.label} />
       </div>
     </>
   );

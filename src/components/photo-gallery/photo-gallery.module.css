@@ -41,10 +41,16 @@
   filter: none;
 }
 
-.thumb:hover .image[data-loaded="true"],
 .thumb:focus-visible .image[data-loaded="true"] {
   transform: scale(1.03);
   filter: saturate(1.15);
+}
+
+@media (hover: hover) {
+  .thumb:hover .image[data-loaded="true"] {
+    transform: scale(1.03);
+    filter: saturate(1.15);
+  }
 }
 
 /* Full-screen viewer */
@@ -109,9 +115,11 @@
   transition: background-color var(--transition-fast);
 }
 
-.control:hover {
-  background: var(--color-pink);
-  color: var(--color-on-accent);
+@media (hover: hover) {
+  .control:hover {
+    background: var(--color-pink);
+    color: var(--color-on-accent);
+  }
 }
 
 .close {

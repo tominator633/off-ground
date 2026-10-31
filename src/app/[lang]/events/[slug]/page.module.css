@@ -125,11 +125,13 @@
     transform var(--transition-fast);
 }
 
-.ticketBox:hover {
-  border-color: var(--color-pink);
-  background: var(--color-pink);
-  color: var(--color-on-accent);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .ticketBox:hover {
+    border-color: var(--color-pink);
+    background: var(--color-pink);
+    color: var(--color-on-accent);
+    transform: translateY(-2px);
+  }
 }
 
 /* Notches punched out of the outline where the perforation meets it (page colour circles) */
@@ -163,8 +165,10 @@
   transition: transform var(--transition-base);
 }
 
-.ticketBox:hover .ticketIcon {
-  transform: rotate(-12deg) scale(1.08);
+@media (hover: hover) {
+  .ticketBox:hover .ticketIcon {
+    transform: rotate(-12deg) scale(1.08);
+  }
 }
 
 /* The perforation is the dashed left edge of the label */
@@ -190,8 +194,10 @@
   transition: transform var(--transition-base);
 }
 
-.ticketBox:hover .ticketArrow {
-  transform: translateX(4px);
+@media (hover: hover) {
+  .ticketBox:hover .ticketArrow {
+    transform: translateX(4px);
+  }
 }
 
 /* Google Maps link under the venue */

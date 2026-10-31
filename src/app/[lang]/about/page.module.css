@@ -101,6 +101,106 @@
   letter-spacing: -0.04em;
 }
 
+/*
+ * "What matters to us" as a numbered poster index, like the FAQ on the home page: a poster
+ * title, then one row per value – a small number (pink, blue, lilac), the value in white
+ * poster lettering and its text, thin lines between the rows. On hover the value takes the
+ * colour of its number. An outline button to the contact page closes the section.
+ */
+.values {
+  padding-block: var(--space-8) var(--space-9);
+}
+
+.valuesTitle {
+  margin-bottom: var(--space-7);
+  font-family: var(--font-poster);
+  font-size: clamp(3rem, 1.5rem + 6vw, 6rem);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.07em;
+  text-transform: lowercase;
+  text-shadow: var(--shadow-text);
+}
+
+.manifesto {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.manifestoRow {
+  --accent: var(--color-pink);
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--space-4);
+  row-gap: var(--space-2);
+  align-items: baseline;
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.manifestoRow:nth-child(2) {
+  --accent: var(--color-blue);
+}
+
+.manifestoRow:nth-child(3) {
+  --accent: var(--color-lilac);
+}
+
+.manifestoNumber {
+  color: var(--accent);
+  font-family: var(--font-poster);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.manifestoWord {
+  color: var(--color-text);
+  font-family: var(--font-poster);
+  font-size: clamp(2.25rem, 1.3rem + 3.2vw, 4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  text-transform: lowercase;
+  text-shadow: var(--shadow-text);
+  transition: color var(--transition-base);
+}
+
+@media (hover: hover) {
+  .manifestoRow:hover .manifestoWord {
+    color: var(--accent);
+  }
+}
+
+/* Under the value on phones, lined up with it (not with the number) */
+.manifestoText {
+  grid-column: 2;
+  max-width: 30rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+.manifestoCta {
+  margin-top: var(--space-7);
+}
+
+@media (min-width: 48rem) {
+  /* Number, value and text in one row */
+  .manifestoRow {
+    grid-template-columns: 2.5rem minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-6);
+  }
+
+  .manifestoText {
+    grid-column: 3;
+  }
+}
+
 @media (min-width: 64rem) {
   .story {
     padding-block: calc(var(--header-height) + var(--space-8)) var(--space-9);

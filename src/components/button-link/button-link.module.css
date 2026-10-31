@@ -21,8 +21,10 @@
     color var(--transition-base);
 }
 
-.button:hover {
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .button:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .button:disabled,
@@ -39,8 +41,10 @@
   box-shadow: 0 10px 30px -12px var(--color-pink);
 }
 
-.primary:hover {
-  box-shadow: 0 14px 36px -10px var(--color-blue);
+@media (hover: hover) {
+  .primary:hover {
+    box-shadow: 0 14px 36px -10px var(--color-blue);
+  }
 }
 
 .outline {
@@ -49,9 +53,11 @@
   color: var(--color-text);
 }
 
-.outline:hover {
-  border-color: var(--color-pink);
-  color: var(--color-pink);
+@media (hover: hover) {
+  .outline:hover {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+  }
 }
 
 /* Black button for use on tie-dye backgrounds */
@@ -62,6 +68,8 @@
   box-shadow: 0 10px 30px -14px rgb(5 5 7 / 0.9);
 }
 
-.dark:hover {
-  background: var(--color-surface-raised);
+@media (hover: hover) {
+  .dark:hover {
+    background: var(--color-surface-raised);
+  }
 }

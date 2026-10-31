@@ -94,8 +94,10 @@
   transition: color var(--transition-base);
 }
 
-.detailText a:hover {
-  color: var(--color-pink);
+@media (hover: hover) {
+  .detailText a:hover {
+    color: var(--color-pink);
+  }
 }
 
 /* Not known yet – visibly a placeholder, not a made-up value */

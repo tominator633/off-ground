@@ -85,12 +85,14 @@
   transform: rotate(90deg);
 }
 
-.question:hover .text {
-  transform: translateX(0.35rem);
-}
+@media (hover: hover) {
+  .question:hover .text {
+    transform: translateX(0.35rem);
+  }
 
-.question:hover .toggle {
-  border-color: var(--color-pink);
+  .question:hover .toggle {
+    border-color: var(--color-pink);
+  }
 }
 
 .item[open] .number,

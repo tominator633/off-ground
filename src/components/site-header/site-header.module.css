@@ -100,8 +100,10 @@
   transition: opacity var(--transition-base);
 }
 
-.brand:hover .brandLockup {
-  opacity: 0.85;
+@media (hover: hover) {
+  .brand:hover .brandLockup {
+    opacity: 0.85;
+  }
 }
 
 /*
@@ -186,8 +188,10 @@
     background-color var(--transition-base);
 }
 
-.menuToggle:hover {
-  opacity: 0.75;
+@media (hover: hover) {
+  .menuToggle:hover {
+    opacity: 0.75;
+  }
 }
 
 .menuToggle[aria-expanded="true"] {
@@ -339,9 +343,11 @@
   color: var(--color-pink);
 }
 
-.navLink:hover:not([aria-current="page"]) {
-  color: var(--color-pink);
-  transform: translateX(0.75rem);
+@media (hover: hover) {
+  .navLink:hover:not([aria-current="page"]) {
+    color: var(--color-pink);
+    transform: translateX(0.75rem);
+  }
 }
 
 /*
@@ -399,9 +405,11 @@
     border-color var(--transition-base);
 }
 
-.roundButton:hover {
-  border-color: var(--color-pink);
-  color: var(--color-pink);
+@media (hover: hover) {
+  .roundButton:hover {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+  }
 }
 
 .roundButton .roundIcon {
@@ -444,8 +452,10 @@
   pointer-events: none;
 }
 
-.langOption:not([aria-current="true"]):hover {
-  color: var(--color-pink);
+@media (hover: hover) {
+  .langOption:not([aria-current="true"]):hover {
+    color: var(--color-pink);
+  }
 }
 
 /* The next event in the menu: a themed button at the bottom on phones, the full ad on desktop */
@@ -557,8 +567,4 @@
   }
 }
 
-@media (hover: none) {
-  .navLink:hover:not([aria-current="page"]) {
-    transform: none;
-  }
-}
+

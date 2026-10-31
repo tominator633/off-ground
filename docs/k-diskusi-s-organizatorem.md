@@ -66,7 +66,22 @@ Zatím je obsah v kódu (akce v `src/content/events.ts`). Až bude organizátor 
 - **Sanity** (hostovaný CMS, zdarma) – pokud jde jen o obsah a fotky,
 - **Payload CMS + Postgres** – pokud přijdou registrace do battlu, hlasování publika nebo účty.
 
-## 8. Nápady na později
+## 8. Prodej vstupenek – čísla z první akce
+
+Od Filipa (zpráva 30. 10. 2026, čísla jsou přibližná):
+
+- Ceny: 1. vlna 150 Kč, 2. vlna 200 Kč, na místě 250 Kč.
+- Prodáno online (Boom Events) 130 ks, na místě asi 30 ks. Kapacita 200.
+- Poplatek Boom Events asi 5 %.
+- Prodávalo se jako **fyzická osoba** (bez IČO).
+
+Hrubý odhad (rozdělení mezi 1. a 2. vlnu neznáme): online 130 × 150–200 Kč = 19 500–26 000 Kč, poplatek Boom Events tedy asi 1 000–1 300 Kč za akci. Vlastní prodej by ušetřil jen rozdíl mezi 5 % a poplatkem platební brány (ověřit aktuální ceníky), tedy řádově stovky korun za akci – a to spolkne už samotný placený hosting (Vercel Pro, viz bod 5).
+
+Otevřené:
+- Prodej přes vlastní web s platební bránou nejspíš vyžaduje IČO nebo spolek (brána účet pro fyzickou osobu bez podnikání obvykle nezřídí) – ověřit s účetní, jak je to s daní z příjmů z prodeje vstupenek jako fyzická osoba.
+- Umí Boom Events vložený widget nebo aspoň přímý odkaz na nákup konkrétní akce? Ten pak stačí dát do `ticketUrl`.
+
+## 9. Nápady na později
 
 - registrace tanečníků do battlu přes web,
 - online hlasování publika („o vítězi rozhoduješ ty“),

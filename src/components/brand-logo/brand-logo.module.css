@@ -21,8 +21,10 @@
 }
 
 /* The star does a little spin when you point at the logo */
-.logo:hover .star {
-  rotate: 20deg;
+@media (hover: hover) {
+  .logo:hover .star {
+    rotate: 20deg;
+  }
 }
 
 /* The lettering overlaps the star a little, like on the Instagram logo */
