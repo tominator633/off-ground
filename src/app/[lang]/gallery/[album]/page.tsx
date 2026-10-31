@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { PageTitle } from "@/components/page-title/page-title";
 import { PhotoGallery } from "@/components/photo-gallery/photo-gallery";
+import { StarLoader } from "@/components/star-loader/star-loader";
 import { getAlbum, getAlbums } from "@/content/gallery";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
@@ -24,7 +25,13 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/gallery/[a
 // Reading the slug is URL data; behind <Suspense> client navigations stay instant.
 export default function AlbumPage({ params }: PageProps<"/[lang]/gallery/[album]">) {
   return (
-    <Suspense fallback={<div className={styles.fallback} />}>
+    <Suspense
+      fallback={
+        <div className={styles.fallback}>
+          <StarLoader />
+        </div>
+      }
+    >
       <Album params={params} />
     </Suspense>
   );

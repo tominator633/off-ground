@@ -1,0 +1,34 @@
+/* Hidden for the first moment, then the star fades in and keeps rocking and pulsing */
+.loader {
+  display: inline-grid;
+  place-items: center;
+  width: 4rem;
+  opacity: 0;
+  animation: loader-in 300ms ease 350ms forwards;
+  pointer-events: none;
+}
+
+.star {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 0.75rem rgb(242 123 192 / 0.45));
+  animation: star-twinkle 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes loader-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes star-twinkle {
+  from {
+    rotate: -14deg;
+    scale: 0.88;
+  }
+
+  to {
+    rotate: 10deg;
+    scale: 1.06;
+  }
+}

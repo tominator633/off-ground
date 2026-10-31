@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { StarLoader } from "@/components/star-loader/star-loader";
 import type { GalleryPhoto } from "@/content/gallery";
 import type { Dictionary } from "@/i18n/dictionaries/en";
 import styles from "./photo-gallery.module.css";
@@ -51,6 +52,8 @@ export function PhotoGallery({ photos, alt, labels }: PhotoGalleryProps) {
                 data-loaded={loaded.has(index)}
                 onLoad={() => setLoaded((prev) => new Set(prev).add(index))}
               />
+              {/* The logo star while the photo is still loading (the blurred preview shows under it) */}
+              {loaded.has(index) ? null : <StarLoader className={styles.thumbLoader} />}
               <span className="visually-hidden">{labels.open}</span>
             </button>
           </li>

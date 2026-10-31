@@ -1,5 +1,7 @@
 /* Placeholder while the album streams in (client navigation to an unknown slug) */
 .fallback {
+  display: grid;
+  place-items: center;
   min-height: 100svh;
 }
 

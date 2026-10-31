@@ -13,6 +13,7 @@
 }
 
 .thumb {
+  position: relative;
   display: block;
   width: 100%;
   padding: 0;
@@ -33,6 +34,15 @@
     transform var(--transition-base),
     filter 400ms ease,
     opacity 400ms ease;
+}
+
+/* Loading star in the middle of a thumbnail until its photo has loaded */
+.thumbLoader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.75rem;
+  translate: -50% -50%;
 }
 
 /* Fade in from the blur placeholder once the photo has loaded */

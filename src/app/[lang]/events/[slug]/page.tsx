@@ -7,6 +7,7 @@ import { TicketIcon } from "@/components/icons/ticket-icon";
 import { InstagramButton } from "@/components/instagram-button/instagram-button";
 import { LineUp } from "@/components/line-up/line-up";
 import { PageHeader } from "@/components/page-header/page-header";
+import { StarLoader } from "@/components/star-loader/star-loader";
 import { TieDye } from "@/components/tie-dye/tie-dye";
 import { getEvent, getEvents, getNextEdition } from "@/content/events";
 import { social } from "@/content/site";
@@ -31,7 +32,13 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/events/[sl
 // Reading the slug is URL data; behind <Suspense> client navigations stay instant.
 export default function EventDetailPage({ params }: PageProps<"/[lang]/events/[slug]">) {
   return (
-    <Suspense fallback={<div className={styles.fallback} />}>
+    <Suspense
+      fallback={
+        <div className={styles.fallback}>
+          <StarLoader />
+        </div>
+      }
+    >
       <EventDetail params={params} />
     </Suspense>
   );
