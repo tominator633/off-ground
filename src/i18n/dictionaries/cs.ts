@@ -166,6 +166,10 @@ export const cs: Dictionary = {
       instagram: "instagram",
       soon: "doplníme",
       mapSoon: "Mapa – doplníme, až bude jasné místo",
+      copyPhone: "Zkopírovat telefon",
+      copyEmail: "Zkopírovat e-mail",
+      copyInstagram: "Zkopírovat odkaz na Instagram",
+      copied: "Zkopírováno",
     },
     form: {
       name: "Jméno",

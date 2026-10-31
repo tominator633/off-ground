@@ -1,0 +1,77 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* Same outline and dark glass as the round buttons in the menu, a bit smaller */
+.button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: var(--radius-pill);
+  background: rgb(5 5 7 / 0.4);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+  }
+}
+
+/* Copied: filled pink with a dark tick */
+.button[data-copied="true"] {
+  border-color: var(--color-pink);
+  background: var(--color-pink);
+  color: var(--color-on-accent);
+}
+
+.icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  vertical-align: 0;
+}
+
+/*
+ * "Copied" as a small pink bubble above the button, aligned to its right edge – it never
+ * sticks out past the screen, even next to a long e-mail on a phone. Fades and rises in.
+ */
+.toast {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.4rem);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-pink);
+  color: var(--color-on-accent);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(0.25rem);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+  pointer-events: none;
+}
+
+/* Empty until something is copied – no pink dot left behind */
+.toast:empty {
+  padding: 0;
+}
+
+.toast[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}

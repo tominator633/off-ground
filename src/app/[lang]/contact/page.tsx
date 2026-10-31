@@ -3,6 +3,7 @@ import type { ComponentType, ReactNode } from "react";
 import contactPhoto from "@/assets/images/sections/contact.jpg";
 import { BrandStar } from "@/components/brand-logo/brand-star";
 import { ContactForm } from "@/components/contact-form/contact-form";
+import { CopyButton } from "@/components/copy-button/copy-button";
 import { ContactIcon } from "@/components/icons/contact-icon";
 import { EmailIcon } from "@/components/icons/email-icon";
 import { LocationIcon } from "@/components/icons/location-icon";
@@ -28,14 +29,26 @@ export default async function ContactPage() {
   const linked = (value: string, href: string) => (placeholder ? value : <a href={href}>{value}</a>);
 
   // Each detail is an icon; the label is only for screen readers. Instagram is the same
-  // outlined button as in the footer (it brings its own icon).
-  const items: { label: string; Icon?: ComponentType<{ className?: string }>; value: ReactNode }[] = [
+  // outlined button as in the footer (it brings its own icon). Known, real details can also be
+  // copied with one click (`copy.text` goes to the clipboard, `copy.label` names the button).
+  const items: {
+    label: string;
+    Icon?: ComponentType<{ className?: string }>;
+    value: ReactNode;
+    copy?: { text: string; label: string };
+  }[] = [
     {
       label: details.phone,
       Icon: ContactIcon,
       value: phone ? linked(phone, `tel:${phone.replace(/\s/g, "")}`) : soon,
+      copy: phone && !placeholder ? { text: phone, label: details.copyPhone } : undefined,
     },
-    { label: details.email, Icon: EmailIcon, value: email ? linked(email, `mailto:${email}`) : soon },
+    {
+      label: details.email,
+      Icon: EmailIcon,
+      value: email ? linked(email, `mailto:${email}`) : soon,
+      copy: email && !placeholder ? { text: email, label: details.copyEmail } : undefined,
+    },
     {
       label: details.instagram,
       value: (
@@ -43,6 +56,7 @@ export default async function ContactPage() {
           {social.instagram.handle}
         </InstagramButton>
       ),
+      copy: { text: social.instagram.url, label: details.copyInstagram },
     },
     { label: details.address, Icon: LocationIcon, value: address ?? soon },
   ];
@@ -59,11 +73,12 @@ export default async function ContactPage() {
             <p className={styles.lead}>{dict.contact.lead}</p>
             <p className={styles.infoText}>{details.text}</p>
             <ul className={styles.details}>
-              {items.map(({ label, Icon, value }) => (
+              {items.map(({ label, Icon, value, copy }) => (
                 <li key={label} className={styles.detail}>
                   {Icon ? <Icon className={styles.detailIcon} /> : null}
                   <span className="visually-hidden">{label}: </span>
                   {Icon ? <span className={styles.detailText}>{value}</span> : value}
+                  {copy ? <CopyButton text={copy.text} label={copy.label} copiedLabel={details.copied} /> : null}
                 </li>
               ))}
             </ul>

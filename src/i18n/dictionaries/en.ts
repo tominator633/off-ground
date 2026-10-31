@@ -164,6 +164,10 @@ export const en = {
       instagram: "instagram",
       soon: "coming soon",
       mapSoon: "Map – coming once the venue is set",
+      copyPhone: "Copy the phone number",
+      copyEmail: "Copy the e-mail address",
+      copyInstagram: "Copy the Instagram link",
+      copied: "Copied",
     },
     form: {
       name: "Name",

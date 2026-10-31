@@ -63,9 +63,10 @@
 }
 
 /* A pink icon instead of a written label (the label is there for screen readers only) */
+/* Icon, the detail and (for phone, e-mail, Instagram) a round copy button on the right */
 .detail {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-3);
 }
 
@@ -75,6 +76,8 @@
  */
 .detailText {
   color: var(--color-text);
+  /* a touch smaller on narrow phones, so the e-mail fits on one line next to its copy button */
+  font-size: clamp(0.875rem, 0.6rem + 1.4vw, var(--text-md));
   font-weight: 600;
   overflow-wrap: anywhere;
   text-shadow: 0 1px 8px rgb(5 5 7 / 0.9);
